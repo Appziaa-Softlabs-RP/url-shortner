@@ -8,28 +8,50 @@ on:
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+    # Setup PHP to the latest version (8.2) to match your dependency requirements.
+    - uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.0'
+        php-version: '8.2' # Updated to PHP 8.2
+        extensions: mbstring, pdo, pdo_mysql
+        coverage: none
+
+    # Checkout the repository code
     - uses: actions/checkout@v4
+
+    # Copy the .env file from example, if not present
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    # Install composer dependencies
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-req=ext-curl
+
+    # Generate the application key for Laravel
     - name: Generate key
       run: php artisan key:generate
+
+    # Set directory permissions for storage and cache
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
+
+    # Create an SQLite database (if required by your test setup)
     - name: Create Database
       run: |
         mkdir -p database
         touch database/database.sqlite
+
+    # Run Laravel tests
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       env:
-        DB_CONNECTION: mysql
-        DB_DATABASE: recruit_ai
+        DB_CONNECTION: sqlite # Use SQLite for testing (or adjust based on your DB setup)
+        DB_DATABASE: database/database.sqlite
       run: php artisan test
+
+    # Use Node.js version 16 for npm tasks (since Node 12 is deprecated)
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16' # Updated Node.js version
