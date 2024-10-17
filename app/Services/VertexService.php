@@ -17,18 +17,23 @@ class VertexService
         $this->apiKey = env('GEMINI_API_KEY');
     }
 
+    // Format the response and ensure all keys are defined before accessing them
     function formatResponse($results)
     {
         $message = '';
-        foreach ($results as $result) {
-            $text = $result['candidates'];
-            $text = $text[0];
-            $text = $text['content'];
-            $text = $text['parts'];
-            $text = $text[0];
-            $text = $text['text'];
 
-            $message .= $text;
+        foreach ($results as $result) {
+            if (isset($result['candidates']) && is_array($result['candidates']) && isset($result['candidates'][0])) {
+                $candidate = $result['candidates'][0];
+
+                if (isset($candidate['content']) && isset($candidate['content']['parts']) && isset($candidate['content']['parts'][0])) {
+                    $part = $candidate['content']['parts'][0];
+
+                    if (isset($part['text'])) {
+                        $message .= $part['text'];
+                    }
+                }
+            }
         }
 
         return $message;
@@ -38,12 +43,17 @@ class VertexService
     {
         $partsData = [];
 
-        // Limit to a maximum of 10 PDFs
+        // Limit to a maximum of 5 PDFs
         $pdfs = array_slice($pdfs, 0, 5);
 
         foreach ($pdfs as $pdf) {
             // Get the content of the PDF file
             $pdfContent = file_get_contents($pdf->getRealPath());
+
+            if ($pdfContent === false) {
+                throw new Exception("Error reading PDF file: " . $pdf->getRealPath());
+            }
+
             // Convert to base64
             $base64Pdf = base64_encode($pdfContent);
 
@@ -150,13 +160,17 @@ class VertexService
 
         $results = json_decode($response, true);
 
-        // Return the response;
+        // Ensure we handle cases where results might be empty or invalid
+        if (!$results || !is_array($results)) {
+            throw new Exception("Invalid response received from the API");
+        }
+
+        // Return the formatted response
         return $this->formatResponse($results);
     }
 
     private function getAccessToken()
     {
-        // Implement your logic to get the access token
         return trim(shell_exec("gcloud auth print-access-token"));
     }
 }
