@@ -33,4 +33,11 @@ class AIService
             tone: $data['tone']
         );
     }
+
+    public function generateBooleanString(array $data)
+    {
+        return $this->geminiAiApi->generateBooleanString(
+            jobDescription: $data['job_description'],
+        );
+    }
 }

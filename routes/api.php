@@ -3,6 +3,7 @@
 use App\Http\Controllers\v1\Ai\CompareCvController;
 use App\Http\Controllers\v1\Ai\JobDescriptionController;
 use App\Http\Controllers\v1\Ai\PreScreeningQuestionsController;
+use App\Http\Controllers\v1\Ai\ToolsController;
 use App\Http\Controllers\v1\Auth\AuthController;
 use App\Http\Controllers\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\v1\Auth\LoginController;
@@ -53,6 +54,9 @@ Route::prefix('v1')->group(function () {
     Route::controller(PreScreeningQuestionsController::class)->group(function () {
         Route::post('generate-prescreening-questions', 'generateQuestion');
         Route::post('generate-prescreening-question-answer', 'generateAnswer');
+    });
+    Route::controller(ToolsController::class)->group(function () {
+        Route::post('get-boolean-string', 'generateBooleanString');
     });
 
     // Auth Routes

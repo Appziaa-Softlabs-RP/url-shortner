@@ -1,0 +1,29 @@
+steps:
+  # Build the container image
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/inductive-voice-435808-i1/recruit-app", "."]
+
+  # Push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/inductive-voice-435808-i1/recruit-app"]
+
+  # Deploy container image to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "laravel-recruit-app-service",
+        "--image",
+        "gcr.io/inductive-voice-435808-i1/recruit-app",
+        "--region",
+        "asia-south2",
+        "--platform",
+        "managed",
+        "--port",
+        "8080",
+      ]
+
+images:
+  - "gcr.io/inductive-voice-435808-i1/recruit-app"

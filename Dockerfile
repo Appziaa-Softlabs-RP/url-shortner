@@ -1,29 +1,30 @@
-# Use Composer 2 with PHP 8.2 for building
-FROM composer:2 as build
+# Stage 1: Build
+FROM composer:2.3.10 as build
 WORKDIR /app
 COPY . /app
+RUN composer install --no-dev && composer dumpautoload
+RUN php artisan optimize:clear
 
-# Install dependencies using Composer 2
-RUN composer install
+# Stage 2: Final image
+FROM php:8.2-apache-bullseye
 
-# Use PHP 8.2 with Apache
-FROM php:8.2-apache
-
-# Install necessary PHP extensions
+# Install required packages
+RUN apt update && apt install -y zlib1g-dev libpng-dev libwebp-dev libjpeg-dev libfreetype6-dev && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
+RUN docker-php-ext-install gd
 
-# Expose port 8080
+# Set Apache to listen on port 8080
 EXPOSE 8080
-
-# Copy application from the build stage
 COPY --from=build /app /var/www/
-
-# Configure Apache
 COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY .env.example /var/www/.env
 
-# Set permissions and enable mod_rewrite
-RUN chmod 777 -R /var/www/storage/ && \
-    echo "Listen 8080" >> /etc/apache2/ports.conf && \
+# Update Apache configuration
+RUN echo "Listen 8080" >> /etc/apache2/ports.conf && \
+    echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
     chown -R www-data:www-data /var/www/ && \
     a2enmod rewrite
+
+# Set the entrypoint
+ENTRYPOINT ["docker-php-entrypoint"]
+CMD ["apache2-foreground"]

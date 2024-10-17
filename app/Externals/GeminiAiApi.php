@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class GeminiAiApi
 {
-    protected function filterGeminiResponse($data, $isText=false)
+    protected function filterGeminiResponse($data, $isText = false)
     {
         if (isset($data->candidates) && count($data->candidates) > 0) {
             $result = $data->candidates[0];
@@ -17,12 +17,13 @@ class GeminiAiApi
 
                 // Clean the text: remove markdown symbols (** or ##) and trim extra spaces
                 $cleanedText = trim($text);
-                $cleanedText = preg_replace('/(\*\*|##|```json|```)/', '', $cleanedText);
+                $cleanedText = preg_replace('/```json|```/', '', $cleanedText);
 
                 // Decode the cleaned JSON text
-                if($isText) {
+                if ($isText) {
                     return $cleanedText;
                 }
+                Log::info($cleanedText);
                 $parsedText = json_decode($cleanedText);
 
                 if (json_last_error() === JSON_ERROR_NONE) {
@@ -34,6 +35,20 @@ class GeminiAiApi
         }
 
         return null;
+    }
+
+    public function generateBooleanString($jobDescription)
+    {
+        $query = "Extract the following data from the job description: Job Titles (key: job_titles), Keywords (key: keywords), Company Names (key: companies), Industries (key: industries), Other Related Keywords (key: other_related_keywords). Give result in JSON format. Job Description: '" . $jobDescription . "'";
+
+        $response = Gemini::geminiPro()->generateContent($query);
+
+        $result = $this->filterGeminiResponse(
+            data: $response
+        );
+
+        // Return the response in JSON format
+        return $result;
     }
 
     public function generatePrescreeningInterviewQuestions(string $description)
@@ -55,7 +70,7 @@ class GeminiAiApi
     public function generatePrescreeningModalAnswer(string $question)
     {
         $prompt = `Interview Question: '` . $question . `'
-        Please provide a concise paragraph response suitable for a job interview setting. Avoid using bullet points or lists (*), and focus on delivering a direct answer that highlights key points without elaboration. Return the answer in the following JSON format:
+        Please provide a concise paragraph response suitable for a job interview setting. Give result in JSON format in the following structure:
         {
             "question": "` . $question . `",
             "data": "Your concise answer here."
@@ -90,7 +105,7 @@ class GeminiAiApi
         5. **Benefits**: Describe the benefits and perks offered to employees in this role.
         6. **Application Instructions**: Provide clear instructions on how to apply for the position.
 
-        Ensure the job description is tailored to the job title and industry specified, and aligns with the given tone (e.g., formal, casual). The description should be professional, engaging, and free of special formatting, markdown, or symbols.
+        Ensure the job description is tailored to the job title and industry specified, and aligns with the given tone (e.g., formal, casual). The description should be professional and engaging.
 
         Your response should be formatted as a JSON object in the following structure:
         {
@@ -100,17 +115,14 @@ class GeminiAiApi
             'description': 'Provide a clear, concise, and professionally written job description here.'
         }
 
-        Please ensure that the response is plain text and does not include any special formatting or symbols, just the raw text formatted as JSON as specified.
+        Give Response in Json Format
         ";
 
         $response = Gemini::geminiPro()->generateContent($prompt);
-        Log::info(json_encode($response));
 
         $result = $this->filterGeminiResponse(
             data: $response
         );
-
-        Log::info(json_encode($result));
 
         return $result;
     }
