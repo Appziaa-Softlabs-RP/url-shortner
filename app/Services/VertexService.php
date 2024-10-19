@@ -173,31 +173,6 @@ class VertexService
 
     private function getAccessToken()
     {
-        $token_url = "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token";
-
-        // Fetch the token from the metadata server
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $token_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Metadata-Flavor: Google"
-        ]);
-
-        $response = curl_exec($ch);
-        if (curl_errno($ch)) {
-            $errorMessage = curl_error($ch);
-            curl_close($ch);
-            throw new Exception("Error fetching access token: $errorMessage");
-        }
-
-        curl_close($ch);
-
-        $tokenData = json_decode($response, true);
-
-        if (isset($tokenData['access_token'])) {
-            return $tokenData['access_token'];
-        }
-
-        throw new Exception("Failed to retrieve access token from metadata server");
+        return trim(shell_exec("gcloud auth print-access-token"));
     }
 }
