@@ -173,6 +173,7 @@ class VertexService
 
     private function getAccessToken()
     {
-        return trim(shell_exec("gcloud auth print-access-token"));
+        // return trim(shell_exec("gcloud auth print-access-token"));
+        return env('GCLOUD_ACCESS_TOKEN');
     }
 }
