@@ -11,7 +11,7 @@ class UserTempRepository
         $userTmp = UserTempDetail::create($data);
         // store password in encrypted form
         if (isset($data['password'])) {
-            $userTmp->password = bcrypt($data['password']);
+            $userTmp->password = $data['password'];
             $userTmp->update();
         }
 

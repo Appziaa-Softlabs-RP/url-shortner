@@ -11,7 +11,6 @@ class RewardsAuthApi
     public function register(array $data, $type)
     {
         $data['type'] = $type;
-        Log::info('RewardsAuthApi register data: ' . json_encode($data));
 
         // Send POST request to the root server
         $response = Http::withHeaders([
@@ -32,7 +31,6 @@ class RewardsAuthApi
         $body = [
             'email' => $data['email'],
             'password' => $data['password'],
-            'is_pass_encrypted' => 1,
             'company_id' => env('COMPANY_ID'),
         ];
 
