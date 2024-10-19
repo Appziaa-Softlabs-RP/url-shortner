@@ -15,8 +15,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'id',
-        'business_age',
-        'pin_code_id',
+        'main_server_token',
         'rewards_id'
     ];
 
@@ -28,7 +27,7 @@ class User extends Authenticatable
     protected $hidden = [
         "rewards_id",
         'created_at',
-        'updated_at',
+        'main_server_token',
         'remember_token',
     ];
 

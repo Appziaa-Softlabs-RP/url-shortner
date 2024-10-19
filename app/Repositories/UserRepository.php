@@ -24,20 +24,21 @@ class UserRepository
         $mainServerData = [
             'type' => $type,
             'company_id' => env('COMPANY_ID'),
-            'first_name' => $data['company_name'], //Change according to app's need
+            'salutation' => $data['salutation'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['first_name'],
             'email' => isset($data['email']) ? $data['email'] : null,
             'phone' => isset($data['phone']) ? $data['phone'] : null,
-            'password' => isset($data['password']) ? bcrypt($data['password']) : null,
+            'password' => isset($data['password']) ? $data['password'] : null,
             'otp_id' => $otpId,
         ];
 
         $mainServerResponse = $this->rewardsAuthApi->register($mainServerData, $type);
+        Log::info('UserRepository store mainServerResponse: ' . json_encode($mainServerResponse));
 
         // Creating user in local database
         $userData = [
-            'rewards_id' => $mainServerResponse['rewards_id'],
-            'business_age' => $data['business_age'],
-            'pin_code_id' => PinCode::where('pin_code', $data['pin_code'])->first()->id,
+            'rewards_id' => $mainServerResponse['user']['rewards_id'],
         ];
 
         return User::create($userData);

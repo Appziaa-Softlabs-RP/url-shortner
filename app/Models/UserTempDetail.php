@@ -14,6 +14,8 @@ class UserTempDetail extends Model
         "salutation",
         "first_name",
         "last_name",
+        "phone",
         "email",
+        "password"
     ];
 }

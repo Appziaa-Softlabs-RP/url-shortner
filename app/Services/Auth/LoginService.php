@@ -41,30 +41,32 @@ class LoginService
             throw new \Exception('Failed to get user details');
         }
 
-        $userMain['business_age'] = $user->business_age;
-        $userMain['pin_code_id'] = PinCode::find($user->pin_code_id)->pin_code;
-
         $data = [
-            'user' => $userMain,
+            'user' => $userMain['user'],
             'token' => $token
         ];
-
         return $data;
     }
 
     public function login(array $data): array
     {
-        $user = User::where('email', $data['email'])->first();
+        $userMain = $this->rewards->login($data);
 
-        if (!$user) {
-            return [];
+        if (!$userMain) {
+            throw new \Exception('Failed to login user');
         }
 
-        if (!password_verify($data['password'], $user->password)) {
-            return [];
+        $user = User::where('rewards_id', $userMain['user']['rewards_id'])->first();
+
+        if($user){
+            // updating token in db
+            $user->update([
+                'main_server_token' => $userMain['token']
+            ]);
+            return $this->authenticate($user);
         }
 
-        return $this->authenticate($user);
+        throw new \Exception('User not found');
     }
 
     public function loginOtpVerify(array $data)
