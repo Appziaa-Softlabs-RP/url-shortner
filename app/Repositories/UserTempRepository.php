@@ -8,14 +8,14 @@ class UserTempRepository
 {
     public function store(array $data): UserTempDetail
     {
-        $user = UserTempDetail::create($data);
+        $userTmp = UserTempDetail::create($data);
         // store password in encrypted form
         if (isset($data['password'])) {
-            $user->password = bcrypt($data['password']);
-            $user->update();
+            $userTmp->password = bcrypt($data['password']);
+            $userTmp->update();
         }
 
-        return $user;
+        return $userTmp;
     }
 
     public function getTempDetailsOnOtpId(string $otp_id): ?UserTempDetail

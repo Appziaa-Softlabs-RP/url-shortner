@@ -11,10 +11,9 @@ class UserTempDetail extends Model
 
     protected $fillable = [
         "otp_id",
-        "company_name",
-        "business_age",
+        "salutation",
+        "first_name",
+        "last_name",
         "email",
-        "phone",
-        "pin_code",
     ];
 }

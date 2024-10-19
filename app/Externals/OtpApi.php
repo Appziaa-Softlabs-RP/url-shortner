@@ -31,8 +31,6 @@ class OtpApi
 
         // throw error
         throw new \Exception($response->json('message') ?? 'Failed to send OTP');
-
-        return null;
     }
 
     public function verifyOtp(array $data)

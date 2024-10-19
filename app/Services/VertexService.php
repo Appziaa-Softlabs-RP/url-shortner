@@ -149,6 +149,8 @@ class VertexService
         // Execute cURL request
         $response = curl_exec($ch);
 
+        Log::info(json_encode($response));
+
         // Check for errors
         if (curl_errno($ch)) {
             $errorMessage = curl_error($ch);

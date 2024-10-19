@@ -32,7 +32,6 @@ class RegisterService
     public function createUserTempDetails(array $data, $otpId)
     {
         $data['otp_id'] = $otpId;
-        // store user data in user_temp_details table
         $this->userTempRepository->store($data);
     }
 

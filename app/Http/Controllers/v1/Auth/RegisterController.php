@@ -35,14 +35,17 @@ class RegisterController extends Controller
             $validated = $request->validated();
 
             $responseData = $this->otpService
-                ->sendOtpRequest($validated, $validated['type']);
+                ->sendOtpRequest(
+                    data: $validated,
+                    type: $validated['type']
+                );
 
             $otpId = $responseData['otp_id'];
 
             // store user data in user_temp_details table
             $this->registerService->createUserTempDetails(
-                $validated,
-                $otpId
+                data: $validated,
+                otpId: $otpId
             );
 
             return $this->success(
@@ -63,7 +66,7 @@ class RegisterController extends Controller
             $validated = $request->validated();
 
             $user = $this->registerService->registerVerify(
-                data:$validated,
+                data: $validated,
                 type: $request->type
             );
 
