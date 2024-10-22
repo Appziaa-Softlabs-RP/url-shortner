@@ -37,4 +37,22 @@ class CompareCvController extends Controller
             );
         }
     }
+
+    public function calculateCandidateFitScore(CompareCvRequest $request)
+    {
+        try {
+            $validated = $request->validated();
+
+            $result = $this->vertexService->calculateCandidateFitScore($validated['job_description'], $request->pdfs);
+
+            return $this->success(
+                message: 'CVs compared successfully',
+                data: $result
+            );
+        } catch (\Exception $e) {
+            return $this->internalError(
+                message: $e->getMessage()
+            );
+        }
+    }
 }

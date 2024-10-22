@@ -16,6 +16,8 @@ class User extends Authenticatable
     protected $fillable = [
         'id',
         'main_server_token',
+        'available_credits',
+        'role',
         'rewards_id'
     ];
 

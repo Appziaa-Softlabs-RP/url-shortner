@@ -9,7 +9,6 @@ use App\Http\Controllers\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\v1\Auth\LoginController;
 use App\Http\Controllers\v1\Auth\LogoutController;
 use App\Http\Controllers\v1\Auth\RegisterController;
-use App\Http\Controllers\v1\global\SearchController;
 use App\Models\Specialization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,14 +38,11 @@ Route::prefix('v1')->group(function () {
             Route::post('/logout', 'logout');
         });
     });
-    // Search Controller
-    Route::controller(SearchController::class)->group(function () {
-        Route::get('search-by-city-or-pin-code', 'searchByCityOrPinCode');
-    });
 
     // AI Controllers
     Route::controller(CompareCvController::class)->group(function () {
         Route::post('compare-cv', 'compare');
+        Route::post('candiate-fit-score', 'calculateCandidateFitScore');
     });
     Route::controller(JobDescriptionController::class)->group(function () {
         Route::post('generate-job-description', 'generate');

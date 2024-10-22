@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Log;
 
 class RegisterService
 {
-
     // Repositories
     protected UserTempRepository $userTempRepository;
     protected UserRepository $userRepository;
@@ -52,11 +51,16 @@ class RegisterService
         }
 
         // storing user
-        return $this->userRepository->store(
+        $user = $this->userRepository->store(
             data: $userTmpDetails->toArray(),
             type: $type,
             otpId: $data['otp_id']
         );
+
+        // adding user inital credits
+        $this->userRepository->addInitialCredits($user);
+
+        return $user;
 
     }
 }

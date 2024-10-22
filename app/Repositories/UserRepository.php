@@ -34,7 +34,6 @@ class UserRepository
         ];
 
         $mainServerResponse = $this->rewardsAuthApi->register($mainServerData, $type);
-        Log::info('UserRepository store mainServerResponse: ' . json_encode($mainServerResponse));
 
         // Creating user in local database
         $userData = [
@@ -47,6 +46,32 @@ class UserRepository
     public function updatePassword(User $user, string $password): User
     {
         $user->password = bcrypt($password);
+        $user->save();
+        return $user;
+    }
+
+    public function addUserCredits(string $rewardsId, int $credits): User
+    {
+        $user = User::where('rewards_id', $rewardsId)->firstOrFail();
+        $user->available_credits += $credits;
+        $user->save();
+        return $user;
+    }
+
+    public function deductUserCredits(string $rewardsId, int $credits): User
+    {
+        $user = User::where('rewards_id', $rewardsId)->firstOrFail();
+        if ($user->available_credits < $credits) {
+            throw new \Exception('Insufficient credits');
+        }
+        $user->available_credits -= $credits;
+        $user->save();
+        return $user;
+    }
+
+    public function addInitialCredits(User $user): User
+    {
+        $user->available_credits = 500;
         $user->save();
         return $user;
     }
