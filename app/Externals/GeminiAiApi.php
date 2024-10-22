@@ -41,41 +41,47 @@ class GeminiAiApi
 
 
     protected function filterGeminiResponseJobDescription($data)
-{
-    if (isset($data->candidates) && count($data->candidates) > 0) {
-        $result = $data->candidates[0];
+    {
+        if (isset($data->candidates) && count($data->candidates) > 0) {
+            $result = $data->candidates[0];
 
-        if (isset($result->content->parts) && count($result->content->parts) > 0) {
-            $text = $result->content->parts[0]->text;
+            if (isset($result->content->parts) && count($result->content->parts) > 0) {
+                $text = $result->content->parts[0]->text;
 
-            // Clean the text: remove unnecessary markdown symbols (```json or ```) and trim extra spaces
-            $cleanedText = trim($text);
-            // Remove markdown formatting
-            $cleanedText = preg_replace('/```json|```/', '', $cleanedText);
-            // Remove control characters and unwanted characters
-            $cleanedText = preg_replace('/[^\x20-\x7E\n]+/', '', $cleanedText); // Keep only printable characters and newlines
+                // Log the raw input data for debugging
+                Log::info('Raw input data: ' . print_r($text, true));
 
-            // Log the cleaned JSON response for debugging
-            Log::info($cleanedText);
+                // Clean the text
+                $cleanedText = trim($text);
+                $cleanedText = preg_replace('/```json|```/', '', $cleanedText);
+                // Remove control characters and unwanted characters
+                $cleanedText = preg_replace('/[\x00-\x1F\x7F]/', '', $cleanedText); // Keep only printable characters
+                $cleanedText = preg_replace('/[^\x20-\x7E\n]+/', '', $cleanedText); // Keep only printable characters and newlines
 
-            // Check for UTF-8 encoding
-            if (!mb_check_encoding($cleanedText, 'UTF-8')) {
-                $cleanedText = utf8_encode($cleanedText); // Ensure it's UTF-8 encoded
-            }
+                // Log the cleaned JSON response for debugging
+                Log::info('Cleaned JSON response: ' . $cleanedText);
 
-            // Decode the cleaned JSON text
-            $parsedText = json_decode($cleanedText);
+                // Check for UTF-8 encoding
+                if (!mb_check_encoding($cleanedText, 'UTF-8')) {
+                    $cleanedText = mb_convert_encoding($cleanedText, 'UTF-8');
+                }
 
-            if (json_last_error() === JSON_ERROR_NONE) {
-                return $parsedText;
-            } else {
-                Log::error('JSON decode error: ' . json_last_error_msg());
+                // Encode any JSON-specific characters
+                $cleanedText = json_encode(json_decode($cleanedText));
+
+                // Decode the cleaned JSON text
+                $parsedText = json_decode($cleanedText);
+
+                if (json_last_error() === JSON_ERROR_NONE) {
+                    return $parsedText;
+                } else {
+                    Log::error('JSON decode error: ' . json_last_error_msg() . ' | Cleaned Text: ' . $cleanedText);
+                }
             }
         }
-    }
 
-    return null;
-}
+        return null;
+    }
 
     public function generateBooleanString($jobDescription)
     {
@@ -148,12 +154,9 @@ class GeminiAiApi
         Ensure the job description is tailored to the job title and industry specified, and aligns with the given tone (e.g., formal, casual). The description should be professional and engaging.
 
         Your response should be formatted as a JSON object in the following structure:
-        {
-            \"jobTitle\": \"" . $jobTitle . "\",
-            \"industry\": \"" . $industry . "\",
-            \"tone\": \"" . $tone . "\",
-            \"description\": \"Provide a clear, concise, and professionally written job description here.\"
-        }
+            {
+                'description': 'Provide a clear, concise, and professionally written job description here.'
+            }
 
         Format the 'description' field using markdown where appropriate (e.g., lists, bold for section headers).
         Give in Proper JSON format.
