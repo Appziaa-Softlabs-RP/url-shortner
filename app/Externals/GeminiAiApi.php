@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Log;
 
 class GeminiAiApi
 {
-    protected function filterGeminiResponse($data, $isText = false)
+
+
+    protected function filterGeminiResponse($data, $isText=false)
     {
         if (isset($data->candidates) && count($data->candidates) > 0) {
             $result = $data->candidates[0];
@@ -17,13 +19,12 @@ class GeminiAiApi
 
                 // Clean the text: remove markdown symbols (** or ##) and trim extra spaces
                 $cleanedText = trim($text);
-                $cleanedText = preg_replace('/```json|```/', '', $cleanedText);
+                $cleanedText = preg_replace('/(\*\*|##|```json|```)/', '', $cleanedText);
 
                 // Decode the cleaned JSON text
-                if ($isText) {
+                if($isText) {
                     return $cleanedText;
                 }
-                Log::info($cleanedText);
                 $parsedText = json_decode($cleanedText);
 
                 if (json_last_error() === JSON_ERROR_NONE) {
@@ -36,6 +37,45 @@ class GeminiAiApi
 
         return null;
     }
+
+
+
+    protected function filterGeminiResponseJobDescription($data)
+{
+    if (isset($data->candidates) && count($data->candidates) > 0) {
+        $result = $data->candidates[0];
+
+        if (isset($result->content->parts) && count($result->content->parts) > 0) {
+            $text = $result->content->parts[0]->text;
+
+            // Clean the text: remove unnecessary markdown symbols (```json or ```) and trim extra spaces
+            $cleanedText = trim($text);
+            // Remove markdown formatting
+            $cleanedText = preg_replace('/```json|```/', '', $cleanedText);
+            // Remove control characters and unwanted characters
+            $cleanedText = preg_replace('/[^\x20-\x7E\n]+/', '', $cleanedText); // Keep only printable characters and newlines
+
+            // Log the cleaned JSON response for debugging
+            Log::info($cleanedText);
+
+            // Check for UTF-8 encoding
+            if (!mb_check_encoding($cleanedText, 'UTF-8')) {
+                $cleanedText = utf8_encode($cleanedText); // Ensure it's UTF-8 encoded
+            }
+
+            // Decode the cleaned JSON text
+            $parsedText = json_decode($cleanedText);
+
+            if (json_last_error() === JSON_ERROR_NONE) {
+                return $parsedText;
+            } else {
+                Log::error('JSON decode error: ' . json_last_error_msg());
+            }
+        }
+    }
+
+    return null;
+}
 
     public function generateBooleanString($jobDescription)
     {
@@ -73,7 +113,7 @@ class GeminiAiApi
         Please provide a concise paragraph response suitable for a job interview setting. Give result in JSON format in the following structure:
         {
             "question": "` . $question . `",
-            "data": "Your concise answer here."
+            "data": "Your concise answer here in md format"
         }`;
 
         $response = Gemini::geminiPro()->generateContent($prompt);
@@ -87,15 +127,15 @@ class GeminiAiApi
         return $result;
     }
 
-    public function generateJobDescription(string $jobTitle, $industry = '', string $tone)
+    public function generateJobDescription(string $jobTitle, string $industry = '', string $tone)
     {
         $prompt = "
         Generate a detailed job description based on the following details:
-        - **Job Title:** '" . $jobTitle . "'
-        - **Industry:** '" . $industry . "'
-        - **Tone:** '" . $tone . "'
+        - **Job Title:** " . $jobTitle . "
+        - **Industry:** " . $industry . "
+        - **Tone:** " . $tone . "
 
-        Note: Points Must be in number
+        Note: Points Must be in numbered list format.
 
         Create a comprehensive and well-structured job description that includes the following sections:
         1. **Job Summary**: Provide a brief overview of the role, including the primary objectives and key responsibilities.
@@ -109,20 +149,21 @@ class GeminiAiApi
 
         Your response should be formatted as a JSON object in the following structure:
         {
-            'jobTitle': '" . $jobTitle . "',
-            'industry': '" . $industry . "',
-            'tone': '" . $tone . "',
-            'description': 'Provide a clear, concise, and professionally written job description here.'
+            \"jobTitle\": \"" . $jobTitle . "\",
+            \"industry\": \"" . $industry . "\",
+            \"tone\": \"" . $tone . "\",
+            \"description\": \"Provide a clear, concise, and professionally written job description here.\"
         }
 
-        Give Response in Json Format
+        Format the 'description' field using markdown where appropriate (e.g., lists, bold for section headers).
+        Give in Proper JSON format.
         ";
 
+        // Call to Gemini for generating content
         $response = Gemini::geminiPro()->generateContent($prompt);
 
-        $result = $this->filterGeminiResponse(
-            data: $response
-        );
+        // Filter and parse the response
+        $result = $this->filterGeminiResponseJobDescription($response);
 
         return $result;
     }
