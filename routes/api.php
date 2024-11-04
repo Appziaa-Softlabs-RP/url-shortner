@@ -1,15 +1,10 @@
 <?php
 
-use App\Http\Controllers\v1\Ai\CompareCvController;
-use App\Http\Controllers\v1\Ai\JobDescriptionController;
-use App\Http\Controllers\v1\Ai\PreScreeningQuestionsController;
-use App\Http\Controllers\v1\Ai\ToolsController;
-use App\Http\Controllers\v1\Auth\AuthController;
 use App\Http\Controllers\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\v1\Auth\LoginController;
 use App\Http\Controllers\v1\Auth\LogoutController;
 use App\Http\Controllers\v1\Auth\RegisterController;
-use App\Models\Specialization;
+use App\Http\Controllers\v1\Card\Admin\SocialLinkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,24 +34,14 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    // AI Controllers
-    Route::controller(CompareCvController::class)->group(function () {
-        Route::post('compare-cv', 'compare');
-        Route::post('candiate-fit-score', 'calculateCandidateFitScore');
-    });
-    Route::controller(JobDescriptionController::class)->group(function () {
-        Route::post('generate-job-description', 'generate');
-    });
-    Route::controller(PreScreeningQuestionsController::class)->group(function () {
-        Route::post('generate-prescreening-questions', 'generateQuestion');
-        Route::post('generate-prescreening-question-answer', 'generateAnswer');
-    });
-    Route::controller(ToolsController::class)->group(function () {
-        Route::post('get-boolean-string', 'generateBooleanString');
-    });
-
     // Auth Routes
     Route::middleware('auth:api')->group(function () {
-        //Routes
+        Route::group(['middleware' => 'isAdmin'], function () {
+            Route::prefix('admin')->group(function () {
+                Route::resource('card-social-links', SocialLinkController::class)->only([
+                    'index', 'store', 'show', 'update', 'destroy'
+                ]);
+            });
+        });
     });
 });

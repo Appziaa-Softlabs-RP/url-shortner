@@ -7,7 +7,7 @@ class ImageUploadService
     private $image;
     private $path;
 
-    public function uploadImage($image, $path)
+    public function uploadImage($image, $path): string
     {
         if ($image) {
             // Generate a unique name for the file
