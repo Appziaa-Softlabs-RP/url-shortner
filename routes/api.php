@@ -4,10 +4,6 @@ use App\Http\Controllers\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\v1\Auth\LoginController;
 use App\Http\Controllers\v1\Auth\LogoutController;
 use App\Http\Controllers\v1\Auth\RegisterController;
-use App\Http\Controllers\v1\Card\Admin\CardTemplateController;
-use App\Http\Controllers\v1\Card\Admin\SocialLinkController;
-use App\Http\Controllers\v1\Card\User\CardTemplateController as UserCardTemplateController;
-use App\Models\CardTemplate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,18 +35,8 @@ Route::prefix('v1')->group(function () {
 
     // Auth Routes
     Route::middleware('auth:api')->group(function () {
-        Route::controller(UserCardTemplateController::class)->group(function () {
-            Route::get('/card-templates', 'index');
-        });
         Route::group(['middleware' => 'isAdmin'], function () {
-            Route::prefix('admin')->group(function () {
-                Route::resource('card-social-links', SocialLinkController::class)->only([
-                    'index', 'store', 'show', 'update', 'destroy'
-                ]);
-                Route::resource('card-templates', CardTemplateController::class)->only([
-                    'index', 'store', 'show', 'update', 'destroy'
-                ]);
-            });
+            // Admin Card Routes
         });
     });
 });
