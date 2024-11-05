@@ -31,7 +31,7 @@ const successStories = [
 ]
 
 export default function SuccessStories() {
-    const [selectedStory, setSelectedStory] = useState(null)
+    const [selectedStory, setSelectedStory] = useState<any>(null)
 
     return (
         <section className="py-16">
@@ -78,8 +78,8 @@ export default function SuccessStories() {
                             className="bg-white p-6 rounded-lg max-w-2xl w-full"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <h3 className="text-2xl font-bold mb-4">{selectedStory.title}</h3>
-                            <p className="mb-4">{selectedStory.description}</p>
+                            <h3 className="text-2xl font-bold mb-4">{selectedStory?.title}</h3>
+                            <p className="mb-4">{selectedStory?.description}</p>
                             <p className="mb-4">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
                                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
