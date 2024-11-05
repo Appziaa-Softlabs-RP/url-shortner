@@ -47,7 +47,7 @@ interface DataTableProps<TData, TValue> {
     };
 }
 
-export function SocialsTable<TData, TValue>({
+export function BlogCategoriesTable<TData, TValue>({
     columns,
     data,
     searchKey,

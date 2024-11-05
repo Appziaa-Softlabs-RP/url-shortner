@@ -13,7 +13,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 353 73% 49%;
+    --primary: 332 100% 41%;
     --primary-foreground: 353 0% 100%;
 
     --secondary: 0 1% 14%;
@@ -70,6 +70,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground box-border;
   }
@@ -77,11 +78,14 @@
 
 @layer utilities {
   .min-h-screen {
-    min-height: 100vh; /* Fallback */
+    min-height: 100vh;
+    /* Fallback */
     min-height: 100dvh;
   }
+
   .h-screen {
-    height: 100vh; /* Fallback */
+    height: 100vh;
+    /* Fallback */
     height: 100dvh;
   }
 }

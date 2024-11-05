@@ -85,25 +85,24 @@ export default function NavLinks({ session }: { session: any }) {
 
     const navItems: ItemsProps[] = [
         {
-            name: "Features",
-            href: "/free-ai-tools",
-            // subItems: tools,
+            name: "Home",
+            href: "/",
         },
         {
-            name: "Team",
-            href: "/products",
+            name: "What we do",
+            href: "/",
         },
         {
-            name: "Products",
-            href: "/services",
+            name: "Who are we",
+            href: "/",
         },
         {
-            name: "Support",
-            href: "/pricing",
+            name: "Insights",
+            href: "/",
         },
         {
-            name: "More",
-            href: "/pricing",
+            name: "Career",
+            href: "/",
         },
     ]
 
@@ -111,18 +110,18 @@ export default function NavLinks({ session }: { session: any }) {
         <header className="sticky top-0 z-50 w-full bg-white backdrop-blur-sm border-b border-gray-200 md:px-[20px]">
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 <div className='flex items-center gap-8'>
-                <Link className="flex items-center space-x-2" href="/">
-                    <Image src="/img/logo.svg"
-                        alt="Scanmate"
-                        height={32}
-                        width={180}
-                    />
-                </Link>
-                <nav className="hidden md:flex items-center space-x-6">
-                    {navItems.map((item, index) => (
-                        <NavItem key={index} item={item} isMobile={false} />
-                    ))}
-                </nav>
+                    <Link className="flex items-center space-x-2" href="/">
+                        <Image src="/img/logo.svg"
+                            alt="Scanmate"
+                            height={32}
+                            width={180}
+                        />
+                    </Link>
+                    <nav className="hidden md:flex items-center space-x-6">
+                        {navItems.map((item, index) => (
+                            <NavItem key={index} item={item} isMobile={false} />
+                        ))}
+                    </nav>
                 </div>
                 {
                     session ?

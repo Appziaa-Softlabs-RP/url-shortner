@@ -1,59 +1,26 @@
-// "use client"
+'use client'
 
-import Contact from "@/components/home/contact"
-import FAQ from "@/components/home/faq"
-import Features from "@/components/home/features"
-import IntroBanner from "@/components/home/intro-banner"
-import Sponsers from "@/components/home/sponsers"
-import WhoWeHelp from "@/components/home/who-we-help"
-import SolutionDesignedFor from "@/components/home/solution-designed-for"
+import CTA from '@/components/home/cta'
+import Expertise from '@/components/home/expertise'
+import Features from '@/components/home/features'
+import GlobalPresence from '@/components/home/global-presence'
+import Hero from '@/components/home/hero'
+import Recognition from '@/components/home/recognition'
+import Stats from '@/components/home/stats'
+import SuccessStories from '@/components/home/success-stories'
 
-const fadeIn = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 }
-}
-
-const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-}
-
-export default async function Home() {
+export default function Page() {
 
   return (
-    <main className="flex-1">
-      <IntroBanner
-        stagger={stagger}
-        fadeIn={fadeIn}
-      />
-
-
-      <Features
-        stagger={stagger}
-        fadeIn={fadeIn}
-      />
-
-      <Sponsers />
-
-      <SolutionDesignedFor
-        stagger={stagger}
-        fadeIn={fadeIn}
-      />
-
-      {/* <WhoWeHelp /> */}
-
-      {/* <Contact
-        stagger={stagger}
-        fadeIn={fadeIn}
-      />
-
-      <FAQ
-        stagger={stagger}
-        fadeIn={fadeIn}
-      /> */}
+    <main>
+      <Hero />
+      <Features />
+      <Expertise />
+      <Recognition />
+      <SuccessStories />
+      <Stats />
+      <GlobalPresence />
+      <CTA />
     </main>
   )
 }

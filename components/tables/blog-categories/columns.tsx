@@ -1,23 +1,10 @@
 "use client";
-import { socials } from "@/constants/data";
+import { blogCategory } from "@/constants/data";
 import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./call-actions";
-import Image from "next/image";
 
 
-export const columns: ColumnDef<socials>[] = [
-    {
-        accessorKey: "icon",
-        header: "ICON",
-        cell: ({ row }) => <Image
-            src={row.getValue("icon")}
-            alt="icon"
-            className="w-8 h-8"
-            width={32}
-            height={32}
-            unoptimized
-        />,
-    },
+export const columns: ColumnDef<blogCategory>[] = [
     {
         accessorKey: "name",
         header: "NAME",

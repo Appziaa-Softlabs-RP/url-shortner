@@ -3,9 +3,6 @@
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
 import {
   Form,
   FormControl,
@@ -14,19 +11,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useRegisterStore } from "@/lib/register-store";
 import { RegisterFormValues, registerSchema } from "@/lib/schemas/register";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function UserRegisterDetails({
   className,
@@ -36,7 +29,6 @@ export function UserRegisterDetails({
     loading,
     setPersonalDetails,
     sendOtp,
-    title,
     firstName,
     lastName,
     email,
@@ -48,7 +40,6 @@ export function UserRegisterDetails({
     resolver: zodResolver(registerSchema),
     mode: "onChange",
     defaultValues: {
-      salutation: (title && title != "") ? title : "Mr",
       first_name: firstName,
       last_name: lastName,
       email: email,
@@ -59,7 +50,6 @@ export function UserRegisterDetails({
 
   const processForm: SubmitHandler<RegisterFormValues> = (data: any) => {
     setPersonalDetails({
-      title: data.salutation,
       firstName: data.first_name,
       lastName: data.last_name,
       email: data.email,
@@ -68,8 +58,6 @@ export function UserRegisterDetails({
     });
     sendOtp();
   };
-
-  const titles = ["Mr", "Mrs", "Miss"];
 
   return (
     <div className="space-y-4">
@@ -81,6 +69,7 @@ export function UserRegisterDetails({
           </span>
         </h1>
       </div>
+
       <div className={cn("grid gap-6 p-2", className)} {...props}>
         <Form {...form}>
           <form
@@ -90,34 +79,6 @@ export function UserRegisterDetails({
             <div>
               <Label>Name</Label>
               <div className="gap-2 flex flex-row w-full">
-                <div className="w-[100px]">
-                  <FormField
-                    control={form.control}
-                    name="salutation"
-                    render={({ field }) => (
-                      <FormItem>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Title" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {titles?.map((item, index) => (
-                              <SelectItem key={index} value={item}>
-                                {item}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
                 <div className="grid grid-cols-2 gap-2 w-full">
                   <FormField
                     control={form.control}

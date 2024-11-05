@@ -10,14 +10,14 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "@/components/ui/use-toast";
-import { socials } from "@/constants/data";
+import { blogCategory } from "@/constants/data";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface CellActionProps {
-    data: socials;
+    data: blogCategory;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -38,7 +38,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         });
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_API_URL}/api/v1/admin/card-social-links/${data.id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_API_URL}/api/v1/admin/blogs/${data.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
@@ -83,7 +83,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
                 <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                     <DropdownMenuItem>
-                        <a href={`/admin/dashboard/socials/edit/${data.id}`}
+                        <a href={`/admin/dashboard/blogs/edit/${data.id}`}
                             className="flex flex-row items-center">
                             <Edit className="mr-2 h-4 w-4" /> Update
                         </a>

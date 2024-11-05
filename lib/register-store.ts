@@ -13,7 +13,6 @@ export type State = {
 }
 
 export type UserInfo = {
-    title: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -41,7 +40,6 @@ export const useRegisterStore = create<State & UserInfo & Actions>()(
 
 
             // Personal Details
-            title: '',
             firstName: '',
             lastName: '',
             email: '',
@@ -68,7 +66,6 @@ export const useRegisterStore = create<State & UserInfo & Actions>()(
                     set({ loading: true });
 
                     const formData = new FormData();
-                    formData.append('salutation', get().title);
                     formData.append('first_name', get().firstName);
                     formData.append('last_name', get().lastName);
                     formData.append('phone', get().phone);

@@ -1,84 +1,56 @@
 import { NavItem } from "@/types";
 
-export type NavProps = {
-  heading: string,
-  items: NavItem[]
+export type blogCategory = {
+  id: number;
+  name: string;
+  slug: string
+  created_at: string;
+  updated_at: string;
 }
 
-export type socials = {
-  id: number,
-  icon: string,
-  name: string,
-  status: string
+export type blog = {
+  id: number;
+  name: string;
+  slug: string
+  description: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
 }
 
-export const navItems: NavProps[] = [
+export const navItems: NavItem[] = [
   {
-    heading: "Operations",
-    items: [
-      {
-        title: "Dashboard",
-        href: "/dashboard",
-        icon: "dashboard",
-        label: "Dashboard",
-      },
-      {
-        title: "Leads",
-        href: "/dashboard/leads",
-        icon: "users",
-        label: "Leads",
-      },
-      {
-        title: "Analytics",
-        href: "/dashboard/analytics",
-        icon: "barchart2",
-      }
-    ]
-  },
-  {
-    heading: "Workspace",
-    items: [
-      {
-        title: "My Projects",
-        href: "/dashboard/projects",
-        icon: "kanban",
-      },
-      {
-        title: "My Uploads",
-        href: "/dashboard/uploads",
-        icon: "media",
-      }
-    ]
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: "dashboard",
+    label: "Dashboard",
   }
 ];
 
-export const adminNavItems: NavProps[] = [
+export const adminNavItems: NavItem[] = [
   {
-    heading: "",
-    items: [
-      {
-        title: "Dashboard",
-        href: "/dashboard",
-        icon: "dashboard",
-        label: "Dashboard",
-      },
-    ]
+    title: "Dashboard",
+    href: "/admin/dashboard",
+    icon: "dashboard",
+    label: "Dashboard",
   },
   {
-    heading: "Settings",
-    items: [
+    title: "Blogs",
+    icon: "dashboard",
+    label: "Dashboard",
+    subItems: [
       {
-        title: "Socials",
-        href: "/admin/dashboard/socials",
-        icon: "globe",
-        label: "Socials",
+        name: "Blog Categories",
+        title: "Blog Categories",
+        href: "/admin/dashboard/blog-categories",
+        icon: "user",
       },
       {
-        title: "Templates",
-        href: "/dashboard/templates",
-        icon: "page",
-        label: "Templates",
+        name: "Blog",
+        title: "Blog",
+        href: "/admin/dashboard/blogs",
+        icon: "user",
       }
-    ]
+    ],
   },
 ];

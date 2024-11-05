@@ -1,88 +1,44 @@
-"use client"
-import { motion } from "framer-motion"
-import Image from "next/image"
+'use client'
 
-export default function Features({
-    stagger,
-    fadeIn
-}: {
-    stagger: any,
-    fadeIn: any
-}) {
+import { motion } from 'framer-motion'
 
-    const features = [
-        {
-            title: "Easy to Share",
-            description: "Lorem ipsum dolor sit amet consectetur. Vulputate sed nunc commodo eu mattis nibh nunc ipsum.",
-            icon: "/icons/share.svg"
-        },
-        {
-            title: "Smart Analytics",
-            description: "Lorem ipsum dolor sit amet consectetur. Vulputate sed nunc commodo eu mattis nibh nunc ipsum.",
-            icon: "/icons/analytics.svg"
-        },
-        {
-            title: "NFC Enabled",
-            description: "Lorem ipsum dolor sit amet consectetur. Vulputate sed nunc commodo eu mattis nibh nunc ipsum.",
-            icon: "/icons/nfc.svg"
-        },
-        {
-            title: "Highly Affordable",
-            description: "Lorem ipsum dolor sit amet consectetur. Vulputate sed nunc commodo eu mattis nibh nunc ipsum.",
-            icon: "/icons/affordable.svg"
-        },
-        {
-            title: "Easy to Customise",
-            description: "Lorem ipsum dolor sit amet consectetur. Vulputate sed nunc commodo eu mattis nibh nunc ipsum.",
-            icon: "/icons/customizable.svg"
-        },
-        {
-            title: "Eco Friendly",
-            description: "Lorem ipsum dolor sit amet consectetur. Vulputate sed nunc commodo eu mattis nibh nunc ipsum.",
-            icon: "/icons/eco.svg"
-        },
-    ]
+const features = [
+    {
+        title: 'Precision in Talent Matching',
+        description: 'Using our AI-powered platform, we connect clients with top talent that aligns both professionally and culturally, ensuring seamless integration and long-term success.',
+    },
+    {
+        title: 'Dedicated to Diversity and Inclusion',
+        description: 'We believe that a diverse workforce drives innovation. By actively sourcing candidates from varied backgrounds, we foster a culture of inclusivity that enhances team dynamics and performance. ',
+    },
+    {
+        title: 'Speed and Efficiency for Today’s Market',
+        description: 'With one of the best turnaround times in the industry, our streamlined processes deliver high-quality placements quickly, reducing hiring timelines without compromising on quality. ',
+    },
+]
 
-    return <>
-        <motion.section
-            id="how-it-works"
-            className="w-full py-12 bg-white"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={stagger}
-        >
-            <div className="max-w-[1000px] mx-auto grid md:grid-cols-2 gap-2">
-            <div>
-                <Image
-                    src="/img/info.svg"
-                    alt="AI Illustration"
-                    width={400}
-                    height={400}
-                    className="mx-auto"
-                    />
-            </div>
-            <div className="grid grid-cols-2 gap-6">
-                {
-                    features.map((feature, index) => (
+export default function Features() {
+    return (
+        <section className="py-16 bg-gray-50">
+            <div className="container mx-auto px-4">
+                <h2 className='text-2xl font-bold text-center mb-10'>
+                    We define our work commitment through
+                </h2>
+                <div className="grid md:grid-cols-3 gap-8">
+                    {features.map((feature, index) => (
                         <motion.div
                             key={index}
-                            className="flex flex-col gap-2 h-full justify-between"
-                            variants={fadeIn}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.2 }}
+                            className="bg-white p-6 rounded-lg shadow-lg text-center"
                         >
-                            <Image
-                                src={feature.icon}
-                                alt={feature.title}
-                                width={50}
-                                height={50}
-                            />
-                            <h3 className="text-md font-semibold">{feature.title}</h3>
-                            <p className="text-xs">{feature.description}</p>
+                            <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                            <p className="text-gray-600 text-sm">{feature.description}</p>
                         </motion.div>
-                    ))
-                }
+                    ))}
+                </div>
             </div>
-            </div>
-        </motion.section>
-    </>
+        </section>
+    )
 }

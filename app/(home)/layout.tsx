@@ -1,3 +1,4 @@
+import CookieConsent from "@/components/consents/cookie-consent";
 import Footer from "@/components/layout/footer";
 import GoToTop from "@/components/layout/go-to-top";
 import Header from "@/components/layout/header";
@@ -21,6 +22,7 @@ export default async function DashboardLayout({
         {children}
       </div>
       <GoToTop />
+      <CookieConsent />
       <Footer />
     </div>
   );
