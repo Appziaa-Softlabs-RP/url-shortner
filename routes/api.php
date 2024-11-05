@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\v1\Admin\BlogCategoryController;
+use App\Http\Controllers\v1\Admin\BlogController;
 use App\Http\Controllers\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\v1\Auth\LoginController;
 use App\Http\Controllers\v1\Auth\LogoutController;
@@ -36,7 +38,10 @@ Route::prefix('v1')->group(function () {
     // Auth Routes
     Route::middleware('auth:api')->group(function () {
         Route::group(['middleware' => 'isAdmin'], function () {
-            // Admin Card Routes
+            Route::prefix('admin')->group(function () {
+                Route::apiResource('blog-categories', BlogCategoryController::class);
+                Route::apiResource('blogs', BlogController::class);
+            });
         });
     });
 });
