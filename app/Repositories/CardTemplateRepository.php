@@ -6,7 +6,6 @@ use App\Models\CardTemplate;
 
 class CardTemplateRepository
 {
-
     protected CardTemplate $cardTemplate;
 
     public function __construct(CardTemplate $cardTemplate)
@@ -14,9 +13,14 @@ class CardTemplateRepository
         $this->cardTemplate = $cardTemplate;
     }
 
-    public function index()
+    public function getActiveCardTemplates()
     {
-        return $this->cardTemplate->all();
+        return $this->cardTemplate->active()->get();
+    }
+
+    public function index($request)
+    {
+        return $this->cardTemplate->paginate($request->limit ?? 10);
     }
 
     public function store($data)
@@ -32,13 +36,14 @@ class CardTemplateRepository
     public function update($data, $id)
     {
         $cardTemplate = $this->cardTemplate->findOrFail($id);
+
         return $cardTemplate->update($data);
     }
 
     public function destroy($id)
     {
         $cardTemplate = $this->cardTemplate->findOrFail($id);
+
         return $cardTemplate->delete();
     }
-
 }

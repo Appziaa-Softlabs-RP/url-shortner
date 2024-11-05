@@ -19,6 +19,6 @@ class UserInfo extends Model
         'phone_no',
         'address',
         'dp',
-        'logo'
+        'logo',
     ];
 }

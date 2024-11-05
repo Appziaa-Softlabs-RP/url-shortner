@@ -17,8 +17,8 @@ class SocialLinkRepository
     public function index($request)
     {
         return $this->SocialLink
-        ->where('name', 'like', '%' . $request->search . '%')
-        ->paginate($request->limit);
+            ->where('name', 'like', '%'.$request->search.'%')
+            ->paginate($request->limit ?? 10);
     }
 
     public function store($data)

@@ -12,6 +12,6 @@ class UserCardThemColor extends Model
     protected $fillable = [
         'user_id',
         'background_color',
-        'text_color'
+        'text_color',
     ];
 }

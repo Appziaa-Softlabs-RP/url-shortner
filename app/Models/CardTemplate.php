@@ -13,7 +13,16 @@ class CardTemplate extends Model
         'name',
         'priority',
         'credits',
-        'template',
-        'status'
+        'type',
+        'vertical_front_template',
+        'horizontal_front_template',
+        'vertical_back_template',
+        'horizontal_back_template',
+        'status',
     ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
 }

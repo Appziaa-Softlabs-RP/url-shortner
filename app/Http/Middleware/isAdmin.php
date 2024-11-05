@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class isAdmin
 {
-
     use HttpResponse;
+
     /**
      * Handle an incoming request.
      *
@@ -23,7 +23,7 @@ class isAdmin
         }
 
         return $this->internalError(
-            message: "Unauthorized access",
+            message: 'Unauthorized access',
         );
     }
 }

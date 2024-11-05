@@ -5,11 +5,9 @@ namespace App\Services;
 use App\Externals\OtpApi;
 use App\Models\LoginWithPinTemp;
 use App\Repositories\OtpRepository;
-use Illuminate\Support\Facades\Http;
 
 class OtpService
 {
-
     protected $otpId = null;
 
     // Externals
@@ -21,8 +19,7 @@ class OtpService
     public function __construct(
         OtpApi $otpApi,
         OtpRepository $otpRepository
-    )
-    {
+    ) {
         $this->otpApi = $otpApi;
         $this->otpRepository = $otpRepository;
     }
@@ -31,6 +28,7 @@ class OtpService
     {
         // calling otp api
         $data = $this->otpApi->sendOtp($data, $type);
+
         return $data['otpId'];
     }
 
@@ -56,7 +54,7 @@ class OtpService
             );
         }
         $otpData = [
-            'otp_id' => $this->otpId
+            'otp_id' => $this->otpId,
         ];
 
         return $otpData;
@@ -80,10 +78,11 @@ class OtpService
         );
 
         // Verify the OTP
-        if($this->otpApi->verifyOtp($data)){
+        if ($this->otpApi->verifyOtp($data)) {
             $this->otpRepository->deleteTempDetails($data);
+
             return $storedDetails;
-        }else{
+        } else {
             throw new \Exception('Invalid OTP');
         }
     }
@@ -92,5 +91,4 @@ class OtpService
     {
         return $this->otpApi->verifyOtp($data);
     }
-
 }

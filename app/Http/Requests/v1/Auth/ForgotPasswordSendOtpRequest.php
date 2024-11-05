@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ForgotPasswordSendOtpRequest extends FormRequest
 {
-
     public function authorize(): bool
     {
         return true;
@@ -17,7 +16,7 @@ class ForgotPasswordSendOtpRequest extends FormRequest
         return [
             'type' => 'required|in:phone,email',
             'email' => 'nullable|email|exists:users,email',
-            'phone' => 'nullable|digits:10|exists:users,phone'
+            'phone' => 'nullable|digits:10|exists:users,phone',
         ];
     }
 }

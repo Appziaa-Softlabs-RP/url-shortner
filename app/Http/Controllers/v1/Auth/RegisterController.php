@@ -10,8 +10,6 @@ use App\Models\User;
 use App\Services\Auth\RegisterService;
 use App\Services\OtpService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -19,6 +17,7 @@ class RegisterController extends Controller
 
     // Services
     protected OtpService $otpService;
+
     protected RegisterService $registerService;
 
     public function __construct(
@@ -49,7 +48,7 @@ class RegisterController extends Controller
             );
 
             return $this->success(
-                message: "OTP sent successfully",
+                message: 'OTP sent successfully',
                 data: $responseData
             );
         } catch (\Exception $e) {
@@ -71,7 +70,7 @@ class RegisterController extends Controller
             );
 
             return $this->success(
-                message: "User registered successfully",
+                message: 'User registered successfully',
                 data: $user
             );
 

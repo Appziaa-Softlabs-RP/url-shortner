@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\PinCode;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PinCodeSeeder extends Seeder
@@ -13,7 +12,7 @@ class PinCodeSeeder extends Seeder
      */
     public function run(): void
     {
-        $json = \Illuminate\Support\Facades\File::get("database/data/pin_codes.json");
+        $json = \Illuminate\Support\Facades\File::get('database/data/pin_codes.json');
         $data = json_decode($json);
         foreach ($data as $pinCode) {
             PinCode::updateOrCreate([

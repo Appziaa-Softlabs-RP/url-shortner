@@ -26,6 +26,7 @@ class LoginPhoneRequest extends FormRequest
     public function rules(): array
     {
         Log::info(json_encode($this->input('email')));
+
         return [
             'type' => [
                 'required',
@@ -38,7 +39,7 @@ class LoginPhoneRequest extends FormRequest
                 new ValidateUserPhoneInMainServer(
                     $this->input('phone'),
                     new VerificationApi()
-                )
+                ),
             ],
             'email' => [
                 'required_if:type,email',
@@ -46,7 +47,7 @@ class LoginPhoneRequest extends FormRequest
                 new ValidateUserEmailInMainServer(
                     $this->input('email'),
                     new VerificationApi()
-                )
+                ),
             ],
         ];
     }

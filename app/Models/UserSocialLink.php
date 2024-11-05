@@ -12,6 +12,6 @@ class UserSocialLink extends Model
     protected $fillable = [
         'social_links_id',
         'link',
-        'is_default'
+        'is_default',
     ];
 }

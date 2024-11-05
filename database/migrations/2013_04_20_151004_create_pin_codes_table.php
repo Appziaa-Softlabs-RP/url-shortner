@@ -21,7 +21,7 @@ class CreatePinCodesTable extends Migration
             $table->timestamps();
         });
 
-        \Illuminate\Support\Facades\Artisan::call('db:seed', array('--class' => 'PinCodeSeeder'));
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'PinCodeSeeder']);
     }
 
     /**

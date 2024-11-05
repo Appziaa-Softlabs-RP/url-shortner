@@ -7,6 +7,7 @@ use App\Repositories\SocialLinkRepository;
 class SocialLinkService
 {
     protected SocialLinkRepository $SocialLinkRepository;
+
     protected ImageUploadService $imageService;
 
     public function __construct(
@@ -30,8 +31,9 @@ class SocialLinkService
     {
         $socials = $this->SocialLinkRepository->index($request);
         foreach ($socials as $social) {
-            $social->icon = url('storage/images/socials/' . $social->icon);
+            $social->icon = url('storage/images/socials/'.$social->icon);
         }
+
         return $socials;
     }
 
@@ -40,13 +42,15 @@ class SocialLinkService
         // uploading icon
         $icon = $this->uploadImage($icon);
         $data['icon'] = $icon;
+
         return $this->SocialLinkRepository->store($data);
     }
 
     public function show($id)
     {
         $socials = $this->SocialLinkRepository->show($id);
-        $socials->icon = url('storage/images/socials/' . $socials->icon);
+        $socials->icon = url('storage/images/socials/'.$socials->icon);
+
         return $socials;
     }
 
@@ -65,6 +69,7 @@ class SocialLinkService
             // remove icon from request
             unset($data['icon']);
         }
+
         return $this->SocialLinkRepository->update($data, $id);
     }
 
@@ -77,6 +82,7 @@ class SocialLinkService
             image: $social->icon,
             path: '/images/socials/'
         );
+
         return $this->SocialLinkRepository->destroy($request, $id);
     }
 }

@@ -3,17 +3,15 @@
 namespace App\Services\Auth;
 
 use App\Externals\RewardsAuthApi;
-use App\Models\PinCode;
 use App\Models\User;
 use App\Services\OtpService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class LoginService
 {
-
     // Services
     protected OtpService $otpService;
+
     protected RewardsAuthApi $rewards;
 
     public function __construct(
@@ -37,14 +35,15 @@ class LoginService
 
         // append extra fields
 
-        if(!$userMain){
+        if (! $userMain) {
             throw new \Exception('Failed to get user details');
         }
 
         $data = [
             'user' => $userMain['user'],
-            'token' => $token
+            'token' => $token,
         ];
+
         return $data;
     }
 
@@ -52,17 +51,18 @@ class LoginService
     {
         $userMain = $this->rewards->login($data);
 
-        if (!$userMain) {
+        if (! $userMain) {
             throw new \Exception('Failed to login user');
         }
 
         $user = User::where('rewards_id', $userMain['user']['rewards_id'])->first();
 
-        if($user){
+        if ($user) {
             // updating token in db
             $user->update([
-                'main_server_token' => $userMain['token']
+                'main_server_token' => $userMain['token'],
             ]);
+
             return $this->authenticate($user);
         }
 
@@ -73,17 +73,16 @@ class LoginService
     {
         $userMain = $this->rewards->loginWithOtp($data);
 
-        if (!$userMain) {
+        if (! $userMain) {
             throw new \Exception('Failed to login user');
         }
 
         $user = User::where('rewards_id', $userMain['rewards_id'])->first();
 
-        if($user){
+        if ($user) {
             return $this->authenticate($user);
         }
 
         throw new \Exception('User not found');
     }
-
 }

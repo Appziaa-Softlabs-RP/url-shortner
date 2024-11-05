@@ -20,9 +20,8 @@ class OtpApi
             $body['phone'] = $data['phone'];
         }
 
-
         // Send POST request to the root server
-        $response = Http::post(env('MAIN_SERVER_URL') . '/api/v1/sendOtp', $body);
+        $response = Http::post(env('MAIN_SERVER_URL').'/api/v1/sendOtp', $body);
 
         // Check if the request was successful
         if ($response->successful()) {
@@ -41,11 +40,12 @@ class OtpApi
         ];
 
         // Send POST request to the root server
-        $response = Http::post(env('MAIN_SERVER_URL') . '/api/v1/verifyOtpWithoutLogin', $body);
+        $response = Http::post(env('MAIN_SERVER_URL').'/api/v1/verifyOtpWithoutLogin', $body);
 
         // Check if the request was successful
         if ($response->successful()) {
-            Log::info('OTP API Response: ' . json_encode($response->json('data')));
+            Log::info('OTP API Response: '.json_encode($response->json('data')));
+
             return $response->json('data');
         }
 

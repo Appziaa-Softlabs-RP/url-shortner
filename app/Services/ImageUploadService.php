@@ -5,15 +5,17 @@ namespace App\Services;
 class ImageUploadService
 {
     private $image;
+
     private $path;
 
     public function uploadImage($image, $path): string
     {
         if ($image) {
             // Generate a unique name for the file
-            $fileName = uniqid() . '_' . $image->getClientOriginalName();
+            $fileName = uniqid().'_'.$image->getClientOriginalName();
             // Store the file in the 'public' disk under the 'files' directory
             $image->storeAs($path, $fileName, 'public');
+
             return $fileName;
         } else {
             return $image;
@@ -42,13 +44,14 @@ class ImageUploadService
     public function updateImage($oldImage, $newImage, $path)
     {
         $this->deleteImage($oldImage, $path);
+
         return $this->uploadImage($newImage, $path);
     }
 
     public function deleteImage($image, $path)
     {
         if ($image) {
-            $this->path = public_path('storage/' . $path . '/' . $image);
+            $this->path = public_path('storage/'.$path.'/'.$image);
             if (file_exists($this->path)) {
                 unlink($this->path);
             }
@@ -60,7 +63,7 @@ class ImageUploadService
 
         if ($image) {
             $ext = $image->getClientOriginalExtension();
-            if (!in_array($ext, ['jpg', 'jpeg', 'png'])) {
+            if (! in_array($ext, ['jpg', 'jpeg', 'png'])) {
                 return false;
             }
 
@@ -69,6 +72,7 @@ class ImageUploadService
                 return false;
             }
         }
+
         return true;
     }
 
@@ -77,6 +81,7 @@ class ImageUploadService
         foreach ($images as $image) {
             return $this->validateImage($image);
         }
+
         return true;
     }
 }

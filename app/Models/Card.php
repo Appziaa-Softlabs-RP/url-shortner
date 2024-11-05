@@ -13,6 +13,6 @@ class Card extends Model
         'user_id',
         'position_type',
         'design_type',
-        'card_template_id'
+        'card_template_id',
     ];
 }

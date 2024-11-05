@@ -9,14 +9,13 @@ class PinCode extends Model
 {
     use HasFactory;
 
-    protected $table = "pin_codes";
+    protected $table = 'pin_codes';
 
     protected $fillable = [
         'name',
         'pin_code',
         'district_id',
     ];
-
 
     public function district()
     {

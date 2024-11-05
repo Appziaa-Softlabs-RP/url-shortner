@@ -20,7 +20,7 @@ class CreateDistrictsTable extends Migration
             $table->timestamps();
         });
 
-        \Illuminate\Support\Facades\Artisan::call('db:seed', array('--class' => 'DistrictSeeder'));
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'DistrictSeeder']);
     }
 
     /**

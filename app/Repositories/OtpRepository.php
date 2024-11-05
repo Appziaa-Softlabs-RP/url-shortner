@@ -3,11 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\LoginWithPinTemp;
-use Illuminate\Support\Facades\Log;
 
 class OtpRepository
 {
-
     public function storeTempEmail(array $data, $otpId): LoginWithPinTemp
     {
         return LoginWithPinTemp::create([
@@ -35,7 +33,7 @@ class OtpRepository
             $detail = $type === 'email' ? $temp->email : $temp->phone;
         }
 
-        if (!$detail) {
+        if (! $detail) {
             throw new \Exception('Invalid OTP');
         }
 
@@ -47,5 +45,4 @@ class OtpRepository
         return LoginWithPinTemp::where('otp_id', $data['otp_id'])
             ->delete();
     }
-
 }

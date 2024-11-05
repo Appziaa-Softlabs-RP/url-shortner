@@ -24,6 +24,7 @@ class SocialLinkController extends Controller
     public function index(Request $request)
     {
         $data = $this->SocialLinkService->index($request);
+
         return $this->success(
             data: $data,
             message: 'Social links fetched successfully'
@@ -37,6 +38,7 @@ class SocialLinkController extends Controller
             data: $data,
             icon: $request->icon
         );
+
         return $this->success(
             data: $data,
             message: 'Social link added successfully'
@@ -46,6 +48,7 @@ class SocialLinkController extends Controller
     public function show($id)
     {
         $data = $this->SocialLinkService->show($id);
+
         return $this->success(
             data: $data,
             message: 'Social link fetched successfully'
@@ -61,6 +64,7 @@ class SocialLinkController extends Controller
             icon: $request->icon,
             id: $id
         );
+
         return $this->success(
             data: $data,
             message: 'Social link updated successfully'
@@ -70,6 +74,7 @@ class SocialLinkController extends Controller
     public function destroy(Request $request, $id)
     {
         $data = $this->SocialLinkService->destroy($request, $id);
+
         return $this->success(
             data: $data,
             message: 'Social link deleted successfully'

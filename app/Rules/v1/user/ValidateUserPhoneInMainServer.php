@@ -9,6 +9,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 class ValidateUserPhoneInMainServer implements ValidationRule
 {
     protected VerificationApi $verificationApi;
+
     protected $phone;
 
     public function __construct($phone, VerificationApi $verificationApi)
@@ -20,7 +21,7 @@ class ValidateUserPhoneInMainServer implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         // Use the Externals service to validate the phone number
-        if (!$this->verificationApi->isUserPhoneExists(
+        if (! $this->verificationApi->isUserPhoneExists(
             phone: $this->phone
         )) {
             $fail('This phone number does not exist.');

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        \Illuminate\Support\Facades\Artisan::call('db:seed', array('--class' => 'StatesSeeder'));
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'StatesSeeder']);
     }
 
     /**

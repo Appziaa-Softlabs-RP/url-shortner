@@ -30,17 +30,16 @@ class ForgotPasswordService
         );
 
         $user = null;
-        if($type === 'email') {
+        if ($type === 'email') {
             $user = User::where('email', $verifiedDetail)->first();
         } else {
             $user = User::where('phone', $verifiedDetail)->first();
         }
 
-        if(!$user) {
+        if (! $user) {
             throw new \Exception('User not found');
         }
 
         return $this->userRepository->updatePassword($user, $data['password']);
     }
-
 }

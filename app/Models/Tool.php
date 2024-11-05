@@ -13,6 +13,6 @@ class Tool extends Model
         'name',
         'slug',
         'credits',
-        'status'
+        'status',
     ];
 }

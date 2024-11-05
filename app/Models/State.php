@@ -27,11 +27,11 @@ class State extends Model
         return $this->hasMany(District::class);
     }
 
-    public function getDoctorRegistrationStateData(){
+    public function getDoctorRegistrationStateData()
+    {
         return [
             'state_id' => $this->id,
             'state_name' => $this->name,
         ];
     }
-
 }

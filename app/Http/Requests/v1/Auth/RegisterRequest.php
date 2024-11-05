@@ -20,7 +20,7 @@ class RegisterRequest extends FormRequest
             'last_name' => 'required|string',
             'email' => 'required|email',
             'phone' => [
-                'required'
+                'required',
             ],
             'password' => 'required|string',
         ];

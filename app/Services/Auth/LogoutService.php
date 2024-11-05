@@ -10,7 +10,7 @@ class LogoutService
     {
         $user = User::find('id', auth()->user()->id);
 
-        if (!$user) {
+        if (! $user) {
             return false;
         }
 

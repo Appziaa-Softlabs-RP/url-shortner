@@ -22,9 +22,9 @@ class SendOtpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => "nullable|email",
-            'phone' => "nullable|digits:10",
-            'type' => "required|string|in:phone,email"
+            'email' => 'nullable|email',
+            'phone' => 'nullable|digits:10',
+            'type' => 'required|string|in:phone,email',
         ];
     }
 }

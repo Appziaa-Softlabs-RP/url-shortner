@@ -13,8 +13,7 @@ class VerificationApi
             'company_id' => env('COMPANY_ID'),
         ];
 
-        $response = Http::post(env('MAIN_SERVER_URL') . '/api/v1/verify-user-email-exists', $body);
-
+        $response = Http::post(env('MAIN_SERVER_URL').'/api/v1/verify-user-email-exists', $body);
 
         if ($response->failed()) {
             return false;
@@ -30,8 +29,7 @@ class VerificationApi
             'company_id' => env('COMPANY_ID'),
         ];
 
-        $response = Http::post(env('MAIN_SERVER_URL') . '/api/v1/verify-user-phone-exists', $body);
-
+        $response = Http::post(env('MAIN_SERVER_URL').'/api/v1/verify-user-phone-exists', $body);
 
         if ($response->failed()) {
             return false;

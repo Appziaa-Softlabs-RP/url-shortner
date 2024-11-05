@@ -5,7 +5,6 @@ namespace App\Rules\v1\user;
 use App\Externals\VerificationApi;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Support\Facades\Log;
 
 class ValidateUserEmailInMainServer implements ValidationRule
 {
@@ -22,7 +21,7 @@ class ValidateUserEmailInMainServer implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         // Use the Externals service to validate the phone number
-        if (!$this->verificationApi->isUserEmailExists(
+        if (! $this->verificationApi->isUserEmailExists(
             email: $this->email
         )) {
             $fail('This email does not exist.');

@@ -9,21 +9,19 @@ use App\Http\Requests\v1\Auth\LoginPhoneRequest;
 use App\Http\Traits\HttpResponse;
 use App\Services\Auth\LoginService;
 use App\Services\OtpService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
     use HttpResponse;
 
     protected LoginService $loginService;
+
     protected OtpService $otpService;
 
     public function __construct(
         LoginService $loginService,
         OtpService $otpService
-    )
-    {
+    ) {
         $this->loginService = $loginService;
         $this->otpService = $otpService;
     }
@@ -37,12 +35,12 @@ class LoginController extends Controller
             if ($responseData) {
                 return $this->success(
                     data: $responseData,
-                    message: "User logged in successfully",
+                    message: 'User logged in successfully',
                 );
             }
 
             return $this->error(
-                message: "Invalid credentials",
+                message: 'Invalid credentials',
             );
         } catch (\Exception $e) {
             return $this->error(
@@ -61,7 +59,7 @@ class LoginController extends Controller
 
             return $this->success(
                 data: $responseData,
-                message: "OTP Sent Successfully!",
+                message: 'OTP Sent Successfully!',
             );
         } catch (\Exception $e) {
             return $this->error(
@@ -78,11 +76,9 @@ class LoginController extends Controller
             $responseData = $this->loginService
                 ->loginOtpVerify($validated);
 
-            Log::info(json_encode($responseData));
-
             return $this->success(
                 data: $responseData,
-                message: "User logged in successfully",
+                message: 'User logged in successfully',
             );
         } catch (\Exception $e) {
             return $this->error(
@@ -90,5 +86,4 @@ class LoginController extends Controller
             );
         }
     }
-
 }

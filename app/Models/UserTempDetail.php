@@ -10,12 +10,12 @@ class UserTempDetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        "otp_id",
-        "salutation",
-        "first_name",
-        "last_name",
-        "phone",
-        "email",
-        "password"
+        'otp_id',
+        'salutation',
+        'first_name',
+        'last_name',
+        'phone',
+        'email',
+        'password',
     ];
 }

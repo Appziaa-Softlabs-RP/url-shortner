@@ -12,6 +12,6 @@ class LoginWithPinTemp extends Model
     protected $fillable = [
         'email',
         'phone',
-        'otp_id'
+        'otp_id',
     ];
 }

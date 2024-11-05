@@ -2,17 +2,15 @@
 
 namespace App\Services\Auth;
 
-use App\Externals\OtpApi;
-use App\Models\UserTempDetail;
 use App\Repositories\UserRepository;
 use App\Repositories\UserTempRepository;
 use App\Services\OtpService;
-use Illuminate\Support\Facades\Log;
 
 class RegisterService
 {
     // Repositories
     protected UserTempRepository $userTempRepository;
+
     protected UserRepository $userRepository;
 
     // Services
@@ -46,7 +44,7 @@ class RegisterService
 
         $userTmpDetails = $this->userTempRepository->getTempDetailsOnOtpId($data['otp_id']);
 
-        if(!$userTmpDetails) {
+        if (! $userTmpDetails) {
             throw new \Exception('Details not found');
         }
 

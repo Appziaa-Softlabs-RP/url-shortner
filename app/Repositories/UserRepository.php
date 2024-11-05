@@ -3,13 +3,10 @@
 namespace App\Repositories;
 
 use App\Externals\RewardsAuthApi;
-use App\Models\PinCode;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class UserRepository
 {
-
     // External Apis
     protected RewardsAuthApi $rewardsAuthApi;
 
@@ -47,6 +44,7 @@ class UserRepository
     {
         $user->password = bcrypt($password);
         $user->save();
+
         return $user;
     }
 
@@ -55,6 +53,7 @@ class UserRepository
         $user = User::where('rewards_id', $rewardsId)->firstOrFail();
         $user->available_credits += $credits;
         $user->save();
+
         return $user;
     }
 
@@ -66,6 +65,7 @@ class UserRepository
         }
         $user->available_credits -= $credits;
         $user->save();
+
         return $user;
     }
 
@@ -73,6 +73,7 @@ class UserRepository
     {
         $user->available_credits = 500;
         $user->save();
+
         return $user;
     }
 }

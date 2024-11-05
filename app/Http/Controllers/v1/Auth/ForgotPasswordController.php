@@ -8,20 +8,19 @@ use App\Http\Requests\v1\Auth\ForgotPasswordSendOtpRequest;
 use App\Http\Traits\HttpResponse;
 use App\Services\Auth\ForgotPasswordService;
 use App\Services\OtpService;
-use Illuminate\Http\Request;
 
 class ForgotPasswordController extends Controller
 {
     use HttpResponse;
 
     protected ForgotPasswordService $forgotPasswordService;
+
     protected OtpService $otpService;
 
     public function __construct(
         ForgotPasswordService $forgotPasswordService,
         OtpService $otpService
-    )
-    {
+    ) {
         $this->forgotPasswordService = $forgotPasswordService;
         $this->otpService = $otpService;
     }
@@ -36,7 +35,7 @@ class ForgotPasswordController extends Controller
 
             return $this->success(
                 data: $responseData,
-                message: "Otp Send Successfully!",
+                message: 'Otp Send Successfully!',
             );
         } catch (\Exception $e) {
             return $this->error(
@@ -55,7 +54,7 @@ class ForgotPasswordController extends Controller
 
             return $this->success(
                 data: $responseData,
-                message: "Password Changed Successfully.",
+                message: 'Password Changed Successfully.',
             );
         } catch (\Exception $e) {
             return $this->error(

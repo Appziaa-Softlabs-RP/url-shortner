@@ -20,7 +20,7 @@ class CreateCountriesTable extends Migration
             $table->timestamps();
         });
 
-        \Illuminate\Support\Facades\Artisan::call('db:seed', array('--class' => 'CountrySeeder'));
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'CountrySeeder']);
     }
 
     /**

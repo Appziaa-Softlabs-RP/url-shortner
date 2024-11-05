@@ -14,20 +14,20 @@ class LogoutController extends Controller
 
     public function __construct(
         LogoutService $logoutService
-    )
-    {
+    ) {
         $this->logoutService = $logoutService;
     }
 
     public function logout()
     {
-        if (!$this->logoutService->logout()) {
+        if (! $this->logoutService->logout()) {
             return $this->error(
-                message: "User not found",
+                message: 'User not found',
             );
         }
+
         return $this->success(
-            message: "User logged out successfully",
+            message: 'User logged out successfully',
         );
     }
 }
