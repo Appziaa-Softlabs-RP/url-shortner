@@ -1,0 +1,47 @@
+.main-links-boxes {
+    @apply flex min-w-[100px] flex-col items-center space-y-1 rounded-lg p-4 text-slate-50 bg-[#1D3C6B] sm:text-slate-800 sm:bg-slate-100 transition-all ease-in-out duration-150 hover:scale-105 cursor-pointer m-2 font-light;
+}
+
+.go-top {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    background: var(--bright-navy-blue);
+    color: var(--white);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.5);
+    opacity: 0;
+    transform: translateY(10px);
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.go-top.active {
+    opacity: 0.8;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.go-top:is(:hover, :focus) {
+    opacity: 1;
+}
+
+.magic {
+    animation: background-pan 3s linear infinite;
+    background: linear-gradient(
+      to right,
+     #FF00FF,
+     #00A9BA,
+     #FF00FF,
+     #FFD700
+      );
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* white-space: nowrap; */
+  }
