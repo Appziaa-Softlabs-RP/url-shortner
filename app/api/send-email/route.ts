@@ -17,14 +17,14 @@ export async function POST(request: Request) {
         to: [
             {
                 email_address: {
-                    address: "anuj@99oranges.com",
+                    address: "hello@digitaljanet.com",
                 },
             },
         ],
-        subject: "New Inquiry Received via Scanmate Contact Form",
+        subject: "New Inquiry Received via DigitalJanet Contact Form",
         htmlbody: `<div>
-        <p>Hi Scanmate Team,</p>
-        <p>This email is to notify you of a new inquiry received through the Scanmate contact form.</p>
+        <p>Hi DigitalJanet Team,</p>
+        <p>This email is to notify you of a new inquiry received through the DigitalJanet contact form.</p>
         <p>
         <br>
         <br>
@@ -60,12 +60,12 @@ export async function POST(request: Request) {
                 },
             },
         ],
-        subject: "Thanks for contacting Scanmate!",
+        subject: "Thanks for contacting DigitalJanet!",
         htmlbody: `Hi ${name}<div>
-        <p>Thank you for reaching out to Scanmate! We appreciate you taking the time to contact us.</p>
-        <p>We've received your message from our contact form and a member of our team will be in touch with you shortly to discuss your inquiry and how Scanmate can help streamline your repair management process.</p>
+        <p>Thank you for reaching out to DigitalJanet! We appreciate you taking the time to contact us.</p>
+        <p>We've received your message from our contact form and a member of our team will be in touch with you shortly to discuss your inquiry and how DigitalJanet can help streamline your repair management process.</p>
         <p>Sincerely,</p>
-        <p>The Scanmate Team</p>
+        <p>The DigitalJanet Team</p>
     </div>
     `,
     });

@@ -13,12 +13,12 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-} from "@/components/ui/sheet"
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from '@/lib/utils'
@@ -104,15 +104,12 @@ export default function CookieConsent() {
     }
 
     const PreferencesContent = () => (
-        <Sheet open={showPreferences} onOpenChange={setShowPreferences}>
-            <SheetContent side="bottom" className={cn(
-                "h-[100dvh] sm:h-[95vh] p-0",
-                "grid grid-rows-[auto,1fr,auto] bg-background"
-            )}>
-                <SheetHeader className="p-6 border-b">
-                    <SheetTitle>Privacy Preference Center</SheetTitle>
-                </SheetHeader>
-                <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col">
+        <Dialog open={showPreferences} onOpenChange={setShowPreferences}>
+            <DialogContent className="max-w-4xl h-screen sm:h-[90vh] flex flex-col p-0">
+                <DialogHeader className="p-6 border-b">
+                    <DialogTitle>Privacy Preference Center</DialogTitle>
+                </DialogHeader>
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-grow flex flex-col overflow-hidden">
                     <TabsList className="justify-center px-6 border-b flex-wrap min-h-fit">
                         {cookieCategories.map((category) => (
                             <TabsTrigger key={category.id} value={category.id} className="data-[state=active]:bg-white m-1 sm:m-2 text-xs sm:text-sm">
@@ -120,12 +117,12 @@ export default function CookieConsent() {
                             </TabsTrigger>
                         ))}
                     </TabsList>
-                    <ScrollArea className="flex-grow max-h-full">
+                    <ScrollArea className="flex-grow max-h-[50vh]">
                         {cookieCategories.map((category) => (
-                            <TabsContent key={category.id} value={category.id} className="p-6 mt-0 h-full">
+                            <TabsContent key={category.id} value={category.id} className="p-6 mt-0">
                                 <div className="space-y-4">
                                     <h3 className="text-lg font-semibold">{category.title}</h3>
-                                    <p className="text-sm text-muted-foreground whitespace-pre-wrap">{category.content}</p>
+                                    <p className="text-sm text-muted-foreground whitespace-pre-wrap mb-[200px]">{category.content}</p>
                                     {category.id !== "your-privacy" && (
                                         <div className="flex items-center justify-between pt-4">
                                             <TooltipProvider>
@@ -165,11 +162,11 @@ export default function CookieConsent() {
                         </Button>
                         <Button onClick={acceptConsent}>
                             Save my preferences
-                        </Button >
+                        </Button>
                     </div>
                 </div>
-            </SheetContent>
-        </Sheet>
+            </DialogContent>
+        </Dialog>
     )
 
     return (

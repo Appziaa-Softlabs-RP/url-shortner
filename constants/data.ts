@@ -40,8 +40,8 @@ export const adminNavItems: NavItem[] = [
     label: "Dashboard",
     subItems: [
       {
-        name: "Blog Categories",
-        title: "Blog Categories",
+        name: "Categories",
+        title: "Categories",
         href: "/admin/dashboard/blog-categories",
         icon: "user",
       },

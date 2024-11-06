@@ -10,7 +10,7 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 const breadcrumbItems = [
-    { title: "Blog Categories", link: "/admin/dashboard/blog-categories" },
+    { title: "Categories", link: "/admin/dashboard/blog-categories" },
 ];
 
 type paramsProps = {
@@ -58,7 +58,7 @@ export default async function page({ searchParams }: paramsProps) {
                 <BreadCrumb initial={'/admin/dashboard'} items={breadcrumbItems} />
                 <div className="flex items-center justify-between">
                     <Heading
-                        title={`Manage Blog Categories`}
+                        title={`Manage Categories`}
                         description="Manage your blog categories"
                     />
                 </div>

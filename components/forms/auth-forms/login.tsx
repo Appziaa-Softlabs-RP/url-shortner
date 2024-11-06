@@ -43,7 +43,7 @@ export default function LoginUser() {
             <h1 className="text-2xl font-bold tracking-tight">
                 Login your account
                 <br />
-                with <span className="text-secondary">Scanmate</span>
+                with <span className="text-secondary">DigitalJanet</span>
             </h1>
         </div>
 

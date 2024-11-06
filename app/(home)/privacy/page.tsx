@@ -7,15 +7,15 @@ const sections = [
         id: 'introduction',
         title: 'Introduction',
         description: `<p>Welcome to <b>Appziaa Softlabs Pvt Ltd</b>.</p><br />
-        <p>Appziaa Softlabs Pvt Ltd (“us”, “we”, or “our”) operates <a href="https://recruitplus.ai" style="color: blue">recruitplus.ai</a> and Recruitplus mobile application (hereinafter referred to as <b>“Service”</b>).</p><br />
-        <p>Our Privacy Policy governs your visit to <a href="https://recruitplus.ai" style="color: blue">recruitplus.ai</a> and Recruitplus mobile application, and explains how we collect, safeguard, and disclose information that results from your use of our Service.</p><br />
+        <p>Appziaa Softlabs Pvt Ltd (“us”, “we”, or “our”) operates <a href="https://digitaljanet.com" style="color: blue">digitaljanet.com</a> and DigitalJanet mobile application (hereinafter referred to as <b>“Service”</b>).</p><br />
+        <p>Our Privacy Policy governs your visit to <a href="https://digitaljanet.com" style="color: blue">digitaljanet.com</a> and DigitalJanet mobile application, and explains how we collect, safeguard, and disclose information that results from your use of our Service.</p><br />
         <p>We use your data to provide and improve Service. By using Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.</p>
         <p>Our Terms and Conditions (<b>“Terms”</b>) govern all use of our Service and together with the Privacy Policy constitutes your agreement with us (<b>“agreement”</b>).</p>`
     },
     {
         id: 'definitions',
         title: 'Definitions',
-        description: `<p><strong>SERVICE</strong> means the <a href="https://recruitplus.ai" style="color: blue">recruitplus.ai</a> website operated by <b>Appziaa Softlabs Pvt Ltd</b>.</p><br />
+        description: `<p><strong>SERVICE</strong> means the <a href="https://digitaljanet.com" style="color: blue">digitaljanet.com</a> website operated by <b>Appziaa Softlabs Pvt Ltd</b>.</p><br />
         <p><strong>PERSONAL DATA</strong> means data about a living individual who can be identified from those data (or from those and other information either in our possession or likely to come into our possession).</p><br />
         <p><strong>USAGE DATA</strong> means data about a living individual who can be identified from those data (or from those and other information either in our possession or likely to come into our possession).</p><br />
         <p><strong>COOKIES</strong> means data about a living individual who can be identified from those data (or from those and other information either in our possession or likely to come into our possession).</p><br />
@@ -41,7 +41,7 @@ const sections = [
             <li>(d) Address, State, Province, ZIP/Postal code, City</li><br />
             <li>(e) Cookies and Usage Data</li><br />
         </ul>
-        <p>We may use your Personal Data to contact you with newsletters, marketing or promotional materials and other information that may be of interest to you. You may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or by emailing at <a href="mailto:hello@recruitplus.ai">hello@recruitplus.ai</a>.</p><br />
+        <p>We may use your Personal Data to contact you with newsletters, marketing or promotional materials and other information that may be of interest to you. You may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or by emailing at <a href="mailto:hello@digitaljanet.com">hello@digitaljanet.com</a>.</p><br />
         <p><b>Usage Data</b></p>
         <p>We may also collect information that your browser sends whenever you visit our Service or when you access Service by or through a mobile device (“Usage Data”).</p><br />
         <p>This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p><br />
@@ -111,7 +111,7 @@ const sections = [
     {
         id: 'data-protection-rights-under-gdpr',
         title: 'Your Data Protection Rights Under GDPR',
-        description: '<p>If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. - See more at <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" style="color: blue;">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a></p><br /><p>We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Data.</p><br /><p>If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please email us at hello@recruitplus.ai.</p><br /><p>In certain circumstances, you have the following data protection rights:</p><br /><p>(a) the right to access, update or to delete the information we have on you;</p><br /><p>(b) the right of rectification. You have the right to have your information rectified if that information is inaccurate or incomplete;</p><br /><p>(c) the right to object. You have the right to object to our processing of your Personal Data;</p><br /><p>(d) the right of restriction. You have the right to request that we restrict the processing of your personal information;</p><br /><p>(e) the right to data portability. You have the right to be provided with a copy of your Personal Data in a structured, machine-readable and commonly used format;</p><br /><p>(f) the right to withdraw consent. You also have the right to withdraw your consent at any time where we rely on your consent to process your personal information;</p><br /><p>Please note that we may ask you to verify your identity before responding to such requests. Please note, we may not able to provide Service without some necessary data.</p><br /><p>You have the right to complain to a Data Protection Authority about our collection and use of your Personal Data. For more information, please contact your local data protection authority in the European Economic Area (EEA).</p>'
+        description: '<p>If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. - See more at <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" style="color: blue;">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a></p><br /><p>We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Data.</p><br /><p>If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please email us at hello@digitaljanet.com.</p><br /><p>In certain circumstances, you have the following data protection rights:</p><br /><p>(a) the right to access, update or to delete the information we have on you;</p><br /><p>(b) the right of rectification. You have the right to have your information rectified if that information is inaccurate or incomplete;</p><br /><p>(c) the right to object. You have the right to object to our processing of your Personal Data;</p><br /><p>(d) the right of restriction. You have the right to request that we restrict the processing of your personal information;</p><br /><p>(e) the right to data portability. You have the right to be provided with a copy of your Personal Data in a structured, machine-readable and commonly used format;</p><br /><p>(f) the right to withdraw consent. You also have the right to withdraw your consent at any time where we rely on your consent to process your personal information;</p><br /><p>Please note that we may ask you to verify your identity before responding to such requests. Please note, we may not able to provide Service without some necessary data.</p><br /><p>You have the right to complain to a Data Protection Authority about our collection and use of your Personal Data. For more information, please contact your local data protection authority in the European Economic Area (EEA).</p>'
     },
     {
         id: 'service-providers',
@@ -233,9 +233,9 @@ const sections = [
         description: `
             <p>If you have any questions about this Privacy Policy, please contact us:</p><br />
 
-            By email: <a href="mailto:hello@recruitplus.ai" style="color: blue;">hello@recruitplus.ai</a><br />
+            By email: <a href="mailto:hello@digitaljanet.com" style="color: blue;">hello@digitaljanet.com</a><br />
 
-            By visiting this page on our website:<br /><a href="https://recruitplus.ai/contact" style="color: blue;">https://recruitplus.ai/contact</a>
+            By visiting this page on our website:<br /><a href="https://digitaljanet.com/contact" style="color: blue;">https://digitaljanet.com/contact</a>
         `
     }
 ];
@@ -282,7 +282,7 @@ export default function PrivacyPolicy() {
 
                         {sections.map((section, index) => (
                             <section key={section.id} id={section.id} className="mb-12">
-                                <h2 className="text-2xl font-semibold text-gray-800 mb-4">{index+1}.&nbsp;{section.title}</h2>
+                                <h2 className="text-2xl font-semibold text-gray-800 mb-4">{index + 1}.&nbsp;{section.title}</h2>
                                 <p className="text-gray-600">
                                     <div dangerouslySetInnerHTML={{ __html: section.description }} />
                                 </p>
@@ -307,7 +307,7 @@ export default function PrivacyPolicy() {
                                                 : 'text-gray-600 hover:text-primary'
                                                 }`}
                                         >
-                                            <span>{index+1}.</span>
+                                            <span>{index + 1}.</span>
                                             <span>{section.title}</span>
                                         </a>
                                     </li>

@@ -1,5 +1,6 @@
 'use client'
 
+import Contact from '@/components/home/contact'
 import CTA from '@/components/home/cta'
 import Expertise from '@/components/home/expertise'
 import Features from '@/components/home/features'
@@ -21,6 +22,7 @@ export default function Page() {
       <Stats />
       <GlobalPresence />
       <CTA />
+      <Contact />
     </main>
   )
 }

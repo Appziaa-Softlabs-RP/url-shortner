@@ -90,19 +90,19 @@ export default function NavLinks({ session }: { session: any }) {
         },
         {
             name: "What we do",
-            href: "/",
+            href: "/what-we-do",
         },
         {
-            name: "Who are we",
-            href: "/",
+            name: "Blogs",
+            href: "/blogs",
         },
         {
             name: "Insights",
-            href: "/",
+            href: "/insights",
         },
         {
             name: "Career",
-            href: "/",
+            href: "/carrer",
         },
     ]
 
@@ -112,7 +112,7 @@ export default function NavLinks({ session }: { session: any }) {
                 <div className='flex items-center gap-8'>
                     <Link className="flex items-center space-x-2" href="/">
                         <Image src="/img/logo.svg"
-                            alt="Scanmate"
+                            alt="DigitalJanet"
                             height={32}
                             width={180}
                         />

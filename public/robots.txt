@@ -3,4 +3,4 @@ Allow: /
 Disallow: /dashboard
 Disallow: /dashboard/*
 
-Sitemap: https://recruitplus.ai/sitemap.xml
+Sitemap: https://digitaljanet.com/sitemap.xml

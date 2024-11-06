@@ -4,78 +4,81 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-    Select, SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
-} from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import { blogCategory } from "@/constants/data"
 import { ArrowBigLeft } from "lucide-react"
 import dynamic from 'next/dynamic'
-import Image from "next/image"
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-
 import { useEffect, useState } from 'react'
 import 'react-quill/dist/quill.snow.css'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-export default function BlogForm({ data = null, token, categories }: { data?: any, token: string, categories: blogCategory[] }) {
+export default function BlogForm({ data = null, token, categories }: { data?: any, token: string, categories: any[] }) {
     const [title, setTitle] = useState(data?.title ?? '')
-    const [url, setUrl] = useState(data?.url ?? '')
+    const [slug, setSlug] = useState(data?.slug ?? '')
     const [description, setDescription] = useState(data?.description ?? '')
     const [content, setContent] = useState(data?.content ?? '')
-    const [status, setStatus] = useState(data?.status == 1)
-    const [image, setImage] = useState<File | null>(null)
-    const [category, setCategory] = useState<string | undefined>(data?.category_id.toString() ?? undefined)
+    const [status, setStatus] = useState(data?.status === '1')
     const [featuredImage, setFeaturedImage] = useState<File | null>(null)
+    const [selectedCategories, setSelectedCategories] = useState<string[]>(data?.category_ids?.map(String) ?? [])
     const router = useRouter()
 
     const toolbarOptions = [
-        [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [{ 'header': 1 }, { 'header': 2 }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],
+        [{ 'indent': '-1' }, { 'indent': '+1' }],
+        [{ 'direction': 'rtl' }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
         [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': [] }],
         [{ 'align': [] }],
-        ['link', 'image', 'video'],
-        ['clean']
-    ];
+        ['clean'],
+        ['link', 'image', 'video']
+    ]
 
     useEffect(() => {
-        // Generate url from title
-        const generatedUrl = title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-        setUrl(generatedUrl)
+        // Generate slug from title
+        const generatedSlug = title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+        setSlug(generatedSlug)
     }, [title])
 
     const handleCategorySelectChange = (value: string) => {
-        setCategory(value);
-    };
+        setSelectedCategories(prev => {
+            if (prev.includes(value)) {
+                return prev.filter(cat => cat !== value)
+            } else {
+                return [...prev, value]
+            }
+        })
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
             const formData = new FormData()
             formData.append('title', title)
-            formData.append('slug', url)
+            formData.append('slug', slug)
             formData.append('description', description)
             formData.append('content', content)
             formData.append('status', status ? '1' : '0')
-            formData.append('category_id', category ?? '');
-            if (image) formData.append('image', image as Blob);
             if (featuredImage) formData.append('featured_image', featuredImage)
+            formData.append('category_ids', JSON.stringify(selectedCategories))
 
             if (data) formData.append('_method', 'PUT')
 
-            const apiUrl = data
+            const url = data
                 ? `${process.env.NEXT_PUBLIC_AUTH_API_URL}/api/v1/admin/blogs/${data.id}`
                 : `${process.env.NEXT_PUBLIC_AUTH_API_URL}/api/v1/admin/blogs`
 
-            const res = await fetch(apiUrl, {
+            const res = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -91,16 +94,16 @@ export default function BlogForm({ data = null, token, categories }: { data?: an
                 toast({
                     variant: 'default',
                     title: 'Success',
-                    description: json?.message
+                    description: data ? 'Blog Updated Successfully' : 'Blog Added Successfully',
                 })
                 if (!data) {
                     setTitle('')
-                    setUrl('')
+                    setSlug('')
                     setDescription('')
                     setContent('')
                     setStatus(false)
                     setFeaturedImage(null)
-                    setCategory(undefined)
+                    setSelectedCategories([])
                 } else {
                     router.push('/admin/dashboard/blogs')
                 }
@@ -144,56 +147,19 @@ export default function BlogForm({ data = null, token, categories }: { data?: an
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="url">Url</Label>
+                            <Label htmlFor="slug">Slug</Label>
                             <Input
-                                id="url"
-                                value={url}
-                                onChange={(e) => setUrl(e.target.value)}
+                                id="slug"
+                                value={slug}
+                                onChange={(e) => setSlug(e.target.value)}
                                 required
                             />
-                            <p className="text-sm text-muted-foreground flex flex-wrap gap-2">
-                                <span>URL Preview:</span><span>{process.env.NEXT_PUBLIC_BASE_URL}/blog/{url}</span>
+                            <p className="text-sm text-muted-foreground">
+                                URL Preview: {process.env.NEXT_PUBLIC_FRONTEND_URL}/{slug}
                             </p>
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="Blog">Upload Blog Image</Label>
-                            <Input type="file" id="Blog"
-                                onChange={(e) => setImage(e?.target?.files ? e?.target?.files[0] : null)}
-                                accept="image/png, image/jpeg, image/jpg, image/svg+xml"
-                                required={!data}
-                            />
-                            {data?.image ?
-                                <Image
-                                    src={data?.image}
-                                    width={50}
-                                    height={50}
-                                    alt="Blog"
-                                    unoptimized={true}
-                                />
-                                : null
-                            }
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="description">Cateogry</Label>
-                            <Select
-                                onValueChange={handleCategorySelectChange}
-                                value={category}
-                            >
-                                <SelectTrigger className="w-full">
-                                    <SelectValue placeholder="Select Category" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="">Select Category</SelectItem>
-                                    {
-                                        categories.map((category) => (
-                                            <SelectItem key={category.id} value={(category.id).toString()}>{category.name}</SelectItem>
-                                        ))
-                                    }
-                                </SelectContent>
-                            </Select>
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="description">Excerpt</Label>
+                            <Label htmlFor="description">Description</Label>
                             <Textarea
                                 id="description"
                                 value={description}
@@ -207,11 +173,44 @@ export default function BlogForm({ data = null, token, categories }: { data?: an
                                 theme="snow"
                                 value={content}
                                 onChange={setContent}
-                                className=" mb-12"
                                 modules={{
                                     toolbar: toolbarOptions
                                 }}
+                                className="h-64 mb-12"
                             />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="featuredImage">Featured Image</Label>
+                            <Input
+                                type="file"
+                                id="featuredImage"
+                                onChange={(e) => setFeaturedImage(e.target.files ? e.target.files[0] : null)}
+                                accept="image/*"
+                            />
+                            {data?.featured_image && (
+                                <Image
+                                    src={data.featured_image}
+                                    width={100}
+                                    height={100}
+                                    alt="Featured Image"
+                                    className="mt-2"
+                                />
+                            )}
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="categories">Categories</Label>
+                            <div className="flex flex-wrap gap-2">
+                                {categories.map((category) => (
+                                    <Button
+                                        key={category.id}
+                                        type="button"
+                                        variant={selectedCategories.includes(category.id.toString()) ? "secondary" : "outline"}
+                                        onClick={() => handleCategorySelectChange(category.id.toString())}
+                                    >
+                                        {category.name}
+                                    </Button>
+                                ))}
+                            </div>
                         </div>
                         <div className="flex items-center space-x-2">
                             <Switch
