@@ -126,11 +126,11 @@ export default function NavLinks({ session }: { session: any }) {
         {
             name: "What we do",
             href: "/what-we-do",
-            subItems: [
-                { name: "Services", href: "/services" },
-                { name: "Solutions", href: "/solutions" },
-                { name: "Industries", href: "/industries" },
-            ],
+            // subItems: [
+            //     { name: "Services", href: "/services" },
+            //     { name: "Solutions", href: "/solutions" },
+            //     { name: "Industries", href: "/industries" },
+            // ],
         },
         {
             name: "Blogs",
@@ -139,11 +139,11 @@ export default function NavLinks({ session }: { session: any }) {
         {
             name: "Insights",
             href: "/insights",
-            subItems: [
-                { name: "Case Studies", href: "/case-studies" },
-                { name: "White Papers", href: "/white-papers" },
-                { name: "Webinars", href: "/webinars" },
-            ],
+            // subItems: [
+            //     { name: "Case Studies", href: "/case-studies" },
+            //     { name: "White Papers", href: "/white-papers" },
+            //     { name: "Webinars", href: "/webinars" },
+            // ],
         },
         {
             name: "Career",

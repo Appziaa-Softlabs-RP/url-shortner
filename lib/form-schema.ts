@@ -56,10 +56,10 @@ export const bankInfoSchema = z.object({
 export const accountDetailsSchema = z.object({
   account_holder_name: commonStringMinLength3,
   bank_name: commonStringMinLength3,
-  account_number: z.string().min(10, "Please enter a valid Account Number (min. 10 characters)"),
+  account_number: z.string().min(10, "Please enter a valid Account Number (min. 10 digits)"),
   reenter_account_number: z.string()
-    .min(10, "Please re-enter Account Number (min. 10 characters)"),
-  ifsc_code: z.string().min(6, "Please enter a valid IFSC Code (min. 6 characters)"),
+    .min(10, "Please re-enter Account Number (min. 10 digits)"),
+  ifsc_code: z.string().min(6, "Please enter a valid IFSC Code (min. 6 digits)"),
   account_type: z.string().min(1, "Please select Account Type")
 }).refine(data => data.account_number === data.reenter_account_number, {
   message: "Account Number does not match",

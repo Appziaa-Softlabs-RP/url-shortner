@@ -60,14 +60,14 @@ export default async function Blog({ params }: { params: { category?: string } }
                                     Latest Articles
                                 </Link>
                             </TabsTrigger>
-                            {categories.map((category: any) => (
+                            {categories?.map((category: any) => (
                                 <TabsTrigger
-                                    key={category.id}
-                                    value={category.slug}
+                                    key={category?.id}
+                                    value={category?.slug}
                                     className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none p-0"
                                 >
                                     <Link href={`/blogs/${category?.slug}`}>
-                                        {category.name}
+                                        {category?.name}
                                     </Link>
                                 </TabsTrigger>
                             ))}
