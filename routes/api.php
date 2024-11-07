@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Controllers\v1\Admin\BlogCategoryController;
 use App\Http\Controllers\v1\Admin\BlogController;
+use App\Http\Controllers\v1\Admin\CategoryController;
+use App\Http\Controllers\v1\Admin\LegalPolicyController;
+use App\Http\Controllers\v1\User\LegalPolicyController as UserLegalPolicyController;
 use App\Http\Controllers\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\v1\Auth\LoginController;
 use App\Http\Controllers\v1\Auth\LogoutController;
 use App\Http\Controllers\v1\Auth\RegisterController;
+use App\Http\Controllers\v1\User\BlogController as UserBlogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,12 +38,22 @@ Route::prefix('v1')->group(function () {
         });
     });
 
+    // User Routes
+    Route::apiResource('legal-policies', UserLegalPolicyController::class)->only(['index']);
+    Route::controller(UserBlogController::class)->group(function () {
+        Route::prefix('blogs')->group(function () {
+            Route::get('/', 'overview');
+            Route::get('/{slug}', 'show');
+        });
+    });
+
     // Auth Routes
     Route::middleware('auth:api')->group(function () {
         Route::group(['middleware' => 'isAdmin'], function () {
             Route::prefix('admin')->group(function () {
-                Route::apiResource('blog-categories', BlogCategoryController::class);
+                Route::apiResource('blog-categories', CategoryController::class);
                 Route::apiResource('blogs', BlogController::class);
+                Route::apiResource('legal-policies', LegalPolicyController::class);
             });
         });
     });

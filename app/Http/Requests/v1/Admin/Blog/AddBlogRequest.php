@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AddBlogRequest extends FormRequest
 {
-
     public function authorize(): bool
     {
         return true;
@@ -19,7 +18,11 @@ class AddBlogRequest extends FormRequest
             'description' => 'required|string',
             'image' => 'required|image',
             'content' => 'required|string',
-            'category_id' => 'required|integer|exists:blog_categories,id',
+            'category_ids' => [
+                'required',
+                'array',
+            ],
+            'category_ids.*' => 'required|integer|exists:categories,id',
             'slug' => 'required|string|unique:blogs,slug',
             'status' => 'required|boolean',
         ];

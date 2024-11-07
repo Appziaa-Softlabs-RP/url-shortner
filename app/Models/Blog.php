@@ -16,17 +16,44 @@ class Blog extends Model
         'slug',
         'description',
         'content',
+        'views',
         'status',
         'created_by',
     ];
 
-    public function scopeActive($query)
+    protected $with = ['categories'];
+
+    // created by as author
+    // public function author()
+    // {
+    // return $this->belongsTo(User::class, 'created_by')->select('id', 'name');
+    //
+
+    public function getImageAttribute($value)
     {
-        return $query->where('status', 'active');
+        return url('storage/blogs/images/'.$value);
     }
 
-    public function category()
+    public function scopeActive($query)
     {
-        return $this->belongsTo(BlogCategory::class, 'category_id');
+        return $query->where('status', 1);
+    }
+
+    public function categories()
+    {
+        // belongs to category via blog_categories table
+        return $this->hasManyThrough(
+            Category::class,
+            BlogCategory::class,
+            'blog_id',
+            'id',
+            'id',
+            'category_id'
+        );
+    }
+
+    public function latest()
+    {
+        return $this->orderBy('created_at', 'desc');
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\v1\Admin\BlogCategory;
+namespace App\Http\Requests\v1\Admin\LegalPolicy;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddCategoryRequest extends FormRequest
+class AddLegalPolicyRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,10 +14,9 @@ class AddCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'slug' => 'required|string',
+            'title' => 'required|string',
             'description' => 'required|string',
-            'status' => 'required|boolean',
+            'file' => 'required|file',
         ];
     }
 }

@@ -10,19 +10,17 @@ class BlogCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'slug',
-        'description',
-        'status',
+        'blog_id',
+        'category_id',
     ];
 
-    public function scopeActive($query)
+    public function blog()
     {
-        return $query->where('status', 'active');
+        return $this->belongsTo(Blog::class);
     }
 
-    public function blogs()
+    public function category()
     {
-        return $this->hasMany(Blog::class, 'category_id');
+        return $this->belongsTo(Category::class);
     }
 }

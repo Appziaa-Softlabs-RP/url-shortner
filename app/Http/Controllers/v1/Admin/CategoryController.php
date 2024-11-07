@@ -3,20 +3,18 @@
 namespace App\Http\Controllers\v1\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\v1\Admin\BlogCategory\AddCategoryRequest;
-use App\Http\Requests\v1\Admin\BlogCategory\UpdateCategoryRequest;
+use App\Http\Requests\v1\Admin\Category\AddCategoryRequest;
+use App\Http\Requests\v1\Admin\Category\UpdateCategoryRequest;
 use App\Http\Traits\HttpResponse;
-use App\Services\BlogCategoryService;
-use Illuminate\Http\Request;
+use App\Services\CategoryService;
 
-class BlogCategoryController extends Controller
+class CategoryController extends Controller
 {
-
     use HttpResponse;
 
-    protected BlogCategoryService $blogCategoryService;
+    protected CategoryService $blogCategoryService;
 
-    public function __construct(BlogCategoryService $blogCategoryService)
+    public function __construct(CategoryService $blogCategoryService)
     {
         $this->blogCategoryService = $blogCategoryService;
     }
@@ -61,7 +59,6 @@ class BlogCategoryController extends Controller
                 code: 400
             );
         }
-
 
         $category = $this->blogCategoryService->update($request, $id);
 

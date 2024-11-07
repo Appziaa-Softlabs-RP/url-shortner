@@ -2,20 +2,34 @@
 
 namespace App\Services;
 
-use App\Repositories\BlogCategoryRepository;
-use App\Repositories\BlogRepository;
+use App\Repositories\CategoryRepository;
 
-class BlogCategoryService
+class CategoryService
 {
-    protected BlogCategoryRepository $blogCategoryRepository;
+    protected CategoryRepository $blogCategoryRepository;
 
     public function __construct(
-        BlogCategoryRepository $blogCategoryRepository
+        CategoryRepository $blogCategoryRepository
     ) {
         $this->blogCategoryRepository = $blogCategoryRepository;
     }
 
-    public function getActiveBlogCategories()
+    public function getCategoryBySlug($slug)
+    {
+        return $this->blogCategoryRepository->getCategoryBySlug($slug);
+    }
+
+    public function isCategoryExists($id)
+    {
+        return $this->blogCategoryRepository->show($id);
+    }
+
+    public function getCategoriesArticles()
+    {
+        return $this->blogCategoryRepository->getCategoriesArticles();
+    }
+
+    public function getActiveCategories()
     {
         return $this->blogCategoryRepository->getActive();
     }
@@ -49,5 +63,4 @@ class BlogCategoryService
     {
         return $this->blogCategoryRepository->destroy($id);
     }
-
 }

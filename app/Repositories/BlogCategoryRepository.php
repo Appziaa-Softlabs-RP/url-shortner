@@ -6,53 +6,23 @@ use App\Models\BlogCategory;
 
 class BlogCategoryRepository
 {
+    protected BlogCategory $blogCategory;
 
-    protected BlogCategory $model;
-
-    public function __construct(BlogCategory $model)
+    public function __construct(BlogCategory $blogCategory)
     {
-        $this->model = $model;
+        $this->blogCategory = $blogCategory;
     }
 
-    public function isSlugExists($slug, $id)
+    public function store($blogId, $categoryId)
     {
-        return $this->model->where('slug', $slug)->where('id', '!=', $id)->exists();
+        return $this->blogCategory->create([
+            'blog_id' => $blogId,
+            'category_id' => $categoryId,
+        ]);
     }
 
-    public function getActive()
+    public function deleteBlogCategories($blogId)
     {
-        return $this->model->active()->get();
+        return $this->blogCategory->where('blog_id', $blogId)->delete();
     }
-
-    public function index($request)
-    {
-        return $this->model
-            ->where('name', 'like', '%' . $request->search . '%')
-            ->paginate($request->per_page);
-    }
-
-    public function store($request)
-    {
-        return $this->model->create($request->all());
-    }
-
-    public function show($id)
-    {
-        return $this->model->findOrFail($id);
-    }
-
-    public function update($request, $id)
-    {
-        $blogCategory = $this->model->findOrFail($id);
-        $blogCategory->update($request->all());
-        return $blogCategory;
-    }
-
-    public function destroy($id)
-    {
-        $blogCategory = $this->model->findOrFail($id);
-        $blogCategory->delete();
-        return $blogCategory;
-    }
-
 }

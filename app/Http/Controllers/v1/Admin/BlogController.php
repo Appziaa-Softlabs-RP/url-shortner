@@ -7,12 +7,10 @@ use App\Http\Requests\v1\Admin\Blog\AddBlogRequest;
 use App\Http\Requests\v1\Admin\Blog\UpdateBlogRequest;
 use App\Http\Traits\HttpResponse;
 use App\Services\BlogService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
-
     use HttpResponse;
 
     protected BlogService $blogService;
@@ -43,12 +41,14 @@ class BlogController extends Controller
             $blog = $this->blogService->store($validated, $image);
 
             DB::commit();
+
             return $this->success(
                 message: 'Blog created successfully',
                 data: $blog
             );
         } catch (\Exception $e) {
             DB::rollBack();
+
             return $this->error(
                 message: 'Something went wrong',
                 code: 500
@@ -86,12 +86,14 @@ class BlogController extends Controller
             $blog = $this->blogService->update($validated, $image, $id);
 
             DB::commit();
+
             return $this->success(
                 message: 'Blog updated successfully',
                 data: $blog
             );
         } catch (\Exception $e) {
             DB::rollBack();
+
             return $this->error(
                 message: 'Something went wrong',
                 code: 500
