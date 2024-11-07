@@ -24,7 +24,7 @@ const footerSections = [
         title: 'Frontend',
         links: [
             { name: 'Blogs', href: '/blogs/latest' },
-            { name: 'Legal Policies', href: '/Legal Policies' },
+            { name: 'Legal Policies', href: '/legal-policies' },
             { name: 'Webinars', href: '/webinars' },
             { name: 'Documentation', href: '/documentation' },
         ],

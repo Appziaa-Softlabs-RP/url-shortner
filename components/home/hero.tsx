@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
+import Link from 'next/link'
 
 const slides = [
     {
@@ -42,7 +43,9 @@ export default function Hero() {
                     </motion.div>
                     <div className="flex justify-center gap-4">
                         <Button className="bg-primary text-white hover:bg-primary">Learn More</Button>
-                        <Button variant="outline">Contact Us</Button>
+                        <Link href="/#contact">
+                            <Button variant="outline">Contact Us</Button>
+                        </Link>
                     </div>
                     {/* <button
                         className="absolute left-0 top-1/2 -translate-y-1/2 p-2 bg-black/30 rounded-full"

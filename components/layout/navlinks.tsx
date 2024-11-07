@@ -15,6 +15,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, Menu } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { UserNav } from './user-nav'
 
@@ -28,6 +29,7 @@ interface ItemsProps {
 
 const NavItem = ({ item, isMobile }: { item: ItemsProps; isMobile: boolean }) => {
     const [isOpen, setIsOpen] = useState(false)
+    const pathname = usePathname()
     const Icon = item.icon ? Icons[item.icon] : null
 
     const handleClick = () => {
@@ -69,13 +71,13 @@ const NavItem = ({ item, isMobile }: { item: ItemsProps; isMobile: boolean }) =>
         >
             <Link
                 href={item?.subItems ? '#' : item.href}
-                className={`space-x-1 text-sm text-gray-700 ${isOpen && 'text-secondary'} hover:text-secondary hover:bg-secondary/10 p-2 rounded transition-colors duration-200 w-full flex items-center justify-between ${isMobile ? 'py-2' : ''
+                className={`space-x-1 text-sm text-gray-700 ${isOpen && 'text-secondary'} ${pathname === item.href && 'text-secondary bg-secondary/10'} hover:text-secondary hover:bg-secondary/10 p-2 rounded transition-colors duration-200 w-full flex items-center justify-between ${isMobile ? 'py-2' : ''
                     }`}
                 onClick={handleClick}
             >
                 <span className={`font-medium grid ${Icon && "grid-cols-[20px_1fr]"} items-center gap-2`}>
                     {Icon && <Icon className="w-5 h-5" />}
-                    <span>{item.name}</span>
+                    <span className='text-[15px]'>{item.name}</span>
                 </span>
                 {item.subItems && (
                     <motion.span
@@ -126,11 +128,10 @@ export default function NavLinks({ session }: { session: any }) {
         {
             name: "What we do",
             href: "/what-we-do",
-            // subItems: [
-            //     { name: "Services", href: "/services" },
-            //     { name: "Solutions", href: "/solutions" },
-            //     { name: "Industries", href: "/industries" },
-            // ],
+        },
+        {
+            name: "Who we are",
+            href: "/who-we-are",
         },
         {
             name: "Blogs",
