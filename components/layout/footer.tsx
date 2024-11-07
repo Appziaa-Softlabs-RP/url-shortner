@@ -4,19 +4,39 @@ import Image from 'next/image'
 const footerSections = [
     {
         title: 'Solutions',
-        links: ['Recruitment', 'Analytics', 'AI Solutions', 'Consulting'],
+        links: [
+            { name: 'Recruitment', href: '/solutions/recruitment' },
+            { name: 'Analytics', href: '/solutions/analytics' },
+            { name: 'AI Solutions', href: '/solutions/ai-solutions' },
+            { name: 'Consulting', href: '/solutions/consulting' },
+        ],
     },
     {
         title: 'Company',
-        links: ['About Us', 'Careers', 'News', 'Contact'],
+        links: [
+            { name: 'About Us', href: '/about-us' },
+            { name: 'Careers', href: '/careers' },
+            { name: 'News', href: '/news' },
+            { name: 'Contact', href: '/contact' },
+        ],
     },
     {
-        title: 'Resources',
-        links: ['Blog', 'Case Studies', 'Webinars', 'Documentation'],
+        title: 'Frontend',
+        links: [
+            { name: 'Blogs', href: '/blogs/latest' },
+            { name: 'Legal Policies', href: '/Legal Policies' },
+            { name: 'Webinars', href: '/webinars' },
+            { name: 'Documentation', href: '/documentation' },
+        ],
     },
     {
         title: 'Legal',
-        links: ['Privacy Policy', 'Terms of Service', 'Security', 'Compliance'],
+        links: [
+            { name: 'Privacy Policy', href: '/privacy-policy' },
+            { name: 'Terms of Service', href: '/terms-of-service' },
+            { name: 'Security', href: '/security' },
+            { name: 'Compliance', href: '/compliance' },
+        ],
     },
 ]
 
@@ -31,8 +51,8 @@ export default function Footer() {
                             <ul className="space-y-2">
                                 {section.links.map((link, linkIndex) => (
                                     <li key={linkIndex}>
-                                        <Link href="#" className="hover:text-white transition-colors">
-                                            {link}
+                                        <Link href={link.href} className="hover:text-white transition-colors">
+                                            {link.name}
                                         </Link>
                                     </li>
                                 ))}

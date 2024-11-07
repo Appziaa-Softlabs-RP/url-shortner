@@ -2,6 +2,14 @@
 
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger
+} from "@/components/ui/navigation-menu"
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, Menu } from 'lucide-react'
@@ -26,6 +34,31 @@ const NavItem = ({ item, isMobile }: { item: ItemsProps; isMobile: boolean }) =>
         if (isMobile && item.subItems) {
             setIsOpen(!isOpen)
         }
+    }
+
+    if (!isMobile && item.subItems) {
+        return (
+            <NavigationMenuItem>
+                <NavigationMenuTrigger>{item.name}</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        {item.subItems.map((subItem, index) => (
+                            <li key={index}>
+                                <NavigationMenuLink asChild>
+                                    <a
+                                        href={subItem.href}
+                                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                    >
+                                        {Icon && <Icon className="h-6 w-6" />}
+                                        <div className="text-sm font-medium leading-none">{subItem.name}</div>
+                                    </a>
+                                </NavigationMenuLink>
+                            </li>
+                        ))}
+                    </ul>
+                </NavigationMenuContent>
+            </NavigationMenuItem>
+        )
     }
 
     return (
@@ -69,9 +102,11 @@ const NavItem = ({ item, isMobile }: { item: ItemsProps; isMobile: boolean }) =>
                             if (subItem?.isComingSoon) {
                                 return null;
                             }
-                            return <div key={index} className={`bg-white md:w-64 p-1 m-0 ${index === 0 ? 'rounded-t-md' : ''} ${(index - 1) === (item?.subItems?.length) ? 'rounded-b-md' : ''}`}>
-                                <NavItem key={index} item={subItem} isMobile={isMobile} />
-                            </div>
+                            return (
+                                <div key={index} className={`bg-white md:w-64 p-1 m-0 ${index === 0 ? 'rounded-t-md' : ''} ${(index - 1) === (item?.subItems?.length) ? 'rounded-b-md' : ''}`}>
+                                    <NavItem key={index} item={subItem} isMobile={isMobile} />
+                                </div>
+                            )
                         })}
                     </motion.div>
                 )}
@@ -91,18 +126,28 @@ export default function NavLinks({ session }: { session: any }) {
         {
             name: "What we do",
             href: "/what-we-do",
+            subItems: [
+                { name: "Services", href: "/services" },
+                { name: "Solutions", href: "/solutions" },
+                { name: "Industries", href: "/industries" },
+            ],
         },
         {
             name: "Blogs",
-            href: "/blogs",
+            href: "/blogs/latest",
         },
         {
             name: "Insights",
             href: "/insights",
+            subItems: [
+                { name: "Case Studies", href: "/case-studies" },
+                { name: "White Papers", href: "/white-papers" },
+                { name: "Webinars", href: "/webinars" },
+            ],
         },
         {
             name: "Career",
-            href: "/carrer",
+            href: "/career",
         },
     ]
 
@@ -117,11 +162,13 @@ export default function NavLinks({ session }: { session: any }) {
                             width={180}
                         />
                     </Link>
-                    <nav className="hidden md:flex items-center space-x-6">
-                        {navItems.map((item, index) => (
-                            <NavItem key={index} item={item} isMobile={false} />
-                        ))}
-                    </nav>
+                    <NavigationMenu className="hidden md:flex">
+                        <NavigationMenuList>
+                            {navItems.map((item, index) => (
+                                <NavItem key={index} item={item} isMobile={false} />
+                            ))}
+                        </NavigationMenuList>
+                    </NavigationMenu>
                 </div>
                 {
                     session ?

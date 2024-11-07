@@ -22,9 +22,11 @@ export default function BlogForm({ data = null, token, categories }: { data?: an
     const [slug, setSlug] = useState(data?.slug ?? '')
     const [description, setDescription] = useState(data?.description ?? '')
     const [content, setContent] = useState(data?.content ?? '')
-    const [status, setStatus] = useState(data?.status === '1')
+    const [status, setStatus] = useState(data?.status == '1')
     const [featuredImage, setFeaturedImage] = useState<File | null>(null)
-    const [selectedCategories, setSelectedCategories] = useState<string[]>(data?.category_ids?.map(String) ?? [])
+    const [selectedCategories, setSelectedCategories] = useState<string[]>(
+        data?.categories?.map((category: any) => category.id.toString()) ?? []
+    )
     const router = useRouter()
 
     const toolbarOptions = [
@@ -69,8 +71,12 @@ export default function BlogForm({ data = null, token, categories }: { data?: an
             formData.append('description', description)
             formData.append('content', content)
             formData.append('status', status ? '1' : '0')
-            if (featuredImage) formData.append('featured_image', featuredImage)
-            formData.append('category_ids', JSON.stringify(selectedCategories))
+            if (featuredImage) formData.append('image', featuredImage)
+            if (selectedCategories.length > 0) {
+                selectedCategories.forEach((category) => {
+                    formData.append('category_ids[]', category)
+                })
+            }
 
             if (data) formData.append('_method', 'PUT')
 
@@ -159,7 +165,7 @@ export default function BlogForm({ data = null, token, categories }: { data?: an
                             </p>
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="description">Description</Label>
+                            <Label htmlFor="description">Excerpt</Label>
                             <Textarea
                                 id="description"
                                 value={description}
@@ -179,17 +185,18 @@ export default function BlogForm({ data = null, token, categories }: { data?: an
                                 className="h-64 mb-12"
                             />
                         </div>
-                        <div className="space-y-2">
+                        <div className="space-y-2 pt-[6rem]">
                             <Label htmlFor="featuredImage">Featured Image</Label>
                             <Input
                                 type="file"
                                 id="featuredImage"
                                 onChange={(e) => setFeaturedImage(e.target.files ? e.target.files[0] : null)}
                                 accept="image/*"
+                                required={!data}
                             />
-                            {data?.featured_image && (
+                            {data?.image && (
                                 <Image
-                                    src={data.featured_image}
+                                    src={data.image}
                                     width={100}
                                     height={100}
                                     alt="Featured Image"

@@ -1,5 +1,14 @@
 import { NavItem } from "@/types";
 
+export type legalPolicies = {
+  id: number;
+  title: string;
+  file: string
+  description: string
+  created_at: string;
+  updated_at: string;
+}
+
 export type blogCategory = {
   id: number;
   name: string;
@@ -52,5 +61,11 @@ export const adminNavItems: NavItem[] = [
         icon: "user",
       }
     ],
+  },
+  {
+    title: "Legal Policies",
+    href: "/admin/dashboard/legal-policies",
+    icon: "dashboard",
+    label: "Legal Policies",
   },
 ];
