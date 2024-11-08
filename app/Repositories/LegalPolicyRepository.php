@@ -18,7 +18,7 @@ class LegalPolicyRepository
     {
         return $this->model
             ->orderBy('id', 'desc')
-            ->where('title', 'like', '%' . request()->search ?? '' . '%')
+            ->where('title', 'like', '%'.request()->search ?? ''.'%')
             ->paginate(request()->limit ?? 10);
     }
 

@@ -7,11 +7,9 @@ use App\Http\Requests\v1\Admin\LegalPolicy\AddLegalPolicyRequest;
 use App\Http\Requests\v1\Admin\LegalPolicy\UpdateLegalPolicyRequest;
 use App\Http\Traits\HttpResponse;
 use App\Services\LegalPolicyService;
-use Illuminate\Http\Request;
 
 class LegalPolicyController extends Controller
 {
-
     use HttpResponse;
 
     protected LegalPolicyService $service;
@@ -25,6 +23,7 @@ class LegalPolicyController extends Controller
     public function index()
     {
         $data = $this->service->index();
+
         return $this->success(
             data: $data,
             message: 'Legal Policy List'
@@ -34,6 +33,7 @@ class LegalPolicyController extends Controller
     public function show($id)
     {
         $data = $this->service->show($id);
+
         return $this->success(
             data: $data,
             message: 'Legal Policy Detail'
@@ -46,6 +46,7 @@ class LegalPolicyController extends Controller
         $file = $request->file('file');
 
         $data = $this->service->store($data, $file);
+
         return $this->success(
             data: $data,
             message: 'Legal Policy Created'
@@ -58,6 +59,7 @@ class LegalPolicyController extends Controller
         $file = $request->file('file');
 
         $data = $this->service->update($id, $data, $file);
+
         return $this->success(
             data: $data,
             message: 'Legal Policy Updated'
@@ -67,6 +69,7 @@ class LegalPolicyController extends Controller
     public function destroy($id)
     {
         $data = $this->service->destroy($id);
+
         return $this->success(
             data: $data,
             message: 'Legal Policy Deleted'

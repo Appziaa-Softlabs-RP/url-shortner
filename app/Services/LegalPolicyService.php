@@ -70,6 +70,7 @@ class LegalPolicyService
         if ($policyLaw->file) {
             $this->imageService->deleteFileFromUrl($policyLaw->file, '/policies/files/');
         }
+
         return $this->repository->destroy($id);
     }
 }

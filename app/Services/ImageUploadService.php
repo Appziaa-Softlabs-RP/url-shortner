@@ -12,7 +12,7 @@ class ImageUploadService
     {
         if ($image) {
             // Generate a unique name for the file
-            $fileName = uniqid() . '_' . $image->getClientOriginalName();
+            $fileName = uniqid().'_'.$image->getClientOriginalName();
             // Store the file in the 'public' disk under the 'files' directory
             $image->storeAs($path, $fileName, 'public');
 
@@ -51,7 +51,7 @@ class ImageUploadService
     public function deleteImage($image, $path)
     {
         if ($image) {
-            $this->path = public_path('storage/' . $path . '/' . $image);
+            $this->path = public_path('storage/'.$path.'/'.$image);
             if (file_exists($this->path)) {
                 unlink($this->path);
             }
@@ -64,7 +64,7 @@ class ImageUploadService
         $file = end($file);
 
         if ($file) {
-            $this->path = public_path('storage/' . $path . '/' . $file);
+            $this->path = public_path('storage/'.$path.'/'.$file);
             if (file_exists($this->path)) {
                 unlink($this->path);
             }
@@ -76,7 +76,7 @@ class ImageUploadService
 
         if ($image) {
             $ext = $image->getClientOriginalExtension();
-            if (!in_array($ext, ['jpg', 'jpeg', 'png'])) {
+            if (! in_array($ext, ['jpg', 'jpeg', 'png'])) {
                 return false;
             }
 

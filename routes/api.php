@@ -3,12 +3,12 @@
 use App\Http\Controllers\v1\Admin\BlogController;
 use App\Http\Controllers\v1\Admin\CategoryController;
 use App\Http\Controllers\v1\Admin\LegalPolicyController;
-use App\Http\Controllers\v1\User\LegalPolicyController as UserLegalPolicyController;
 use App\Http\Controllers\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\v1\Auth\LoginController;
 use App\Http\Controllers\v1\Auth\LogoutController;
 use App\Http\Controllers\v1\Auth\RegisterController;
 use App\Http\Controllers\v1\User\BlogController as UserBlogController;
+use App\Http\Controllers\v1\User\LegalPolicyController as UserLegalPolicyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

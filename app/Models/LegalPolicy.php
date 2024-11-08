@@ -17,6 +17,6 @@ class LegalPolicy extends Model
 
     public function getFileAttribute($value)
     {
-        return url('storage/policies/files/' . $value);
+        return url('storage/policies/files/'.$value);
     }
 }
