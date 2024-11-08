@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { Mail, Phone } from "lucide-react"
+import { Mail, MapPin, Phone } from "lucide-react"
 
 export default function UnderConstructionPopup() {
     const [isOpen, setIsOpen] = useState(false)
@@ -43,6 +43,10 @@ export default function UnderConstructionPopup() {
                             <Phone className="h-4 w-4" />
                             <span>+1 (681) 233 2629</span>
                         </a>
+                        <div className="flex items-center space-x-2 text-primary">
+                            <MapPin className="h-4 w-4" />
+                            <span>17250 Dallas Parkway, Dallas, TX 75248</span>
+                        </div>
                     </div>
                     <p>We appreciate your patience and look forward to connecting with you soon!</p>
                 </DialogDescription>

@@ -6,8 +6,8 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Sign Up/Sign In with DigitalJanety4",
-  description: "Login to your account with DigitalJanety4",
+  title: "Sign Up/Sign In with Digital Janet",
+  description: "Login to your account with Digital Janet",
 };
 
 export default async function RootLayout({

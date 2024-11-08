@@ -6,8 +6,8 @@ import UnderConstructionPopup from "@/components/layout/under-construction-popup
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "DigitalJanet: AI-Powered Candidate Sourcing Platform for Efficient Hiring",
-  description: "DigitalJanet is an AI-driven recruitment platform that streamlines candidate sourcing with intelligent matching, automated searches, and real-time insights, helping businesses hire the best talent faster. Simplify your hiring process with cutting-edge LLM technology.",
+  title: "Empowering Organizations Through Talent and Technology",
+  description: "With our extensive capabilities, strategic ecosystem partnerships, and unparalleled industry expertise, we empower your business to reach its next level. Whether it's sourcing top talent or driving digital transformation, we're here to support your success.",
 };
 
 export default async function DashboardLayout({
