@@ -2,6 +2,7 @@ import CookieConsent from "@/components/consents/cookie-consent";
 import Footer from "@/components/layout/footer";
 import GoToTop from "@/components/layout/go-to-top";
 import Header from "@/components/layout/header";
+import UnderConstructionPopup from "@/components/layout/under-construction-popup";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default async function DashboardLayout({
       </div>
       <GoToTop />
       <CookieConsent />
+      <UnderConstructionPopup />
       <Footer />
     </div>
   );

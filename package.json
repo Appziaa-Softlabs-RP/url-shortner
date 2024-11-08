@@ -67,6 +67,7 @@
     "generative-ai": "^0.1.4",
     "google-auth-library": "^9.14.2",
     "input-otp": "^1.2.4",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.291.0",
     "next": "^14.2.16",
     "next-auth": "^4.24.8",
@@ -101,6 +102,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "prettier": "3.0.3"
