@@ -16,6 +16,44 @@ export default function WhatWeDo() {
                 </p>
             </section>
 
+            <section id="staff-and-consulting">
+                <h2 className="text-3xl font-semibold mb-6">Staffing and Consulting</h2>
+                <p>At Digital Janet, we bring the best talent to your organization. Our Staffing & Consulting services are powered by a combination of human expertise and AI-driven technology to ensure you get the right professionals for your business needs—faster and with greater precision.</p>
+                <ul>
+                    <li>
+                        <b>AI-Powered Talent Sourcing:</b> Our in-house AI-powered product significantly reduces sourcing and screening time by 70%, enabling us to deliver higher-quality candidates in record time. This helps businesses scale quickly without compromising quality.
+                    </li>
+                    <li>
+                        <b>IT Staff Augmentation:</b> Whether you’re in Telecom, Automobile, or Manufacturing & Logistics, we help you bring top-tier talent to your team to ensure that your projects are completed on time and within budget.
+                    </li>
+                    <li>
+                        <b>Consulting Services:</b> Our expert consultants help you tackle your biggest challenges and optimize your operations across BFSI, Life Science & Healthcare, and more, providing strategic guidance and actionable insights.
+                    </li>
+                    <li>
+                        <b>Diversity and Inclusion:</b> As an MBE, we are committed to sourcing diverse talent that fosters innovation and enriches your organizational culture.
+                    </li>
+                </ul>
+            </section>
+
+            <section id="recruitment-process-outsourcing">
+                <h2 className="text-3xl font-semibold mb-6">Recruitment Process Outsourcing (RPO)</h2>
+                <p>At Digital Janet, we bring the best talent to your organization. Our Staffing & Consulting services are powered by a combination of human expertise and AI-driven technology to ensure you get the right professionals for your business needs—faster and with greater precision.</p>
+                <ul>
+                    <li>
+                        <b>AI-Powered Talent Sourcing:</b> Our in-house AI-powered product significantly reduces sourcing and screening time by 70%, enabling us to deliver higher-quality candidates in record time. This helps businesses scale quickly without compromising quality.
+                    </li>
+                    <li>
+                        <b>IT Staff Augmentation:</b> Whether you’re in Telecom, Automobile, or Manufacturing & Logistics, we help you bring top-tier talent to your team to ensure that your projects are completed on time and within budget.
+                    </li>
+                    <li>
+                        <b>Consulting Services:</b> Our expert consultants help you tackle your biggest challenges and optimize your operations across BFSI, Life Science & Healthcare, and more, providing strategic guidance and actionable insights.
+                    </li>
+                    <li>
+                        <b>Diversity and Inclusion:</b> As an MBE, we are committed to sourcing diverse talent that fosters innovation and enriches your organizational culture.
+                    </li>
+                </ul>
+            </section>
+
             <section className="mb-16">
                 <h2 className="text-3xl font-semibold mb-6">Our Unique Approach to Staffing</h2>
                 <p className="text-lg mb-6">

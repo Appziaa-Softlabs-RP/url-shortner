@@ -6,8 +6,8 @@ const sections = [
     {
         id: 'introduction',
         title: 'Introduction',
-        description: `<p>Welcome to <b>Appziaa Softlabs Pvt Ltd</b>.</p><br />
-        <p>Appziaa Softlabs Pvt Ltd (“us”, “we”, or “our”) operates <a href="https://digitaljanet.com" style="color: blue">digitaljanet.com</a> and DigitalJanet mobile application (hereinafter referred to as <b>“Service”</b>).</p><br />
+        description: `<p>Welcome to <b>Digital Janet</b>.</p><br />
+        <p>Digital Janet (“us”, “we”, or “our”) operates <a href="https://digitaljanet.com" style="color: blue">digitaljanet.com</a> and DigitalJanet mobile application (hereinafter referred to as <b>“Service”</b>).</p><br />
         <p>Our Privacy Policy governs your visit to <a href="https://digitaljanet.com" style="color: blue">digitaljanet.com</a> and DigitalJanet mobile application, and explains how we collect, safeguard, and disclose information that results from your use of our Service.</p><br />
         <p>We use your data to provide and improve Service. By using Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.</p>
         <p>Our Terms and Conditions (<b>“Terms”</b>) govern all use of our Service and together with the Privacy Policy constitutes your agreement with us (<b>“agreement”</b>).</p>`
@@ -15,7 +15,7 @@ const sections = [
     {
         id: 'definitions',
         title: 'Definitions',
-        description: `<p><strong>SERVICE</strong> means the <a href="https://digitaljanet.com" style="color: blue">digitaljanet.com</a> website operated by <b>Appziaa Softlabs Pvt Ltd</b>.</p><br />
+        description: `<p><strong>SERVICE</strong> means the <a href="https://digitaljanet.com" style="color: blue">digitaljanet.com</a> website operated by <b>Digital Janet</b>.</p><br />
         <p><strong>PERSONAL DATA</strong> means data about a living individual who can be identified from those data (or from those and other information either in our possession or likely to come into our possession).</p><br />
         <p><strong>USAGE DATA</strong> means data about a living individual who can be identified from those data (or from those and other information either in our possession or likely to come into our possession).</p><br />
         <p><strong>COOKIES</strong> means data about a living individual who can be identified from those data (or from those and other information either in our possession or likely to come into our possession).</p><br />
@@ -71,7 +71,7 @@ const sections = [
     {
         id: 'use-of-data',
         title: 'Use of Data',
-        description: `<p><b>Appziaa Softlabs Pvt Ltd</b> uses the collected data for various purposes:</p><br />
+        description: `<p><b>Digital Janet</b> uses the collected data for various purposes:</p><br />
         <ul>
             <li>(a) to provide and maintain our Service;</li><br />
             <li>(b) to notify you about changes to our Service;</li><br />
@@ -96,7 +96,7 @@ const sections = [
     {
         id: 'transfer-of-data',
         title: 'Transfer of Data',
-        description: '<p>Your information, including Personal Data, may be transferred to – and maintained on – computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.</p><br /> <p>If you are located outside United States and choose to provide information to us, please note that we transfer the data, including Personal Data, to United States and process it there.</p><br /><p>Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.</p><br /> <p>Appziaa Softlabs Private Limited will take all the steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organisation or a country unless there are adequate controls in place including the security of your data and other personal information.</p>'
+        description: '<p>Your information, including Personal Data, may be transferred to – and maintained on – computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.</p><br /> <p>If you are located outside United States and choose to provide information to us, please note that we transfer the data, including Personal Data, to United States and process it there.</p><br /><p>Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.</p><br /> <p>Digital Janet will take all the steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organisation or a country unless there are adequate controls in place including the security of your data and other personal information.</p>'
     },
     {
         id: 'disclosure-of-data',
@@ -158,7 +158,7 @@ const sections = [
         id: 'behavioral-remarketing',
         title: 'Behavioral Remarketing',
         description: `
-            <p>Appziaa Softlabs Private Limited uses remarketing services to advertise on third party websites to you after you visited our Service. We and our third-party vendors use cookies to inform, optimise and serve ads based on your past visits to our Service.</p><br />
+            <p>Digital Janet uses remarketing services to advertise on third party websites to you after you visited our Service. We and our third-party vendors use cookies to inform, optimise and serve ads based on your past visits to our Service.</p><br />
 
             <p><b>Google Ads (AdWords)</b></p><br />
             <p>Google Ads (AdWords) remarketing service is provided by Google Inc.</p><br />
