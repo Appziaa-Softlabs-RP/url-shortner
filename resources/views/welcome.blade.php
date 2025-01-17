@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PookieURL Shortener</title>
+    <title>Rewards Plus URL Shortener</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -129,7 +129,7 @@
 
 <body>
     <header>
-        <h1>PookieURL Shortener</h1>
+        <h1>Rewards Plus URL Shortener</h1>
     </header>
 
     <main>
@@ -153,13 +153,13 @@
             <p>Tired of those long, unwieldy links cramping your style? We get it. Here through this service, you can
                 transform those monsters into bite-sized wonders. Simply paste your link, and we'll whip you up a short,
                 sweet, and shareable version. It's fast, free, and makes your online life a whole lot easier.</p>
-            <a href="#">Learn More About Pookie</a>
+            <a href="#">Learn More About Rewards Plus </a>
         </section>
 
     </main>
 
     <footer>
-        <p>&copy; 2024 Pookie</p>
+        <p>&copy; 2024 Rewards Plus </p>
     </footer>
 
     <script>

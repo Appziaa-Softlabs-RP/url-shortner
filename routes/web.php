@@ -7,3 +7,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/{code}', [UrlController::class, 'redirect']);
+
+Route::get('/{dltCode}/{code}', [UrlController::class, 'redirectWithDlt']);
