@@ -21,10 +21,10 @@ export async function POST(request: Request) {
                 },
             },
         ],
-        subject: "New Inquiry Received via DigitalJanet Contact Form",
+        subject: "New Inquiry Received via RewardsPlus URL Shortener Contact Form",
         htmlbody: `<div>
-        <p>Hi DigitalJanet Team,</p>
-        <p>This email is to notify you of a new inquiry received through the DigitalJanet contact form.</p>
+        <p>Hi RewardsPlus URL Shortener Team,</p>
+        <p>This email is to notify you of a new inquiry received through the RewardsPlus URL Shortener contact form.</p>
         <p>
         <br>
         <br>
@@ -60,12 +60,12 @@ export async function POST(request: Request) {
                 },
             },
         ],
-        subject: "Thanks for contacting DigitalJanet!",
+        subject: "Thanks for contacting RewardsPlus URL Shortener!",
         htmlbody: `Hi ${name}<div>
-        <p>Thank you for reaching out to DigitalJanet! We appreciate you taking the time to contact us.</p>
-        <p>We've received your message from our contact form and a member of our team will be in touch with you shortly to discuss your inquiry and how DigitalJanet can help streamline your repair management process.</p>
+        <p>Thank you for reaching out to RewardsPlus URL Shortener! We appreciate you taking the time to contact us.</p>
+        <p>We've received your message from our contact form and a member of our team will be in touch with you shortly to discuss your inquiry and how RewardsPlus URL Shortener can help streamline your repair management process.</p>
         <p>Sincerely,</p>
-        <p>The DigitalJanet Team</p>
+        <p>The RewardsPlus URL Shortener Team</p>
     </div>
     `,
     });

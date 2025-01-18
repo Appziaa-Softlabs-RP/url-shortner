@@ -4,7 +4,7 @@ import { clarity } from "react-microsoft-clarity";
 
 export function ClarityInit() {
     useEffect(() => {
-        clarity.init("omr9o18qn0");
+        clarity.init("pvrvh3nle7");
     }, []);
 
     return null;

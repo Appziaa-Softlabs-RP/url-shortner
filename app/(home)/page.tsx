@@ -1,28 +1,37 @@
-'use client'
+import { Features } from "@/components/home/features";
+import { Footer } from "@/components/home/footer";
+import { Hero } from "@/components/home/hero";
+import { Navbar } from "@/components/home/navbar";
+import { Stats } from "@/components/home/stats";
+import { Testimonials } from "@/components/home/testimonials";
+import { UseCases } from "@/components/home/use-cases";
+import { authOptions } from "@/lib/auth-options";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-import Contact from '@/components/home/contact'
-import CTA from '@/components/home/cta'
-import Expertise from '@/components/home/expertise'
-import Features from '@/components/home/features'
-import GlobalPresence from '@/components/home/global-presence'
-import Hero from '@/components/home/hero'
-import Recognition from '@/components/home/recognition'
-import Stats from '@/components/home/stats'
-import SuccessStories from '@/components/home/success-stories'
+export default async function Home() {
 
-export default function Page() {
+  const session = await getServerSession({
+    ...authOptions,
+    pages: {
+      signIn: "/login",
+    },
+  });
+
+  if(session){
+    redirect("/dashboard");
+  }
 
   return (
-    <main>
+    <main className="min-h-screen">
+      <Navbar />
       <Hero />
       <Features />
-      <Expertise />
-      <Recognition />
-      <SuccessStories />
       <Stats />
-      <GlobalPresence />
-      <CTA />
-      <Contact />
+      <Testimonials />
+      <UseCases />
+      <Footer />
     </main>
   )
 }
+

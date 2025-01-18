@@ -1,44 +1,49 @@
-'use client'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Link2, QrCode, Layout } from 'lucide-react'
 
-import { motion } from 'framer-motion'
+export function Features() {
+    const features = [
+        {
+            title: "URL Shortener",
+            description: "Transform long URLs into concise, shareable links that drive more clicks",
+            icon: Link2,
+        },
+        {
+            title: "QR Codes",
+            description: "Create custom QR codes to connect the physical and digital worlds",
+            icon: QrCode,
+        },
+        {
+            title: "Landing Pages",
+            description: "Build mobile-optimized landing pages that convert visitors into customers",
+            icon: Layout,
+        },
+    ]
 
-const features = [
-    {
-        title: 'Precision in Talent Matching',
-        description: 'Using our AI-powered platform, we connect clients with top talent that aligns both professionally and culturally, ensuring seamless integration and long-term success.',
-    },
-    {
-        title: 'Dedicated to Diversity and Inclusion',
-        description: 'We believe that a diverse workforce drives innovation. By actively sourcing candidates from varied backgrounds, we foster a culture of inclusivity that enhances team dynamics and performance. ',
-    },
-    {
-        title: 'Speed and Efficiency for Today’s Market',
-        description: 'With one of the best turnaround times in the industry, our streamlined processes deliver high-quality placements quickly, reducing hiring timelines without compromising on quality. ',
-    },
-]
-
-export default function Features() {
     return (
-        <section className="py-16 bg-gray-50">
-            <div className="container mx-auto px-4">
-                <h2 className='text-2xl font-bold text-center mb-10'>
-                    We define our work commitment through
+        <section className="py-20 px-4">
+            <div className="container mx-auto max-w-6xl">
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+                    The Platform You Need
                 </h2>
+                <p className="text-lg text-center text-gray-600 mb-12">
+                    All the products you need to build brand connections, manage links and QR Codes
+                </p>
                 <div className="grid md:grid-cols-3 gap-8">
                     {features.map((feature, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.2 }}
-                            className="bg-white p-6 rounded-lg shadow-lg text-center"
-                        >
-                            <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                            <p className="text-gray-600 text-sm">{feature.description}</p>
-                        </motion.div>
+                        <Card key={index} className="border-2 hover:border-[#5D91FA] transition-colors">
+                            <CardHeader>
+                                <feature.icon className="w-12 h-12 text-[#4800C4] mb-4" />
+                                <CardTitle>{feature.title}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-gray-600">{feature.description}</p>
+                            </CardContent>
+                        </Card>
                     ))}
                 </div>
             </div>
         </section>
     )
 }
+

@@ -36,7 +36,7 @@ export function RegisterDetailsOtpVerify({ className, role, ...props }: UserAuth
 
     const {
         loading,
-        phone,
+        email,
         otp,
         status,
         setOtp,
@@ -79,7 +79,7 @@ export function RegisterDetailsOtpVerify({ className, role, ...props }: UserAuth
                                 <FormLabel>One-Time Password</FormLabel>
                                 <FormControl>
                                     <InputOTP maxLength={6} {...field}>
-                                        <InputOTPGroup>
+                                        <InputOTPGroup className='gap-4'>
                                             <InputOTPSlot index={0} />
                                             <InputOTPSlot index={1} />
                                             <InputOTPSlot index={2} />
@@ -90,7 +90,7 @@ export function RegisterDetailsOtpVerify({ className, role, ...props }: UserAuth
                                     </InputOTP>
                                 </FormControl>
                                 <FormDescription>
-                                    Please enter the one-time password sent to <span className='font-bold'>{phone}</span>.{" "}<span
+                                    Please enter the one-time password sent to <span className='font-bold'>{email}</span>.{" "}<span
                                         className='text-primary transition-all duration-150 hover:text-primary/70 cursor-pointer'
                                         onClick={() => changeCurrentStep(0)}
                                     >Change</span>

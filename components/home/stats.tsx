@@ -1,30 +1,44 @@
-'use client'
 
-import { motion } from 'framer-motion'
+export function Stats() {
+    const stats = [
+        {
+            number: "500K+",
+            label: "Global paying customers",
+            icon: "🌐"
+        },
+        {
+            number: "256M",
+            label: "Links & QR Codes created monthly",
+            icon: "🔗"
+        },
+        {
+            number: "800+",
+            label: "App integrations",
+            icon: "🔌"
+        },
+        {
+            number: "10B",
+            label: "Connections linked & tracked monthly",
+            icon: "📊"
+        }
+    ]
 
-const stats = [
-    { number: '24/7', label: 'Support Available' },
-    { number: '200,000+', label: 'Candidates Processed' },
-    { number: '8,000+', label: 'Success Stories' },
-    { number: '95%', label: 'Client Satisfaction' },
-]
-
-export default function Stats() {
     return (
-        <section className="py-16 bg-gray-900 text-white">
-            <div className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <section className="py-20 px-4 bg-gray-50">
+            <div className="container mx-auto max-w-6xl">
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+                    Adopted and loved by millions of users for over a decade
+                </h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {stats.map((stat, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
                             className="text-center"
                         >
-                            <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>
-                            <div className="text-gray-400">{stat.label}</div>
-                        </motion.div>
+                            <span className="text-4xl mb-2 block">{stat.icon}</span>
+                            <h3 className="text-4xl font-bold text-[#4800C4] mb-2">{stat.number}</h3>
+                            <p className="text-gray-600 text-sm">{stat.label}</p>
+                        </div>
                     ))}
                 </div>
             </div>

@@ -5,11 +5,15 @@ export default async function Page() {
   return (
     <>
       <LoginUser />
-      <p className="text-xs space-x-1 flex items-center justify-center">
-        <span>Already have an account?</span>
-        <Link href="/signup" className="text-blue-500 hover:underline">
+      <p className="px-8 text-center text-sm text-muted-foreground">
+        Don&apos;t have an account?{' '}
+        <Link
+          href="/register"
+          className="underline underline-offset-4 hover:text-primary"
+        >
           Register
         </Link>
+        .
       </p>
     </>
   );

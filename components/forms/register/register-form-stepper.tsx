@@ -8,17 +8,17 @@ import { RegisterDetailsOtpVerify } from "./forms/otp";
 import { UserRegisterDetails } from "./forms/user-details";
 
 export function RegisterDetailsFormStepper({
-  className,
-  ...props
+    className,
+    ...props
 }: {
-  className?: string;
+    className?: string;
 }) {
-  const { currentStep } = useRegisterStore();
+    const { currentStep } = useRegisterStore();
 
-  return (
-    <div className={cn("grid gap-6 p-2", className)} {...props}>
-      {currentStep === 0 && <UserRegisterDetails />}
-      {currentStep === 1 && <RegisterDetailsOtpVerify />}
-    </div>
-  );
+    return (
+        <div className={cn("grid gap-6 p-2", className)} {...props}>
+            {currentStep === 0 && <UserRegisterDetails />}
+            {currentStep === 1 && <RegisterDetailsOtpVerify />}
+        </div>
+    );
 }

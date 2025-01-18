@@ -41,9 +41,7 @@ export default function LoginUser() {
     return <>
         <div className="flex flex-col space-y-2 text-start">
             <h1 className="text-2xl font-bold tracking-tight">
-                Login your account
-                <br />
-                with <span className="text-secondary">DigitalJanet</span>
+                Sigin
             </h1>
         </div>
 

@@ -272,11 +272,11 @@ export default function NavLinks({ session }: { session: any }) {
                     name: "Product And Platforms",
                     href: "/what-we-do#products",
                     links: [
-                        { name: "DigitalJanet", href: "/what-we-do#digitaljanet" },
-                        { name: "DigitalJanet Pro", href: "/what-we-do#digitaljanet-pro" },
-                        { name: "DigitalJanet Enterprise", href: "/what-we-do#digitaljanet-enterprise" },
-                        { name: "DigitalJanet HR", href: "/what-we-do#digitaljanet-hr" },
-                        { name: "DigitalJanet Payroll", href: "/what-we-do#digitaljanet-payroll" },
+                        { name: "RewardsPlus URL Shortener", href: "/what-we-do#digitaljanet" },
+                        { name: "RewardsPlus URL Shortener Pro", href: "/what-we-do#digitaljanet-pro" },
+                        { name: "RewardsPlus URL Shortener Enterprise", href: "/what-we-do#digitaljanet-enterprise" },
+                        { name: "RewardsPlus URL Shortener HR", href: "/what-we-do#digitaljanet-hr" },
+                        { name: "RewardsPlus URL Shortener Payroll", href: "/what-we-do#digitaljanet-payroll" },
                     ]
                 },
                 {
@@ -313,7 +313,7 @@ export default function NavLinks({ session }: { session: any }) {
                 <div className='flex items-center gap-8'>
                     <Link className="flex items-center space-x-2" href="/">
                         <Image src="/img/logo.svg"
-                            alt="DigitalJanet"
+                            alt="RewardsPlus URL Shortener"
                             height={32}
                             width={180}
                         />

@@ -13,10 +13,7 @@ export type State = {
 }
 
 export type UserInfo = {
-    firstName: string;
-    lastName: string;
     email: string;
-    phone: string;
     password: string;
 }
 
@@ -40,10 +37,7 @@ export const useRegisterStore = create<State & UserInfo & Actions>()(
 
 
             // Personal Details
-            firstName: '',
-            lastName: '',
             email: '',
-            phone: '',
             password: '',
 
             otp: '',
@@ -66,12 +60,9 @@ export const useRegisterStore = create<State & UserInfo & Actions>()(
                     set({ loading: true });
 
                     const formData = new FormData();
-                    formData.append('first_name', get().firstName);
-                    formData.append('last_name', get().lastName);
-                    formData.append('phone', get().phone);
                     formData.append('email', get().email);
                     formData.append('password', get().password);
-                    formData.append('type', 'phone');
+                    formData.append('type', 'email');
 
                     if (!get().email) {
                         return toast({
@@ -121,7 +112,7 @@ export const useRegisterStore = create<State & UserInfo & Actions>()(
                     const formData = new FormData();
                     formData.append('otp', get().otp);
                     formData.append('otp_id', get().otpId);
-                    formData.append('type', "phone");
+                    formData.append('type', "email");
 
                     if (!get().otp || !get().password) {
                         return toast({
