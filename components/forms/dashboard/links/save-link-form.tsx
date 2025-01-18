@@ -1,6 +1,6 @@
 "use client"
 
-import { createUrl, updateUrl } from "@/api"
+import { createUrl, fetchPageTitle, updateUrl } from "@/api"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -105,12 +105,10 @@ export default function UrlShortenerForm({ data = null, token }: {
     const extractPageTitle = useCallback(async (url: string) => {
         if (isTitleFetched) return null
         try {
-            const response = await fetch(`/api/extract-title?url=${encodeURIComponent(url)}`)
-            if (!response.ok) throw new Error('Failed to fetch title')
-            const data = await response.json()
-            if (data.title) {
+            const title = await fetchPageTitle({ url });
+            if (title) {
                 setIsTitleFetched(true)
-                return data.title
+                form.setValue('title', title)
             }
         } catch (error) {
             console.error('Error extracting title:', error)
@@ -147,7 +145,13 @@ export default function UrlShortenerForm({ data = null, token }: {
 
     return (
         <div className="grid gap-6 max-w-2xl mx-auto py-8">
-            <h1 className="text-3xl font-bold text-secondary">Create a short url</h1>
+            <h1 className="text-3xl font-bold text-secondary">
+                {
+                    data ?
+                        "Edit a short url" :
+                        "Create a short url"
+                }
+            </h1>
             <Card className="w-full py-4 border-0 shadow-none">
                 <CardContent>
                     <Form {...form}>
@@ -198,7 +202,7 @@ export default function UrlShortenerForm({ data = null, token }: {
                                     Cancel
                                 </Button>
                                 <Button type="submit"
-                                    disabled={urlError !== null || !form.formState.isValid}
+                                    disabled={urlError !== null || !form.formState.isValid || data}
                                 >Create your link</Button>
                             </div>
                         </form>

@@ -1,6 +1,6 @@
 // /api/urlApi.ts
 import api from './api'; // Axios instance
-import { API_V1 } from './apiConfig';
+import { API_V1, API_V1_USER } from './apiConfig';
 
 // Get all urls with pagination and search filters
 export const getUrls = async ({
@@ -15,7 +15,7 @@ export const getUrls = async ({
     limit?: number;
 }) => {
     const response = await api.get(
-        `${API_V1}/urls?page=${page}&search=${search}&limit=${limit}`,
+        `${API_V1_USER}/urls?page=${page}&search=${search}&limit=${limit}`,
         {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ export const createUrl = async ({
     data: FormData;
     token: string;
 }) => {
-    const response = await api.post(`${API_V1}/urls`, data, {
+    const response = await api.post(`${API_V1_USER}/urls`, data, {
         headers: {
             Authorization: `Bearer ${token}`,
             Accept: 'application/json',
@@ -54,7 +54,7 @@ export const updateUrl = async ({
     token: string;
 }) => {
     data.append('_method', 'PUT');
-    const response = await api.post(`${API_V1}/urls/${id}`, data, {
+    const response = await api.post(`${API_V1_USER}/urls/${id}`, data, {
         headers: {
             Authorization: `Bearer ${token}`,
             Accept: 'application/json',
@@ -66,13 +66,13 @@ export const updateUrl = async ({
 
 // Delete a url
 export const deleteUrl = async ({
-    id,
+    shortCode,
     token,
 }: {
-    id: number;
+    shortCode: string;
     token: string;
 }) => {
-    const response = await api.delete(`${API_V1}/urls/${id}`, {
+    const response = await api.delete(`${API_V1_USER}/urls/${shortCode}`, {
         headers: {
             Authorization: `Bearer ${token}`,
             Accept: 'application/json',
@@ -83,17 +83,31 @@ export const deleteUrl = async ({
 
 // Get a specific url by ID
 export const getUrl = async ({
-    id,
+    short_code,
     token,
 }: {
-    id: number;
+    short_code: string;
     token: string;
 }) => {
-    const response = await api.get(`${API_V1}/urls/${id}`, {
+    const response = await api.get(`${API_V1_USER}/urls/${short_code}`, {
         headers: {
             Authorization: `Bearer ${token}`,
             Accept: 'application/json',
         },
+    });
+    return response.data.data;
+};
+
+// Get a specific url by ID
+export const fetchPageTitle = async ({
+    url,
+}: {
+    url: string;
+}) => {
+    const response = await api.post(`${API_V1}/fetch-title`, { url }, {
+        headers: {
+            Accept: 'application/json',
+        }
     });
     return response.data.data;
 };
