@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\v1\UrlController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/{code}', [UrlController::class, 'redirect']);
+
+Route::get('/{dltCode}/{code}', [UrlController::class, 'redirectWithDlt']);

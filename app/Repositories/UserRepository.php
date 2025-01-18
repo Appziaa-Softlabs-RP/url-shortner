@@ -21,10 +21,7 @@ class UserRepository
         $mainServerData = [
             'type' => $type,
             'company_id' => env('COMPANY_ID'),
-            'first_name' => $data['first_name'],
-            'last_name' => $data['first_name'],
             'email' => isset($data['email']) ? $data['email'] : null,
-            'phone' => isset($data['phone']) ? $data['phone'] : null,
             'password' => isset($data['password']) ? $data['password'] : null,
             'otp_id' => $otpId,
         ];

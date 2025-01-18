@@ -11,9 +11,6 @@ class UserTempDetail extends Model
 
     protected $fillable = [
         'otp_id',
-        'first_name',
-        'last_name',
-        'phone',
         'email',
         'password',
     ];

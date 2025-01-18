@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('legal_policies', function (Blueprint $table) {
+        Schema::create('url_caches', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->string('file');
+            $table->string('url')->unique();
+            $table->string('title')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('legal_policies');
+        Schema::dropIfExists('url_caches');
     }
 };

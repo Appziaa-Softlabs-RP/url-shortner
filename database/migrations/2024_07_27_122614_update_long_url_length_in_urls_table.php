@@ -4,16 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('pages', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('page_id')->nullable()->constrained('pages')->onDelete('set null');
-            $table->timestamps();
+        Schema::table('urls', function (Blueprint $table) {
+            $table->string('long_url', 2048)->change();
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('pages');
+        Schema::table('urls', function (Blueprint $table) {
+            $table->string('long_url', 255)->change(); // Assuming the original length was 255
+        });
     }
 };

@@ -18,4 +18,9 @@ class PageController extends Controller
     ) {
         $this->service = $service;
     }
+
+    public function addPage()
+    {
+
+    }
 }

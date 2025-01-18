@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('blogs', function (Blueprint $table) {
-            $table->string('image')->nullable()->after('description');
+        Schema::table('urls', function (Blueprint $table) {
+            $table->foreignId('dlt_id')->nullable()->constrained('dlt_codes')->onDelete('set null')->after('short_code');
         });
     }
 
@@ -21,8 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('blogs', function (Blueprint $table) {
-            $table->dropColumn('image');
+        Schema::table('urls', function (Blueprint $table) {
+            $table->dropForeign(['dlt_id']);
+            $table->dropColumn('dlt_id');
         });
     }
 };

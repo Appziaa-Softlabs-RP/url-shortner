@@ -1,14 +1,11 @@
 <?php
 
-use App\Http\Controllers\v1\Admin\BlogController;
-use App\Http\Controllers\v1\Admin\CategoryController;
-use App\Http\Controllers\v1\Admin\LegalPolicyController;
 use App\Http\Controllers\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\v1\Auth\LoginController;
 use App\Http\Controllers\v1\Auth\LogoutController;
 use App\Http\Controllers\v1\Auth\RegisterController;
-use App\Http\Controllers\v1\User\BlogController as UserBlogController;
-use App\Http\Controllers\v1\User\LegalPolicyController as UserLegalPolicyController;
+use App\Http\Controllers\v1\UrlController;
+use App\Http\Controllers\v1\User\UrlController as UserUrlController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,15 +15,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     // Auth Controllers
+    Route::controller(LoginController::class)->group(function () {
+        Route::post('/login-email', 'loginEmail');
+    });
     Route::controller(RegisterController::class)->group(function () {
         Route::post('/register-request', 'registerRequest');
         Route::post('/register-verify', 'registerVerify');
-    });
-    Route::controller(LoginController::class)->group(function () {
-        Route::post('/login-email', 'loginEmail');
-        Route::post('/login-otp-request', 'loginWithOtpRequest');
-        Route::post('/login-otp-verify', 'loginOtpVerify');
-        Route::post('/login-pin', 'loginPin');
     });
     Route::controller(ForgotPasswordController::class)->group(function () {
         Route::post('/forgot-password-request', 'forgotPasswordRequest');
@@ -38,22 +32,21 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    // User Routes
-    Route::apiResource('legal-policies', UserLegalPolicyController::class)->only(['index']);
-    Route::controller(UserBlogController::class)->group(function () {
-        Route::prefix('blogs')->group(function () {
-            Route::get('/', 'overview');
-            Route::get('/{slug}', 'show');
-        });
-    });
+    // Route::post('/shorten', [UrlController::class, 'shorten']);
+    Route::post('/fetch-title', [UrlController::class, 'fetchTitle']);
 
     // Auth Routes
     Route::middleware('auth:api')->group(function () {
+        // User Routes
+        Route::prefix('user')->group(function () {
+            Route::apiResource('urls', UserUrlController::class);
+            Route::controller(UserUrlController::class)->group(function () {
+                Route::post('validate-auth-user-url', 'validateAuthUserUrl');
+            });
+        });
         Route::group(['middleware' => 'isAdmin'], function () {
             Route::prefix('admin')->group(function () {
-                Route::apiResource('blog-categories', CategoryController::class);
-                Route::apiResource('blogs', BlogController::class);
-                Route::apiResource('legal-policies', LegalPolicyController::class);
+                // Admin Routes
             });
         });
     });

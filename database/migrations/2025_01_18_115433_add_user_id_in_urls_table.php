@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('user_temp_details', function (Blueprint $table) {
-            $table->string('phone')->after('email');
+        Schema::table('urls', function (Blueprint $table) {
+            $table->foreignId('user_id')->after('id')->constrained('users')->onDelete('cascade')->after('id');
         });
     }
 
@@ -21,8 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('user_temp_details', function (Blueprint $table) {
-            $table->dropColumn('phone');
+        Schema::table('urls', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
         });
     }
 };

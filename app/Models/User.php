@@ -14,10 +14,14 @@ class User extends Authenticatable
 
     protected $fillable = [
         'id',
-        'main_server_token',
+        'rewards_id',
+        'name',
+        'about_company',
+        'team_size',
+        'company_role',
         'available_credits',
         'role',
-        'rewards_id',
+        'main_server_token',
     ];
 
     /**

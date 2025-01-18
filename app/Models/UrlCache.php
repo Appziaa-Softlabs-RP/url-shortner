@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BlockType extends Model
+class UrlCache extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'status'
+        'url',
+        'title'
     ];
 }

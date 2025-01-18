@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('blogs', function (Blueprint $table) {
-            $table->dropForeign(['category_id']);
-            $table->dropColumn('category_id');
+        Schema::create('dlt_codes', function (Blueprint $table) {
+            $table->id();
+            $table->string('company_name');
+            $table->string('code');
+            $table->boolean('status')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -22,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('blogs', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-        });
+        Schema::dropIfExists('dlt_codes');
     }
 };
