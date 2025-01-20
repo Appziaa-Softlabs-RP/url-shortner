@@ -12,11 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('urls', function (Blueprint $table) {
-            $table->dropForeign('urls_user_id_foreign');
-
-            $table->foreign('user_id')->references('id')->on('users')
-                ->nullable()
-                ->onDelete('cascade');
+            $table->bigInteger('user_id')->nullable()->unsigned()->change(); // Modify user_id to nullable
         });
     }
 

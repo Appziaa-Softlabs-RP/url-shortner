@@ -71,7 +71,7 @@ class UrlRepository
     }
 
 
-    public function getByShortCodeAndUserId(string $url, int $userId)
+    public function getByShortCodeAndUserId(string $url, $userId)
     {
         $url = $this->model->where('short_code', $url)->where('user_id', $userId)->first();
         if ($url && !$url->title) {
@@ -94,6 +94,20 @@ class UrlRepository
         return $this->model->where('short_code', $shortCode)->update($data);
     }
 
+    public function getLongUrlByShortCodeAndDltOld($code, $dltCode)
+    {
+        $dltId = null;
+        if ($dltCode) {
+            $dltDetails = $this->dltRepository->getByCode($dltCode);
+            if ($dltDetails) {
+                $dltId = $dltDetails->id;
+            }
+        }
+
+        return $this->model->where('short_code', $code)
+            ->where('dlt_id', $dltId)
+            ->first();
+    }
 
     public function getLongUrlByShortCodeAndDlt($code, $dltCode)
     {

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Url;
 use App\Models\UrlAnalytics;
 use App\Repositories\UrlRepository;
 use App\Repositories\DltRepository;
@@ -66,10 +67,11 @@ class UrlService
                 throw new \Exception("Short Code doesn't exists");
             }
         }
-
-        $existingUrl = $this->repository->getByUrlAndUserId($url, $userId);
-        if ($existingUrl && (!$shortCode || $existingUrl->short_code != $shortCode)) {
-            throw new \Exception("Looks like this destination is already used for another short link. Check the existing url tab.");
+        if ($userId) {
+            $existingUrl = $this->repository->getByUrlAndUserId($url, $userId);
+            if ($existingUrl && (!$shortCode || $existingUrl->short_code != $shortCode)) {
+                throw new \Exception("Looks like this destination is already used for another short link. Check the existing url tab.");
+            }
         }
 
         $shortCode = $this->extractCode($url);
@@ -117,6 +119,35 @@ class UrlService
         ]);
 
         return $shortCode;
+    }
+
+    public function generateShortUrlOld($longUrl, $dltCode)
+    {
+        $codeWithDlt = $dltCode ? $dltCode . '/' : '';
+
+        // Check if the long URL already exists in the database
+        $existingUrl = $this->repository->getByUrl($longUrl);
+        if ($existingUrl) {
+            return url($codeWithDlt . $existingUrl->short_code);
+        }
+        // Generate a unique shortcode
+        $shortCode = $this->generateUniqueShortCode();
+
+        $dltId = null;
+        if ($dltCode) {
+            $dltDetails = $this->dltRepository->getByCode($dltCode);
+            if ($dltDetails) {
+                $dltId = $dltDetails->id;
+            }
+        }
+
+        $this->repository->create([
+            'dlt_id' => $dltId,
+            'long_url' => $longUrl,
+            'short_code' => $shortCode
+        ]);
+
+        return  secure_url($codeWithDlt . $shortCode);
     }
 
     public function updateShortUrl($longUrl, $shortCode, $title)

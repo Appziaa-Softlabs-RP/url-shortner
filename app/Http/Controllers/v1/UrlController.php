@@ -43,7 +43,7 @@ class UrlController extends Controller
 
     public function redirectWithDlt($dltCode, $code)
     {
-        $url = $this->repository->getLongUrlByShortCodeAndDlt(
+        $url = $this->repository->getLongUrlByShortCodeAndDltOld(
             code: $code,
             dltCode: $dltCode
         );
@@ -62,5 +62,32 @@ class UrlController extends Controller
             data: $title,
             message: 'Title fetched successfully'
         );
+    }
+
+    // old code
+    public function shorten(Request $request)
+    {
+        $request->validate([
+            'long_url' => [
+                'required',
+                'url'
+            ],
+            'dlt_code' => [
+                'nullable',
+                'string',
+                'exists:dlt_codes,code',
+                'max:6'
+            ]
+        ]);
+
+        $longUrl = $request->input('long_url');
+        $dltCode = $request->dlt_code;
+
+        $shortCode = $this->service->generateShortUrlOld(
+            longUrl: $longUrl,
+            dltCode: $dltCode
+        );
+
+        return response()->json(['short_url' => $shortCode]);
     }
 }
