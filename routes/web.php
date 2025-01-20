@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('https://app.rwps.in');
 });
 Route::get('/{code}', [UrlController::class, 'redirect']);
 
