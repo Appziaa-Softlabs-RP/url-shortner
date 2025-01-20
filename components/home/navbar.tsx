@@ -43,7 +43,7 @@ export function Navbar() {
                     }
                 </div>
                 <div className="flex items-center space-x-4">
-                    <Link href="/auth">
+                    <Link href="/login">
                         <Button className="group flex gap-1">
                             <span>Get Started</span>
                             <ArrowRight size={18} className="duration-200 transition-transform ease-in-out group-hover:translate-x-2" />

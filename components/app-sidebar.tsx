@@ -8,10 +8,9 @@ import {
     SidebarRail,
 } from "@/components/ui/sidebar"
 import {
-    BarChart2,
+    BarChart3,
     LayoutDashboard,
-    Link2,
-    QrCode,
+    Link as LinkNew,
     Settings
 } from "lucide-react"
 import Image from "next/image"
@@ -30,23 +29,23 @@ const data = {
         {
             title: "Urls",
             url: "/dashboard/urls",
-            icon: Link2,
+            icon: LinkNew,
         },
-        {
-            title: "QR Codes",
-            url: "/dashboard/qr-codes",
-            icon: QrCode,
-        },
+        // {
+        //     title: "QR Codes",
+        //     url: "/dashboard/qr-codes",
+        //     icon: QrCode,
+        // },
         {
             title: "Analytics",
             url: "/dashboard/analytics",
-            icon: BarChart2,
+            icon: BarChart3,
         },
-        {
-            title: "Settings",
-            url: "/dashboard/settings",
-            icon: Settings,
-        },
+        // {
+        //     title: "Settings",
+        //     url: "/dashboard/settings",
+        //     icon: Settings,
+        // },
     ],
 }
 

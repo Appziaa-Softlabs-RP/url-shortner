@@ -15,6 +15,7 @@ export async function GET(
 
     const { searchParams } = new URL(request.url)
     const url = searchParams.get('url')
+    const short_code = searchParams.get('short_code')
 
     if (!url) {
         return NextResponse.json({ message: 'URL is required' }, { status: 400 })
@@ -23,6 +24,8 @@ export async function GET(
     try {
         const formData = new FormData();
         formData.append('url', url);
+        if (short_code)
+            formData.append('short_code', short_code);
         const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_API_URL}/api/v1/user/validate-auth-user-url`, {
             method: 'POST',
             headers: {

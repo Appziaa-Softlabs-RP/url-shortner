@@ -34,6 +34,7 @@ export default function DeleteUrl({ shortCode, token }: {
                 });
                 if (response.status === 200) {
                     router.refresh();
+                    window.location.href = '/dashboard/urls'
                     toast({
                         variant: 'default',
                         title: 'Success',

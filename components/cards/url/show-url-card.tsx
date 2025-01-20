@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { UrlItem } from "@/types/links";
 import { format } from "date-fns";
-import { CalendarRange, Ellipsis, Pencil } from "lucide-react";
+import { CalendarRange, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 

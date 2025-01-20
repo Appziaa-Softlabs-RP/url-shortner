@@ -13,11 +13,18 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { toast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import debounce from 'lodash/debounce'
+import { Info } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -39,41 +46,46 @@ export default function UrlShortenerForm({ data = null, token }: {
             ...data
         },
     })
+    const initialValuesRef = useRef<UrlFormValues>(form.getValues());
     const [isTitleFetched, setIsTitleFetched] = useState(false)
+    const [pending, setTransition] = useTransition()
     const [urlError, setUrlError] = useState<string | null>(null)
+    const [isAnythingChanged, setIsAnythingChanged] = useState(false)
 
     const router = useRouter()
 
     const onSubmit = useCallback(async (values: UrlFormValues) => {
         try {
-            const formData = new FormData()
-            formData.append('long_url', values.long_url)
-            if (values.title) formData.append('title', values.title)
+            setTransition(async () => {
+                const formData = new FormData()
+                formData.append('long_url', values.long_url)
+                if (values.title) formData.append('title', values.title)
 
-            const result = data
-                ? await updateUrl({ id: data.id, data: formData, token })
-                : await createUrl({ data: formData, token })
+                const result = data
+                    ? await updateUrl({ short_code: data.short_code, data: formData, token })
+                    : await createUrl({ data: formData, token })
 
-            const message = result.data.message
+                const message = result.data.message
+                const shortCode = result.data.data.short_code;
 
-            if (result.status === 200) {
-                toast({
-                    variant: 'default',
-                    title: 'Success',
-                    description: message
-                })
-                if (!data) {
-                    form.reset()
+                if (result.status === 200) {
+                    toast({
+                        variant: 'default',
+                        title: 'Success',
+                        description: message
+                    })
+                    if (!data) {
+                        form.reset()
+                    }
+                    router.push(`/dashboard/urls/view/${shortCode}?new=true`)
                 } else {
-                    router.push('/dashboard/urls')
+                    toast({
+                        variant: 'destructive',
+                        title: 'Error',
+                        description: message
+                    })
                 }
-            } else {
-                toast({
-                    variant: 'destructive',
-                    title: 'Error',
-                    description: message
-                })
-            }
+            })
         } catch (error: any) {
             toast({
                 variant: 'destructive',
@@ -89,9 +101,13 @@ export default function UrlShortenerForm({ data = null, token }: {
             return
         }
         try {
-            const response = await fetch(`/api/validate-auth-user-url?url=${encodeURIComponent(url)}`)
-            const data = await response.json()
-            setUrlError(data?.message)
+            let link = `/api/validate-auth-user-url?url=${encodeURIComponent(url)}`;
+            if (data) {
+                link += `& short_code=${data.short_code} `
+            }
+            const response = await fetch(link)
+            const json = await response.json()
+            setUrlError(json?.message)
         } catch (error: any) {
             setUrlError(error.message)
         }
@@ -135,20 +151,42 @@ export default function UrlShortenerForm({ data = null, token }: {
     useEffect(() => {
         const subscription = form.watch((value, { name }) => {
             if (name === 'long_url') {
-                debouncedValidateUrl(value.long_url as string)
-                if (urlError === null)
-                    getExtractedTitle()
+                debouncedValidateUrl(value.long_url as string);
+                if (urlError === null && !data) {
+                    getExtractedTitle();
+                }
             }
-        })
-        return () => subscription.unsubscribe()
-    }, [form, debouncedValidateUrl, getExtractedTitle])
+
+            // Compare current values with initial values
+            const hasChanged = Object.keys(initialValuesRef.current).some(
+                (key) => value[key as keyof UrlFormValues] !== initialValuesRef.current[key as keyof UrlFormValues]
+            );
+            setIsAnythingChanged(hasChanged);
+        });
+
+        return () => subscription.unsubscribe();
+    }, [form, debouncedValidateUrl, getExtractedTitle, urlError, data]);
+
 
     return (
         <div className="grid gap-6 max-w-2xl mx-auto py-8">
             <h1 className="text-3xl font-bold text-secondary">
                 {
                     data ?
-                        "Edit a short url" :
+                        <span className="flex items-center gap-4">
+                            <span>Edit a destination link</span>
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <Info className="text-slate-600" size={20} />
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p className="font-normal">The destination URL can be updated while the short URL remains unchanged.</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+
+                        </span> :
                         "Create a short url"
                 }
             </h1>
@@ -163,7 +201,7 @@ export default function UrlShortenerForm({ data = null, token }: {
                                     <FormItem>
                                         <FormLabel className={
                                             urlError ? 'text-red-500' : ''
-                                        }>Destination URL</FormLabel>
+                                        }>Destination Link</FormLabel>
                                         <FormControl>
                                             <Input type="url"
                                                 className={
@@ -197,13 +235,38 @@ export default function UrlShortenerForm({ data = null, token }: {
                                 )}
                             />
 
+                            {
+                                data?.short_url &&
+                                <div className="grid gap-2">
+                                    <FormLabel>Short URL</FormLabel>
+                                    <Input type="url" value={data?.short_url} disabled />
+                                </div>
+                            }
                             <div className="flex justify-end space-x-4">
                                 <Button variant="outline" type="button">
                                     Cancel
                                 </Button>
                                 <Button type="submit"
-                                    disabled={urlError !== null || !form.formState.isValid || data}
-                                >Create your link</Button>
+                                    disabled={urlError !== null || !form.formState.isValid || (data && !isAnythingChanged) || pending}
+                                >
+                                    {
+                                        data ?
+                                            <span>
+                                                {
+                                                    pending ?
+                                                        "Updating..." :
+                                                        "Update"
+                                                }
+                                            </span>
+                                            : <span>
+                                                {
+                                                    pending ?
+                                                        "Creating..." :
+                                                        "Create"
+                                                }
+                                            </span>
+                                    }
+                                </Button>
                             </div>
                         </form>
                     </Form>

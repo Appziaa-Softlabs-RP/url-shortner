@@ -45,16 +45,16 @@ export const createUrl = async ({
 
 // Update an existing url
 export const updateUrl = async ({
-    id,
+    short_code,
     data,
     token,
 }: {
-    id: number;
+    short_code: string;
     data: FormData;
     token: string;
 }) => {
     data.append('_method', 'PUT');
-    const response = await api.post(`${API_V1_USER}/urls/${id}`, data, {
+    const response = await api.post(`${API_V1_USER}/urls/${short_code}`, data, {
         headers: {
             Authorization: `Bearer ${token}`,
             Accept: 'application/json',
@@ -90,6 +90,21 @@ export const getUrl = async ({
     token: string;
 }) => {
     const response = await api.get(`${API_V1_USER}/urls/${short_code}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+        },
+    });
+    return response.data.data;
+};
+
+// Get a specific url by ID
+export const getAllUrlsAnalytics = async ({
+    token,
+}: {
+    token: string;
+}) => {
+    const response = await api.get(`${API_V1_USER}/get-analytics`, {
         headers: {
             Authorization: `Bearer ${token}`,
             Accept: 'application/json',

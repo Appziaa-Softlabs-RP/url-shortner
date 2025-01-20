@@ -2,22 +2,12 @@
 
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
 import { Check, Copy } from 'lucide-react'
-import {
-    EmailShareButton,
-    FacebookShareButton,
-    LinkedinShareButton,
-    RedditShareButton,
-    TelegramShareButton,
-    TwitterShareButton,
-    WhatsappShareButton
-} from 'next-share'
 import { useState } from "react"
-import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
-import 'swiper/css'
+import { cn } from "@/lib/utils"
+import { SharableSocials } from "./sharable-socials"
 
 interface ShareDialogProps {
     url: string
@@ -34,82 +24,33 @@ export function ShareDialog({ url, isOpen, onClose }: ShareDialogProps) {
         setTimeout(() => setCopied(false), 2000)
     }
 
-    const shareButtons = [
-        {
-            Component: WhatsappShareButton,
-            icon: "/icons/whatsapp.svg",
-            label: "WhatsApp"
-        },
-        {
-            Component: FacebookShareButton,
-            icon: "/icons/facebook.svg",
-            label: "Facebook"
-        },
-        {
-            Component: TwitterShareButton,
-            icon: "/icons/twitter.svg",
-            label: "X"
-        },
-        {
-            Component: LinkedinShareButton,
-            icon: "/icons/threads.svg",
-            label: "Threads"
-        },
-        {
-            Component: EmailShareButton,
-            icon: "/icons/gmail.svg",
-            label: "Email"
-        },
-        {
-            Component: TelegramShareButton,
-            icon: "/icons/telegram.svg",
-            label: "Telegram"
-        },
-        {
-            Component: RedditShareButton,
-            icon: "/icons/reddit.svg",
-            label: "Reddit"
-        },
-    ]
-
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent>
+            <DialogContent className="max-h-[90vh] overflow-y-auto px-2 sm:px-4  sm:max-w-md">
                 <DialogHeader>
-                    <DialogTitle className="text-start text-2xl">Share your RWPS Link</DialogTitle>
+                    <DialogTitle className="text-start text-2xl text-primary my-4">Share your RWPS Link</DialogTitle>
                 </DialogHeader>
-                <div className="flex flex-col gap-4 sm:max-w-md">
-                    <div className="relative">
-                        <Swiper
-                            spaceBetween={8}
-                            slidesPerView="auto"
-                            className="w-full"
-                        >
-                            {shareButtons.map(({ Component, icon, label }) => (
-                                <SwiperSlide key={label} className="!w-auto">
-                                    <Component url={url} title="Check this out!">
-                                        <Button
-                                            variant="outline"
-                                            className="h-auto p-2 flex flex-col items-center gap-1"
-                                        >
-                                            <img src={icon || "/placeholder.svg"} alt={label} className="w-8 h-8" />
-                                            <span className="text-xs">{label}</span>
-                                        </Button>
-                                    </Component>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Input
-                            value={url}
-                            readOnly
-                            className="flex-1"
-                        />
+                <div className="relative max-w-full overflow-hidden flex flex-col gap-8">
+                    <SharableSocials
+                        url={url}
+                    />
+                    <div className={cn(
+                        "flex items-center flex-col gap-6 rounded p-4",
+                        copied ? "bg-green-600/10" : "bg-primary/10"
+                    )}>
+                        <p className={cn(
+                            "font-bold",
+                            copied ? "text-green-700" : "text-primary"
+                        )}>
+                            {url}
+                        </p>
                         <Button
                             type="submit"
-                            size="sm"
-                            className="px-3"
+                            size="lg"
+                            className={cn(
+                                "px-3 flex gap-2 items-center shadow-none rounded",
+                                copied && "bg-green-600/20 text-green-700 hover:text-green-700 hover:bg-green-600/20"
+                            )}
                             onClick={handleCopy}
                         >
                             {copied ? (
@@ -117,7 +58,13 @@ export function ShareDialog({ url, isOpen, onClose }: ShareDialogProps) {
                             ) : (
                                 <Copy className="h-4 w-4" />
                             )}
-                            <span className="sr-only">Copy</span>
+                            <span>
+                                {
+                                    copied ?
+                                        <span>Copied</span> :
+                                        <span>Copy</span>
+                                }
+                            </span>
                         </Button>
                     </div>
                 </div>
