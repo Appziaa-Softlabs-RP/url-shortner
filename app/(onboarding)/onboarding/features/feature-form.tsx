@@ -65,7 +65,7 @@ export default function FeaturesForm({ token }: {
             <div className="space-y-6">
                 <div>
                     <h1 className="text-3xl font-bold">Where would you like to start?</h1>
-                    <p className="text-muted-foreground">Let's get down to work</p>
+                    <p className="text-muted-foreground">Let&apos;s get down to work</p>
                 </div>
                 <form
                     onSubmit={
