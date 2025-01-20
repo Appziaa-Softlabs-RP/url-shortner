@@ -4,14 +4,11 @@ import ShowUrlCard from "@/components/cards/url/show-url-card"
 import { Button } from "@/components/ui/button"
 import { UrlItem } from '@/types/links'
 import Link from 'next/link'
-import { useState } from 'react'
 
 export default function ShowLinks({ links, token }: {
     links: UrlItem[],
     token: string
 }) {
-    const [selectedLinks, setSelectedLinks] = useState<string[]>([])
-
     return (
         <div className="container p-0 py-6">
             <div className="flex justify-between items-center mb-6">

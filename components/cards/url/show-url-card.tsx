@@ -55,7 +55,7 @@ export default function ShowUrlCard({ data, token }: {
                     />
                 </div>
                 <div className="text-sm grid gap-2">
-                    <Link href={data?.short_url} target="_blank">
+                    <Link href={"https://" + data?.short_url} target="_blank">
                         <p className="font-bold text-blue-600 hover:underline">
                             {data?.short_url}
                         </p>
