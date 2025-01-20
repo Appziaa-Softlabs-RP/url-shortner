@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\UrlAnalytics;
 use App\Repositories\UrlRepository;
 use App\Repositories\DltRepository;
 use Carbon\Carbon;
@@ -57,10 +58,17 @@ class UrlService
         return $host;
     }
 
-    public function validateUrl($url, $userId)
+    public function validateUrl($url, $shortCode = null, $userId)
     {
+
+        if ($shortCode) {
+            if (!$this->repository->isShortCodeByUserIdExists($shortCode, $userId)) {
+                throw new \Exception("Short Code doesn't exists");
+            }
+        }
+
         $existingUrl = $this->repository->getByUrlAndUserId($url, $userId);
-        if ($existingUrl) {
+        if ($existingUrl && (!$shortCode || $existingUrl->short_code != $shortCode)) {
             throw new \Exception("Looks like this destination is already used for another short link. Check the existing url tab.");
         }
 
@@ -81,15 +89,14 @@ class UrlService
 
     public function generateShortUrl($longUrl, $dltCode, $title)
     {
-        $this->validateUrl($longUrl, auth()->id());
+        $this->validateUrl(
+            url: $longUrl,
+            shortCode: null,
+            userId: auth()->id()
+        );
 
         $codeWithDlt = $dltCode ? $dltCode . '/' : '';
 
-        // Check if the long URL already exists in the database
-        $existingUrl = $this->repository->getByUrl($longUrl);
-        if ($existingUrl) {
-            return url($codeWithDlt . $existingUrl->short_code);
-        }
         // Generate a unique shortcode
         $shortCode = $this->generateUniqueShortCode();
 
@@ -109,7 +116,29 @@ class UrlService
             'user_id' => auth()->id()
         ]);
 
-        return  secure_url($codeWithDlt . $shortCode);
+        return $shortCode;
+    }
+
+    public function updateShortUrl($longUrl, $shortCode, $title)
+    {
+        $this->validateUrl(
+            url: $longUrl,
+            userId: auth()->id(),
+            shortCode: $shortCode
+        );
+
+        $path = '';
+
+        $this->repository->updateByShortCode(
+            shortCode: $shortCode,
+            data: [
+                'long_url' => $longUrl,
+                'title' => $title,
+                'user_id' => auth()->id()
+            ]
+        );
+
+        return $shortCode;
     }
 
     public function getById(int $id)
@@ -121,6 +150,14 @@ class UrlService
     {
         return $this->repository->getByShortCodeWhereNullDlt(
             shortCode: $shortCode
+        );
+    }
+
+    public function getByShortCodeWhereNullDltAndUserId($shortCode, $userId)
+    {
+        return $this->repository->getByShortCodeWhereNullDltAndUserId(
+            shortCode: $shortCode,
+            userId: $userId
         );
     }
 

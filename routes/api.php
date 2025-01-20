@@ -6,6 +6,7 @@ use App\Http\Controllers\v1\Auth\LogoutController;
 use App\Http\Controllers\v1\Auth\RegisterController;
 use App\Http\Controllers\v1\UrlController;
 use App\Http\Controllers\v1\User\UrlController as UserUrlController;
+use App\Http\Controllers\v1\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,11 @@ Route::prefix('v1')->group(function () {
             Route::apiResource('urls', UserUrlController::class);
             Route::controller(UserUrlController::class)->group(function () {
                 Route::post('validate-auth-user-url', 'validateAuthUserUrl');
+                Route::get('get-analytics', 'getAllUrlAnalytics');
+            });
+            Route::controller(UserController::class)->group(function () {
+                Route::post('save-user-onboarding', 'saveOnboarding');
+                Route::get('get-onboarding-status', 'getOnboardingStatus');
             });
         });
         Route::group(['middleware' => 'isAdmin'], function () {

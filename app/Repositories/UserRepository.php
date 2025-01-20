@@ -44,6 +44,27 @@ class UserRepository
         return $user;
     }
 
+    public function update(int $id, array $data): User
+    {
+        $user = User::findOrFail($id);
+
+        // Fill the model with the provided data
+        $user->fill($data);
+
+        // Save the updated model
+        $user->save();
+
+        // Return the updated user
+        return $user;
+    }
+
+    public function getUserOnboardingStatus(int $id): bool
+    {
+        $user = User::findOrFail($id);
+        return $user->is_onboarding_done;
+    }
+
+
     public function addUserCredits(string $rewardsId, int $credits): User
     {
         $user = User::where('rewards_id', $rewardsId)->firstOrFail();

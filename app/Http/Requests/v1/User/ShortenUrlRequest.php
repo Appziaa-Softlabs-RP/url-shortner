@@ -24,12 +24,6 @@ class ShortenUrlRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:255'
-            ],
-            'dlt_code' => [
-                'nullable',
-                'string',
-                'exists:dlt_codes,code',
-                'max:6'
             ]
         ];
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\User\ShortenUrlRequest;
 use App\Http\Requests\v1\User\ValidateUrlRequest;
 use App\Http\Traits\HttpResponse;
+use App\Services\UrlAnalyticsService;
 use App\Services\UrlService;
 
 class UrlController extends Controller
@@ -13,11 +14,14 @@ class UrlController extends Controller
     use HttpResponse;
 
     protected UrlService $urlService;
+    protected UrlAnalyticsService $analyticsService;
 
     public function __construct(
         UrlService $urlService,
+        UrlAnalyticsService $analyticsService
     ) {
         $this->urlService = $urlService;
+        $this->analyticsService = $analyticsService;
     }
 
     public function index()
@@ -42,7 +46,7 @@ class UrlController extends Controller
         try {
             $data = $request->validated();
             $longUrl = $data['long_url'];
-            $title = $data['title'];
+            $title = $request->title ?? null;
             $dltCode = $request->dlt_code;
 
             $shortCode = $this->urlService->generateShortUrl(
@@ -52,7 +56,7 @@ class UrlController extends Controller
             );
 
             return $this->success(
-                data: ['short_url' => $shortCode],
+                data: ['short_code' => $shortCode],
                 message: 'Short URL generated successfully'
             );
         } catch (\Exception $e) {
@@ -67,7 +71,13 @@ class UrlController extends Controller
     {
         try {
             $data = $request->validated();
-            $data = $this->urlService->validateUrl($data['url'], auth()->id());
+            $url = $data['url'];
+            $shortCode = $request->short_code;
+            $data = $this->urlService->validateUrl(
+                url: $url,
+                shortCode: $shortCode,
+                userId: auth()->id()
+            );
 
             return $this->success(
                 message: null
@@ -83,11 +93,67 @@ class UrlController extends Controller
     public function show($shortCode)
     {
         try {
-            $url = $this->urlService->getByShortCodeWhereNullDlt($shortCode);
+            $url = $this->urlService->getByShortCodeWhereNullDltAndUserId(
+                shortCode: $shortCode,
+                userId: auth()->id()
+            );
+
+            $analytics = $this->analyticsService->getAnalyticsForUrl($url->id);
+
+            $data = [
+                "url" => $url,
+                "analytics" => $analytics
+            ];
 
             return $this->success(
-                data: $url,
+                data: $data,
                 message: null
+            );
+        } catch (\Exception $e) {
+            return $this->error(
+                message: $e->getMessage(),
+                code: 400
+            );
+        }
+    }
+
+    public function getAllUrlAnalytics()
+    {
+        try {
+            $analytics = $this->analyticsService->getAllUrlsAnalyticsForUser(auth()->id());
+
+            $data = [
+                "analytics" => $analytics
+            ];
+
+            return $this->success(
+                data: $data,
+                message: null
+            );
+        } catch (\Exception $e) {
+            return $this->error(
+                message: $e->getMessage(),
+                code: 400
+            );
+        }
+    }
+
+    public function update($shortCode, ShortenUrlRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            $longUrl = $data['long_url'];
+            $title = $data['title'];
+
+            $shortCode = $this->urlService->updateShortUrl(
+                longUrl: $longUrl,
+                shortCode: $shortCode,
+                title: $title
+            );
+
+            return $this->success(
+                data: ['short_code' => $shortCode],
+                message: 'Short URL generated successfully'
             );
         } catch (\Exception $e) {
             return $this->error(

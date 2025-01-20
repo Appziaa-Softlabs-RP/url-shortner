@@ -65,6 +65,12 @@ class UrlRepository
         return $url;
     }
 
+    public function isShortCodeByUserIdExists(string $shortCode, int $userId)
+    {
+        return $this->model->where('short_code', $shortCode)->where('user_id', $userId)->exists();
+    }
+
+
     public function getByShortCodeAndUserId(string $url, int $userId)
     {
         $url = $this->model->where('short_code', $url)->where('user_id', $userId)->first();
@@ -83,6 +89,12 @@ class UrlRepository
         return $url;
     }
 
+    public function updateByShortCode(string $shortCode, array $data)
+    {
+        return $this->model->where('short_code', $shortCode)->update($data);
+    }
+
+
     public function getLongUrlByShortCodeAndDlt($code, $dltCode)
     {
         $dltId = null;
@@ -96,10 +108,6 @@ class UrlRepository
         $url = $this->model->where('short_code', $code)
             ->where('dlt_id', $dltId)
             ->first();
-
-        $url->update([
-            'clicks' => $url->clicks + 1
-        ]);
 
         if ($url && !$url->title) {
             $url->title = $this->getTitle($url->long_url);
@@ -117,9 +125,22 @@ class UrlRepository
             ->whereNull('dlt_id')
             ->firstOrFail();
 
-        $url->update([
-            'clicks' => $url->clicks + 1
-        ]);
+        if ($url && !$url->title) {
+            $url->title = $this->getTitle($url->long_url);
+        }
+
+        return $url;
+    }
+
+
+    public function getByShortCodeWhereNullDltAndUserId($shortCode, $userId)
+    {
+        $url = $this
+            ->model
+            ->where('short_code', $shortCode)
+            ->where('user_id', $userId)
+            ->whereNull('dlt_id')
+            ->firstOrFail();
 
         if ($url && !$url->title) {
             $url->title = $this->getTitle($url->long_url);

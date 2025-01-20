@@ -10,6 +10,7 @@ use App\Http\Traits\HttpResponse;
 use App\Models\Url;
 use App\Services\UrlService;
 use App\Repositories\UrlRepository;
+use App\Services\UrlAnalyticsService;
 use Illuminate\Support\Facades\Http;
 
 class UrlController extends Controller
@@ -19,13 +20,16 @@ class UrlController extends Controller
 
     protected UrlService $service;
     protected UrlRepository $repository;
+    protected UrlAnalyticsService $analyticsService;
 
     public function __construct(
         UrlService $service,
-        UrlRepository $repository
+        UrlRepository $repository,
+        UrlAnalyticsService $analyticsService
     ) {
         $this->service = $service;
         $this->repository = $repository;
+        $this->analyticsService = $analyticsService;
     }
 
     public function redirect($code)
@@ -33,6 +37,7 @@ class UrlController extends Controller
         $url = $this->service->getByShortCodeWhereNullDlt(
             shortCode: $code
         );
+        $this->analyticsService->recordAnalytics($url);
         return redirect($url->long_url);
     }
 

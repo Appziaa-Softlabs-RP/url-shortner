@@ -67,4 +67,9 @@ class Url extends Model
         // Save and return the record
         return parent::create($data);
     }
+
+    public function analytics()
+    {
+        return $this->hasMany(UrlAnalytics::class);
+    }
 }

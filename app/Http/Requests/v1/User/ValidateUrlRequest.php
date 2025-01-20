@@ -19,6 +19,11 @@ class ValidateUrlRequest extends FormRequest
                 'url',
                 'max:2048',
                 'regex:/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(\/[^\s]*)?(\?[^\s]*)?$/'
+            ],
+            'short_code' => [
+                'nullable',
+                'string',
+                'exists:urls,short_code'
             ]
         ];
     }
