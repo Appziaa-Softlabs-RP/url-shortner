@@ -3,8 +3,29 @@ import GoToTop from "@/components/layout/go-to-top";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Empowering Organizations Through Talent and Technology",
-  description: "With our extensive capabilities, strategic ecosystem partnerships, and unparalleled industry expertise, we empower your business to reach its next level. Whether it's sourcing top talent or driving digital transformation, we're here to support your success.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://app.rwps.in'),
+  applicationName: process.env.NEXT_PUBLIC_APP_NAME || "RWPS URL Shortener",
+  title: "Free Enterprise-Grade URL Shortener",
+  description: "Experience RWPS, the enterprise-grade URL shortening platform designed for reliability, scalability, and customization. Enjoy powerful analytics, seamless integration, and limitless innovation—all for free.",
+  openGraph: {
+    type: 'website',
+    siteName: "Free Enterprise-Grade URL Shortener",
+    locale: 'en_US',
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Free Enterprise-Grade URL Shortener",
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Free Enterprise-Grade URL Shortener",
+    description: 'Experience RWPS, the enterprise-grade URL shortening platform designed for reliability, scalability, and customization. Enjoy powerful analytics, seamless integration, and limitless innovation—all for free.',
+    images: [`${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png`],
+  }
 };
 
 export default async function DashboardLayout({
