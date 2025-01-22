@@ -25,6 +25,7 @@ class LoginService
     protected function authenticate($user): array
     {
         Auth::login($user);
+
         $token = $user->createToken('accessToken')->accessToken;
 
         $user = auth()->user();

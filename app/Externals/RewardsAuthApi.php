@@ -13,7 +13,7 @@ class RewardsAuthApi
         // Send POST request to the root server
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-        ])->post(env('MAIN_SERVER_URL').'/api/v1/register', $data);
+        ])->post(env('MAIN_SERVER_URL') . '/api/v1/register', $data);
 
         // Check if the request was successful
         if ($response->successful()) {
@@ -35,7 +35,7 @@ class RewardsAuthApi
         // Send POST request to the root server
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-        ])->post(env('MAIN_SERVER_URL').'/api/v1/login-user', $body);
+        ])->post(env('MAIN_SERVER_URL') . '/api/v1/login-user', $body);
 
         // Check if the request was successful
         if ($response->successful()) {
@@ -57,7 +57,7 @@ class RewardsAuthApi
         // Send POST request to the root server
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-        ])->post(env('MAIN_SERVER_URL').'/api/v1/login-user-otp-verify', $body);
+        ])->post(env('MAIN_SERVER_URL') . '/api/v1/login-user-otp-verify', $body);
 
         // Check if the request was successful
         if ($response->successful()) {
@@ -73,7 +73,7 @@ class RewardsAuthApi
         // Send POST request to the root server
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-        ])->get(env('MAIN_SERVER_URL').'/api/v1/get-user-details-by-rewards-id/'.$rewardsId);
+        ])->get(env('MAIN_SERVER_URL') . '/api/v1/get-user-details-by-rewards-id/' . $rewardsId);
 
         // Check if the request was successful
         if ($response->successful()) {

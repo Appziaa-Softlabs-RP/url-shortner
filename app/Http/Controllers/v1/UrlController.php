@@ -50,6 +50,7 @@ class UrlController extends Controller
         if (!$url) {
             abort(404);
         }
+        $this->analyticsService->recordAnalytics($url);
         return redirect($url->long_url);
     }
 

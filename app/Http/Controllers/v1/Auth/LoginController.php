@@ -30,7 +30,6 @@ class LoginController extends Controller
     {
         try {
             $credentials = $request->validated();
-
             $responseData = $this->loginService->login($credentials);
             if ($responseData) {
                 return $this->success(
