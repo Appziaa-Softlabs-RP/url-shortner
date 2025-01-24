@@ -58,6 +58,15 @@ class UserRepository
         return $user;
     }
 
+    public function updateDisplayName(int $id, string $name): User
+    {
+        $user = User::findOrFail($id);
+        $user->name = $name;
+        $user->save();
+
+        return $user;
+    }
+
     public function getUserOnboardingStatus(int $id): bool
     {
         $user = User::findOrFail($id);

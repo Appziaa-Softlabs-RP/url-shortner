@@ -5,6 +5,7 @@ use App\Http\Controllers\v1\Auth\LoginController;
 use App\Http\Controllers\v1\Auth\LogoutController;
 use App\Http\Controllers\v1\Auth\RegisterController;
 use App\Http\Controllers\v1\UrlController;
+use App\Http\Controllers\v1\User\ApiClientController;
 use App\Http\Controllers\v1\User\UrlController as UserUrlController;
 use App\Http\Controllers\v1\User\UserController;
 use Illuminate\Http\Request;
@@ -50,6 +51,13 @@ Route::prefix('v1')->group(function () {
             Route::controller(UserController::class)->group(function () {
                 Route::post('save-user-onboarding', 'saveOnboarding');
                 Route::get('get-onboarding-status', 'getOnboardingStatus');
+                Route::get('display-name', 'getDisplayName');
+                Route::put('display-name', 'updateDisplayName');
+            });
+            // api access routes
+            Route::apiResource('oauth-apps', ApiClientController::class);
+            Route::middleware('validate.url.shortening.api.token')->group(function () {
+                Route::post('shorten', [UrlController::class, 'shorten']);
             });
         });
         Route::group(['middleware' => 'isAdmin'], function () {

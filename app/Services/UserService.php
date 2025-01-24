@@ -23,4 +23,9 @@ class UserService
     {
         return $this->repository->getUserOnboardingStatus($id);
     }
+
+    public function updateDisplayName(int $id, string $name)
+    {
+        return $this->repository->updateDisplayName($id, $name);
+    }
 }
