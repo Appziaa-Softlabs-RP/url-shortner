@@ -1,7 +1,7 @@
 import DocsBreadcrumb from "@/components/docs-breadcrumb";
 import Pagination from "@/components/pagination";
 import Toc from "@/components/toc";
-import { page_routes } from "@/lib/routes-config";
+import { docs_page_routes } from "@/lib/routes-config";
 import { notFound } from "next/navigation";
 import { getDocsForSlug } from "@/lib/markdown";
 import { Typography } from "@/components/typography";
@@ -31,7 +31,7 @@ export default async function DocsPage(props: PageProps) {
             {res.frontmatter.description}
           </p>
           <div>{res.content}</div>
-          <Pagination pathname={pathName} />
+          <Pagination pathname={pathName} type="docs" />
         </Typography>
       </div>
       <Toc path={pathName} />
@@ -57,7 +57,7 @@ export async function generateMetadata(props: PageProps) {
 }
 
 export function generateStaticParams() {
-  return page_routes.map((item) => ({
+  return docs_page_routes.map((item) => ({
     slug: item.href.split("/").slice(1),
   }));
 }

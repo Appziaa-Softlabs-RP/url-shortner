@@ -1,19 +1,19 @@
 "use client";
 
-import { DOCS } from "@/lib/routes-config";
+import { API } from "@/lib/routes-config";
 import SubLink from "./sublink";
 import { usePathname } from "next/navigation";
 
-export default function DocsMenu({ isSheet = false }) {
+export default function ApiReferenceMenu({ isSheet = false }) {
   const pathname = usePathname();
-  if (!pathname.startsWith("/v1/docs")) return null;
+  if (!pathname.startsWith("/v1/api-reference")) return null;
 
   return (
     <div className="flex flex-col gap-3.5 mt-5 pr-2 pb-6">
-      {DOCS.map((item, index) => {
+      {API.map((item, index) => {
         const modifiedItems = {
           ...item,
-          href: `/v1/docs${item.href}`,
+          href: `/v1/api-reference${item.href}`,
           level: 0,
           isSheet,
         };

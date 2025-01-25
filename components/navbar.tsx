@@ -5,30 +5,18 @@ import { buttonVariants } from "./ui/button";
 import Search from "./search";
 import Anchor from "./anchor";
 import { SheetLeftbar } from "./leftbar";
-import { page_routes } from "@/lib/routes-config";
+import { docs_page_routes, api_page_routes } from "@/lib/routes-config";
 import { SheetClose } from "@/components/ui/sheet";
 
 export const NAVLINKS = [
   {
     title: "Documentation",
-    href: `/docs${page_routes[0].href}`,
+    href: `/v1/docs${docs_page_routes[0].href}`,
   },
   {
-    title: "Blog",
-    href: "/blog",
-  },
-  {
-    title: "Examples",
-    href: "#",
-  },
-  {
-    title: "Guides",
-    href: "#",
-  },
-  {
-    title: "Community",
-    href: "https://github.com/nisabmohd/Aria-Docs/discussions",
-  },
+    title: "API Reference",
+    href: `/v1/api-reference${api_page_routes[0].href}`,
+  }
 ];
 
 export function Navbar() {

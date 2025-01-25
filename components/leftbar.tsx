@@ -12,12 +12,24 @@ import { FooterButtons } from "./footer";
 import { DialogTitle } from "./ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import DocsMenu from "./docs-menu";
+import ApiReferenceMenu from "./api-reference-menu";
 
-export function Leftbar() {
+type LeftBarProps = {
+  item: "docs" | "api-reference"
+};
+
+
+export function Leftbar({
+  item
+}: LeftBarProps) {
   return (
     <aside className="md:flex hidden flex-[1.5] min-w-[238px] sticky top-16 flex-col h-[93.75vh] overflow-y-auto">
       <ScrollArea className="py-4">
-        <DocsMenu />
+        {
+          item == "docs" ?
+            <DocsMenu />
+            : <ApiReferenceMenu />
+        }
       </ScrollArea>
     </aside>
   );
