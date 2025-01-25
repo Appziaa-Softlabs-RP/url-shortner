@@ -1,11 +1,12 @@
-import { getDisplayName } from "@/api/profileApi";
+import { getOauthApps } from "@/api/oauthAppApi";
+import ShowAuthApps from "@/components/dashboard/settings/api/show-oauth-app";
 import { Separator } from "@/components/ui/separator";
 import { authOptions } from "@/lib/auth-options";
 import { getServerSession } from "next-auth";
 
-const getUrlsData = async (token: any) => {
+const getUrlsData = async ({token}: {token: string}) => {
     try {
-        return await getDisplayName({
+        return await getOauthApps({
             token: token,
         });
     } catch (e) {
@@ -22,7 +23,7 @@ export default async function SettingsProfilePage() {
     });
 
     const data = await getUrlsData({
-        token: session?.accessToken,
+        token: session?.accessToken ?? '',
     });
 
     return (
@@ -34,6 +35,10 @@ export default async function SettingsProfilePage() {
                 </p>
             </div>
             <Separator />
+            <ShowAuthApps
+                token={session?.accessToken}
+                data={data}
+            />
         </div>
     );
 }

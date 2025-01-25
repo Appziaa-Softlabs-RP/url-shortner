@@ -15,6 +15,7 @@ const api = axios.create({
 api.interceptors.response.use(
     (response) => response,
     (error) => {
+        console.log(error)
         const formattedError = {
             message: error.response?.data?.message || 'An unexpected error occurred',
             status: error.response?.status || 500,
