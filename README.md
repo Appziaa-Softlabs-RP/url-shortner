@@ -1,4 +1,4 @@
-## AriaDocs - Documentation Template
+## RWPS - Documentation Template
 
 This feature-packed documentation template, built with Next.js, offers a sleek and responsive design, perfect for all your project documentation needs.
 
@@ -6,7 +6,7 @@ This feature-packed documentation template, built with Next.js, offers a sleek a
 
 <br/>
 
-Here are all versions of the AriaDocs template, each crafted for specific use cases:
+Here are all versions of the RWPS template, each crafted for specific use cases:
 
 
 - **Advanced Docs:** A comprehensive template offering extensive features for in-depth documentation needs. Perfect for larger projects that require detailed explanations and advanced configurations.  
@@ -23,7 +23,7 @@ Here are all versions of the AriaDocs template, each crafted for specific use ca
 
 ### Quick Start
 
-You can create a new Ariadocs project using the command:
+You can create a new RWPS project using the command:
 
 ```plaintext
 npx create-aria-doc <project-directory>
@@ -34,9 +34,9 @@ npx create-aria-doc <project-directory>
 When you run the CLI, you can expect an output similar to this:
 
 ```
-Creating a new Ariadocs project in /path/to/your/project from the master branch...
+Creating a new RWPS project in /path/to/your/project from the master branch...
 Cloning Master (Full Documentation)...
-Ariadocs project successfully created in /path/to/your/project!
+RWPS project successfully created in /path/to/your/project!
 
 Next steps:
 1. Navigate to your project directory:

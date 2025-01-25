@@ -1,12 +1,11 @@
 import { ModeToggle } from "@/components/theme-toggle";
-import { GithubIcon, TwitterIcon, CommandIcon } from "lucide-react";
+import { SheetClose } from "@/components/ui/sheet";
+import { api_page_routes, docs_page_routes } from "@/lib/routes-config";
+import Image from "next/image";
 import Link from "next/link";
-import { buttonVariants } from "./ui/button";
-import Search from "./search";
 import Anchor from "./anchor";
 import { SheetLeftbar } from "./leftbar";
-import { docs_page_routes, api_page_routes } from "@/lib/routes-config";
-import { SheetClose } from "@/components/ui/sheet";
+import Search from "./search";
 
 export const NAVLINKS = [
   {
@@ -15,7 +14,7 @@ export const NAVLINKS = [
   },
   {
     title: "API Reference",
-    href: `/v1/api-reference${api_page_routes[0].href}`,
+    href: `/v1/api${api_page_routes[0].href}`,
   }
 ];
 
@@ -39,21 +38,6 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <Search />
             <div className="flex ml-2.5 sm:ml-0">
-              <Link
-                href="https://github.com/nisabmohd/NexDocs"
-                className={buttonVariants({ variant: "ghost", size: "icon" })}
-              >
-                <GithubIcon className="h-[1.1rem] w-[1.1rem]" />
-              </Link>
-              <Link
-                href="#"
-                className={buttonVariants({
-                  variant: "ghost",
-                  size: "icon",
-                })}
-              >
-                <TwitterIcon className="h-[1.1rem] w-[1.1rem]" />
-              </Link>
               <ModeToggle />
             </div>
           </div>
@@ -66,8 +50,22 @@ export function Navbar() {
 export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5">
-      <CommandIcon className="w-6 h-6 text-muted-foreground" strokeWidth={2} />
-      <h2 className="text-md font-bold font-code">AriaDocs</h2>
+      <h2 className="text-md font-bold font-code">
+        <Image
+          src={'/logo-dark.svg'}
+          height={100}
+          width={100}
+          alt="rwps"
+          className="dark:hidden"
+        />
+        <Image
+          src={'/logo-light.svg'}
+          height={100}
+          width={100}
+          alt="rwps"
+          className="hidden dark:block"
+        />
+      </h2>
     </Link>
   );
 }

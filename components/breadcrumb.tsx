@@ -8,13 +8,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Fragment } from "react";
 
-export default function DocsBreadcrumb({ paths }: { paths: string[] }) {
+export default function DocsBreadcrumb({ paths, name }: { paths: string[], name: string }) {
   return (
     <div className="pb-5">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink>Docs</BreadcrumbLink>
+            <BreadcrumbLink>{name}</BreadcrumbLink>
           </BreadcrumbItem>
           {paths.map((path, index) => (
             <Fragment key={path}>

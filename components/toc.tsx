@@ -2,8 +2,8 @@ import { getDocsTocs } from "@/lib/markdown";
 import TocObserver from "./toc-observer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-export default async function Toc({ path }: { path: string }) {
-  const tocs = await getDocsTocs(path);
+export default async function Toc({ path, type }: { path: string, type: "docs" | "api" }) {
+  const tocs = await getDocsTocs(path, type);
 
   return (
     <div className="lg:flex hidden toc flex-[1.5] min-w-[238px] py-9 sticky top-16 h-[96.95vh]">

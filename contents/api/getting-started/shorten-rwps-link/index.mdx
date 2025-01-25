@@ -1,0 +1,35 @@
+# Shorten a Link
+
+Shorten long URLs into concise, shareable links using the RWPS API.
+
+### Endpoint
+```http
+POST /api/v1/shorten
+Headers:
+  rwps_token: your_generated_api_token
+Body:
+  long_url: https://example.com/very-long-url
+```
+
+### Example Request
+```http
+{
+  "long_url": "https://example.com/very-long-url"
+}
+```
+
+### Example Response
+```http
+{
+  "short_url": "https://rwps.in/abc123",
+  "long_url": "https://example.com/new-long-url"
+}
+```
+
+### Parameters
+- long_url: The URL you want to shorten (required).
+
+### Errors
+- 400 Bad Request: Invalid URL format.
+- 401 Unauthorized: Missing or invalid API token.
+
