@@ -41,11 +41,11 @@ const data = {
             url: "/dashboard/analytics",
             icon: BarChart3,
         },
-        // {
-        //     title: "Settings",
-        //     url: "/dashboard/settings",
-        //     icon: Settings,
-        // },
+        {
+            title: "Settings",
+            url: "/dashboard/settings/profile",
+            icon: Settings,
+        },
     ],
 }
 
