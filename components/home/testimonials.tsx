@@ -1,58 +1,172 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
-import { Button } from "@/components/ui/button"
+"use client"
 
-export function Testimonials() {
-    const testimonials = [
-        {
-            quote: "When it comes to deciding on a platform to use for generating all of our QR Codes, there was a general consensus among the team—of course we should use Bitly! We didn't even give it a second thought.",
-            author: "Jessica Park",
-            role: "Marketing Director at TechCorp",
-            avatar: "/placeholder.svg?height=40&width=40"
-        },
-        // Add more testimonials as needed
-    ]
+import { useRef } from 'react'
+import { A11y, Navigation, Pagination } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+// Import Swiper styles
+import { cn } from '@/lib/utils'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import SkewCard1 from '../cards/testimonials/skew-card-1'
+import SkewCard2 from '../cards/testimonials/skew-card-2'
+import SkewCard3 from '../cards/testimonials/skew-card-3'
+
+const testimonials = [
+    {
+        id: 1,
+        name: "Harsha",
+        image: "/placeholder.svg",
+        quote: "RWPS has transformed our link management completely. The analytics provide deep insights into our customer behavior, making it an invaluable tool for our marketing strategy.",
+        rating: 5
+    },
+    {
+        id: 2,
+        name: "Gautam Kumar",
+        image: "/placeholder.svg",
+        quote: "The ease of use and comprehensive analytics make RWPS stand out. We've seen a significant improvement in our campaign tracking since switching to this platform.",
+        rating: 4
+    },
+    {
+        id: 3,
+        name: "Deepa",
+        image: "/placeholder.svg",
+        quote: "As a content creator, RWPS has simplified my workflow immensely. The custom branding options and detailed click analytics help me optimize my content strategy effectively.",
+        rating: 4
+    },
+    {
+        id: 4,
+        name: "Deepa",
+        image: "/placeholder.svg",
+        quote: "As a content creator, RWPS has simplified my workflow immensely. The custom branding options and detailed click analytics help me optimize my content strategy effectively.",
+        rating: 4
+    },
+    {
+        id: 6,
+        name: "Deepa",
+        image: "/placeholder.svg",
+        quote: "As a content creator, RWPS has simplified my workflow immensely. The custom branding options and detailed click analytics help me optimize my content strategy effectively.",
+        rating: 4
+    }
+]
+
+const CardPattern = ({ type }: { type: 'left' | 'center' | 'right' }) => {
+    const patterns = {
+        left: "M0,100 C150,100 150,50 300,50 L300,300 L0,300 Z",
+        center: "M0,50 C150,50 150,100 300,100 L300,300 L0,300 Z",
+        right: "M0,50 C150,50 150,100 300,100 L300,300 L0,300 Z"
+    }
 
     return (
-        <section className="py-20 px-4 bg-gradient-to-br from-[#111827] to-[#2E2662]">
-            <div className="container mx-auto max-w-6xl">
-                <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-                    What our customers are saying
-                </h2>
-                <div className="relative">
-                    <Card className="bg-white p-8 max-w-2xl mx-auto">
-                        <CardContent className="space-y-6">
-                            <Quote className="w-12 h-12 text-[#5D91FA]" />
-                            <p className="text-lg text-gray-700">{testimonials[0].quote}</p>
-                            <div className="flex items-center gap-4">
-                                <Avatar>
-                                    <AvatarImage src={testimonials[0].avatar} alt={testimonials[0].author} />
-                                    <AvatarFallback>JP</AvatarFallback>
-                                </Avatar>
-                                <div>
-                                    <p className="font-semibold">{testimonials[0].author}</p>
-                                    <p className="text-sm text-gray-600">{testimonials[0].role}</p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                    <div className="flex justify-center gap-4 mt-8">
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="bg-white/20 hover:bg-white/30 text-white"
-                        >
-                            <ChevronLeft className="w-6 h-6" />
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="bg-white/20 hover:bg-white/30 text-white"
-                        >
-                            <ChevronRight className="w-6 h-6" />
-                        </Button>
+        <div className="absolute inset-0 overflow-hidden">
+            <svg
+                viewBox="0 0 300 300"
+                className="w-full h-full absolute"
+                style={{
+                    transform: type === 'right' ? 'scaleX(1.05)' : 'scaleX(0.95)'
+                }}
+            >
+                <path
+                    d={patterns[type]}
+                    fill="#8B4513"
+                    opacity="0.1"
+                />
+            </svg>
+        </div>
+    )
+}
+
+export function Testimonials() {
+    const swiperRef = useRef(null)
+
+    return (
+        <section className="py-20 sm:px-4 bg-gradient-to-b from-blue-100 to-white">
+            <div className="container p-2 mx-auto max-w-7xl">
+                <div className='relative grid sm:grid-cols-[1fr_500px_1fr] gap-4 justify-center items-center'>
+                    <div className='w-full hidden sm:flex justify-end'>
+                        <button className="custom-prev z-10 w-12 h-12 flex items-center justify-center">
+                            <ChevronLeft size={50} />
+                        </button>
                     </div>
+                    <h2 className="text-4xl font-bold text-gray-700 text-center">
+                        What Our Customers Say
+                    </h2>
+                    <div className='grid grid-cols-2 gap-8'>
+                        <div className='w-full flex md:hidden flex-sm-hidden justify-end'>
+                            <button className="custom-prev z-10 w-12 h-12 flex items-center justify-center">
+                                <ChevronLeft size={50} />
+                            </button>
+                        </div>
+                        <div className='w-full flex justify-start'>
+                            <button className="custom-next  z-10 w-12 h-12 flex items-center justify-center">
+                                <ChevronRight size={50} />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div className="relative">
+                    <Swiper
+                        modules={[Navigation, Pagination, A11y]}
+                        spaceBetween={30}
+                        slidesPerView={3}
+                        centeredSlides={true}
+                        loop={true}
+                        navigation={{
+                            prevEl: '.custom-prev',
+                            nextEl: '.custom-next',
+                        }}
+                        pagination={{
+                            clickable: true,
+                            el: '.custom-pagination',
+                            bulletClass: 'inline-block w-2.5 h-2.5 mx-1 rounded-full bg-gray-300 cursor-pointer transition-colors',
+                            bulletActiveClass: '!bg-pink-500'
+                        }}
+                        breakpoints={{
+                            320: {
+                                slidesPerView: 1,
+                                spaceBetween: 20
+                            },
+                            768: {
+                                slidesPerView: 2,
+                                spaceBetween: 30
+                            },
+                            1024: {
+                                slidesPerView: 3,
+                                spaceBetween: 30
+                            }
+                        }}
+                        onSwiper={(swiper) => {
+                            // @ts-ignore
+                            swiperRef.current = swiper
+                        }}
+                        className="py-16"
+                    >
+                        {testimonials.map((testimonial, index) => {
+                            const activeCard = (testimonial.id) % 3;
+                            return <SwiperSlide key={index} className='my-24 w-full'>
+                                {({ isActive }) => (
+                                    <div key={index}
+                                        className={cn(
+                                            "max-w-[450px]",
+                                            "transition-all duration-150 ease-in-out flex items-center justify-center",
+                                            isActive && "sm:scale-110"
+                                        )}
+                                    >
+                                        {
+                                            activeCard === 1 ? <SkewCard1 data={testimonial} /> :
+                                                activeCard === 0 ? <SkewCard2 data={testimonial} /> :
+                                                    <SkewCard3 data={testimonial} />
+                                        }
+                                    </div>
+                                )}
+                            </SwiperSlide>
+                        })}
+                    </Swiper>
+
+                    {/* Custom Pagination */}
+                    <div className="custom-pagination flex justify-center gap-2"></div>
                 </div>
             </div>
         </section>

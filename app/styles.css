@@ -7,10 +7,18 @@
     flex-direction: column;
 }
 
+.flex-sm-hidden{
+    display: flex !important;
+}
+
+
 @media (min-width: 640px) {
     .flex-col-sm-flex-row {
         display: flex;
         flex-direction: row;
+    }
+    .flex-sm-hidden{
+        display: none !important;
     }
 }
 

@@ -39,7 +39,7 @@ export function ShortnerUI() {
 
     return (
         <>
-            <div className="flex">
+            <div className="flex gap-2">
                 {
                     btnTypes.map((btn, index) => {
                         const isActive = btn.value === type;
@@ -51,14 +51,14 @@ export function ShortnerUI() {
                             disabled={btn.coming_soon ?? true}
                             variant={'ghost'}
                             className={cn(
-                                "text-lg py-6 hover:bg-white/10 hover:text-white rounded-b-none",
-                                "flex gap-2",
-                                isActive && "bg-white border-b-4 border-primary text-black hover:bg-slate-100 hover:text-black"
+                                "text-lg py-6 hover:bg-slate-50 hover:text-primary rounded-b-none",
+                                "flex gap-2 bg-white border-b-white text-slate-500 border-b-4",
+                                isActive && "border-primary text-primary"
                             )}>
                             <btn.icon />
                             <span className="hidden sm:block">
                                 {btn.name}
-                                <span className="text-xs"> {btn.coming_soon && "(COMING SOON)"}</span>
+                                <span className="text-xs"> {btn.coming_soon && "(Coming Soon)"}</span>
                                 </span>
                         </Button>
                     })}
