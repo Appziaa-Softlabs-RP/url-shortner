@@ -21,7 +21,7 @@ export function Features() {
     ]
 
     return (
-        <section className="py-20 px-4">
+        <section className="py-20 px-4" id="features">
             <div className="container mx-auto max-w-6xl">
                 <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
                     The Platform You Need

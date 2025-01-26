@@ -11,12 +11,12 @@ export function Navbar() {
             href: "#features"
         },
         {
-            name: "Pricing",
-            href: "#pricing"
+            name: "Testimonials",
+            href: "#testimonials"
         },
         {
             name: "Resources",
-            href: "#resources"
+            href: "https://docs.rwps.in"
         }
     ]
 

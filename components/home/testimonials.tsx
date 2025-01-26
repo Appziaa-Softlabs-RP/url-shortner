@@ -52,37 +52,11 @@ const testimonials = [
     }
 ]
 
-const CardPattern = ({ type }: { type: 'left' | 'center' | 'right' }) => {
-    const patterns = {
-        left: "M0,100 C150,100 150,50 300,50 L300,300 L0,300 Z",
-        center: "M0,50 C150,50 150,100 300,100 L300,300 L0,300 Z",
-        right: "M0,50 C150,50 150,100 300,100 L300,300 L0,300 Z"
-    }
-
-    return (
-        <div className="absolute inset-0 overflow-hidden">
-            <svg
-                viewBox="0 0 300 300"
-                className="w-full h-full absolute"
-                style={{
-                    transform: type === 'right' ? 'scaleX(1.05)' : 'scaleX(0.95)'
-                }}
-            >
-                <path
-                    d={patterns[type]}
-                    fill="#8B4513"
-                    opacity="0.1"
-                />
-            </svg>
-        </div>
-    )
-}
-
 export function Testimonials() {
     const swiperRef = useRef(null)
 
     return (
-        <section className="py-20 sm:px-4 bg-gradient-to-b from-blue-100 to-white">
+        <section id="testimonials" className="py-20 sm:px-4 bg-gradient-to-b from-blue-100 to-white">
             <div className="container p-2 mx-auto max-w-7xl">
                 <div className='relative grid sm:grid-cols-[1fr_500px_1fr] gap-4 justify-center items-center'>
                     <div className='w-full hidden sm:flex justify-end'>
