@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import { ArrowRight, Link } from 'lucide-react'
+import { ArrowRight, Link, QrCode } from 'lucide-react'
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Label } from "../ui/label"
@@ -26,18 +26,20 @@ export function ShortnerUI() {
         {
             name: "Short link",
             value: "url",
-            icon: Link
+            icon: Link,
+            coming_soon: false
         },
-        // {
-        //     name: "QR Code",
-        //     value: "qr",
-        //     icon: QrCode
-        // }
+        {
+            name: "QR Code",
+            value: "qr",
+            icon: QrCode,
+            coming_soon: true
+        }
     ]
 
     return (
         <>
-            <div className="p-4 flex gap-4 justify-center items-center">
+            <div className="flex">
                 {
                     btnTypes.map((btn, index) => {
                         const isActive = btn.value === type;
@@ -46,18 +48,19 @@ export function ShortnerUI() {
                             onClick={
                                 () => setType(btn.value)
                             }
+                            disabled={btn.coming_soon ?? true}
                             variant={'ghost'}
                             className={cn(
-                                "text-lg py-6 hover:bg-white/10 hover:text-white",
+                                "text-lg py-6 hover:bg-white/10 hover:text-white rounded-b-none",
                                 "flex gap-2",
-                                isActive && "bg-white text-black hover:bg-slate-100 hover:text-black"
+                                isActive && "bg-white border-b-4 border-primary text-black hover:bg-slate-100 hover:text-black"
                             )}>
                             <btn.icon />
                             <span className="hidden sm:block">{btn.name}</span>
                         </Button>
                     })}
             </div>
-            <div className="bg-white rounded-3xl p-6 md:p-12 mb-8 grid gap-8">
+            <div className="bg-white rounded-3xl rounded-tl-none p-6 md:p-12 mb-8 grid gap-8">
                 <div className="grid gap-2">
                     <h2 className="text-[#0B1736] text-xl sm:text-2xl md:text-3xl font-semibold">
                         {
