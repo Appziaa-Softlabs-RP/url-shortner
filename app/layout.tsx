@@ -20,10 +20,10 @@ const monoFont = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RWPS - Template",
-  metadataBase: new URL("https://RWPS.vercel.app/"),
+  metadataBase: new URL("https://docs.rwps.in/"),
+  title: "rwps.in Docs - API Reference & Integration Guides",
   description:
-    "This comprehensive documentation template, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements.",
+    "Dive into the rwps.in developer documentation to learn about API endpoints, usage limits, and implementation tips. Simplify URL shortening and analytics for your apps.",
 };
 
 export default function RootLayout({
