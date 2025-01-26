@@ -59,7 +59,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('display-name', 'updateDisplayName');
             });
             // api access routes
-            Route::apiResource('    ', ApiClientController::class);
+            Route::apiResource('oauth-apps', ApiClientController::class);
         });
         Route::group(['middleware' => 'isAdmin'], function () {
             Route::prefix('admin')->group(function () {
