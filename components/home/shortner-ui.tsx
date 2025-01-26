@@ -30,7 +30,7 @@ export function ShortnerUI() {
             coming_soon: false
         },
         {
-            name: "QR Code",
+            name: "QR code",
             value: "qr",
             icon: QrCode,
             coming_soon: true
@@ -56,7 +56,10 @@ export function ShortnerUI() {
                                 isActive && "bg-white border-b-4 border-primary text-black hover:bg-slate-100 hover:text-black"
                             )}>
                             <btn.icon />
-                            <span className="hidden sm:block">{btn.name}</span>
+                            <span className="hidden sm:block">
+                                {btn.name}
+                                <span className="text-xs"> {btn.coming_soon && "(COMING SOON)"}</span>
+                                </span>
                         </Button>
                     })}
             </div>
@@ -73,7 +76,7 @@ export function ShortnerUI() {
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-8 text-black">
                     <div className="grid gap-2">
-                        <Label className="text-md font-bold">
+                        <Label className="text-sm font-bold">
                             {
                                 isUrl ?
                                     "Paste your long link here"
