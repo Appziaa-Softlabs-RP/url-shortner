@@ -31,7 +31,7 @@ export function Features() {
                 </p>
                 <div className="grid md:grid-cols-3 gap-8">
                     {features.map((feature, index) => (
-                        <Card key={index} className="border-2 hover:border-[#5D91FA] transition-colors">
+                        <Card key={index} className="border-[1px] hover:border-[#5D91FA] transition-colors">
                             <CardHeader>
                                 <feature.icon className="w-12 h-12 text-[#4800C4] mb-4" />
                                 <CardTitle>{feature.title}</CardTitle>

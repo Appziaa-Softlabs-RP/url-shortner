@@ -2,11 +2,11 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ArrowRight, Link, QrCode } from 'lucide-react'
+import { cn } from "@/lib/utils"
+import { ArrowRight, Link } from 'lucide-react'
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Label } from "../ui/label"
-import { cn } from "@/lib/utils"
 
 export function ShortnerUI() {
     const [url, setUrl] = useState("")
@@ -28,11 +28,11 @@ export function ShortnerUI() {
             value: "url",
             icon: Link
         },
-        {
-            name: "QR Code",
-            value: "qr",
-            icon: QrCode
-        }
+        // {
+        //     name: "QR Code",
+        //     value: "qr",
+        //     icon: QrCode
+        // }
     ]
 
     return (
@@ -57,7 +57,7 @@ export function ShortnerUI() {
                         </Button>
                     })}
             </div>
-            <div className="bg-white rounded-3xl px-6 py-10 mb-8 grid gap-8">
+            <div className="bg-white rounded-3xl px-6 sm:px-12 py-10 mb-8 grid gap-8">
                 <div className="grid gap-2">
                     <h2 className="text-[#0B1736] text-xl sm:text-2xl md:text-3xl font-semibold">
                         {
@@ -70,7 +70,7 @@ export function ShortnerUI() {
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-8 text-black">
                     <div className="grid gap-2">
-                        <Label className="text-lg font-bold">
+                        <Label className="text-md font-bold">
                             {
                                 isUrl ?
                                     "Paste your long link here"
@@ -82,7 +82,7 @@ export function ShortnerUI() {
                             placeholder="Paste long URL here"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
-                            className="flex-grow h-12 text-lg px-4 border-2 border-gray-300 focus:border-[#5D91FA]"
+                            className="flex-grow h-12 text-lg px-4 fs-[14px] border-2 border-gray-300 focus:border-[#5D91FA]"
                             required
                         />
                     </div>
