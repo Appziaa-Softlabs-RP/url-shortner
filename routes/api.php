@@ -6,6 +6,7 @@ use App\Http\Controllers\v1\Auth\LogoutController;
 use App\Http\Controllers\v1\Auth\RegisterController;
 use App\Http\Controllers\v1\UrlController;
 use App\Http\Controllers\v1\User\ApiClientController;
+use App\Http\Controllers\v1\User\QrCodeController;
 use App\Http\Controllers\v1\User\UrlController as UserUrlController;
 use App\Http\Controllers\v1\User\UserController;
 use Illuminate\Http\Request;
@@ -47,6 +48,7 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:api')->group(function () {
         // User Routes
         Route::prefix('user')->group(function () {
+            Route::apiResource('qr-codes', QrCodeController::class);
             Route::apiResource('urls', UserUrlController::class);
             Route::controller(UserUrlController::class)->group(function () {
                 Route::post('validate-auth-user-url', 'validateAuthUserUrl');
