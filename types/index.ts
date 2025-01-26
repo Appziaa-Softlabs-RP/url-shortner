@@ -16,6 +16,16 @@ export interface NavItem {
   }[];
 }
 
+export interface SettingSidebarItem {
+  icon: keyof typeof Icons;
+  href: string;
+  title: string;
+}
+
+export interface SettingSidebarItems {
+  heading: string;
+  items: SettingSidebarItem[];
+}
 export interface NavItemWithChildren extends NavItem {
   items: NavItemWithChildren[];
 }
