@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Repositories\ApiClientRepository;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,11 @@ class ApiClientService
     public function validateToken(string $token, string $url): bool
     {
         return $this->apiClientRepository->validateToken($token, $url);
+    }
+
+    public function getUserByToken(string $token): User
+    {
+        return $this->apiClientRepository->getUserByToken($token);
     }
 
     public function index()

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\ApiClient;
+use App\Models\User;
 
 class ApiClientRepository
 {
@@ -41,6 +42,14 @@ class ApiClientRepository
             ->where('app_url', $url)
             ->where('is_active', true)
             ->exists();
+    }
+
+    public function getUserByToken(string $token): User
+    {
+        $apiClient = $this->model->where('token', $token)
+            ->first();
+
+        return $apiClient->user;
     }
 
     public function index()

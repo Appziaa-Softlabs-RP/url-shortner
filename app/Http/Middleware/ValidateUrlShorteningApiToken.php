@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use App\Services\ApiClientService;
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class ValidateUrlShorteningApiToken
 {
@@ -18,12 +18,15 @@ class ValidateUrlShorteningApiToken
 
     public function handle(Request $request, Closure $next)
     {
-        $token = $request->header('Authorization');
-        $appUrl = $request->header('App-Url');
+        $token = trim($request->header('rwps_token'));
+        $appUrl = request()->getSchemeAndHttpHost();
 
         if (!$this->apiClientService->validateToken($token, $appUrl)) {
             return response()->json(['message' => 'Invalid or unauthorized API token.'], 403);
         }
+
+        // validate user via token
+        Auth::login($this->apiClientService->getUserByToken($token));
 
         return $next($request);
     }

@@ -18,6 +18,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/shorten', [UrlController::class, 'shorten']);
 
 Route::prefix('v1')->group(function () {
+    Route::middleware('validate.url.shortening.api.token')->group(function () {
+        Route::post('shorten', [UserUrlController::class, 'store']);
+    });
+
     // Auth Controllers
     Route::controller(LoginController::class)->group(function () {
         Route::post('/login-email', 'loginEmail');
@@ -55,10 +59,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('display-name', 'updateDisplayName');
             });
             // api access routes
-            Route::apiResource('oauth-apps', ApiClientController::class);
-            Route::middleware('validate.url.shortening.api.token')->group(function () {
-                Route::post('shorten', [UrlController::class, 'shorten']);
-            });
+            Route::apiResource('    ', ApiClientController::class);
         });
         Route::group(['middleware' => 'isAdmin'], function () {
             Route::prefix('admin')->group(function () {
