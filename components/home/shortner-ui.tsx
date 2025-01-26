@@ -57,7 +57,7 @@ export function ShortnerUI() {
                         </Button>
                     })}
             </div>
-            <div className="bg-white rounded-3xl px-6 sm:px-12 py-10 mb-8 grid gap-8">
+            <div className="bg-white rounded-3xl p-6 md:p-12 mb-8 grid gap-8">
                 <div className="grid gap-2">
                     <h2 className="text-[#0B1736] text-xl sm:text-2xl md:text-3xl font-semibold">
                         {
@@ -89,7 +89,7 @@ export function ShortnerUI() {
                     <Button
                         type="submit"
                         size={'lg'}
-                        className="text-lg flex gap-2 w-fit px-8 py-6 group"
+                        className="text-md flex gap-2 w-fit px-8 py-6 group"
                     >
                         <span>
                             {

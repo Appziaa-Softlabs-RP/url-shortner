@@ -50,7 +50,7 @@ export function Footer() {
     }
 
     return (
-        <footer className="bg-[conic-gradient(at_right,_var(--tw-gradient-stops))] from-[#1d4ed8] via-[#1e40af] to-[#111827] text-white pt-20 pb-8">
+        <footer className="bg-gradient-to-br from-[#111827] to-[#2E2662] text-white pt-20 pb-8">
             <div className="container mx-auto max-w-6xl px-4">
                 <div className="text-center mb-20">
                     <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -59,7 +59,7 @@ export function Footer() {
                     <p className="text-lg mb-8 max-w-2xl mx-auto">
                         Knowing how your clicks and scans are performing should be as easy as making them. That&apos;s why we&apos;ve optimized all your connections in one place.
                     </p>
-                    <Button className="bg-white text-[#4800C4] hover:bg-gray-100">
+                    <Button size={'lg'} className="px-10 py-6 text-lg bg-white text-[#4800C4] hover:bg-gray-100">
                         Get started for free
                     </Button>
                 </div>

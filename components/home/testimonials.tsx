@@ -15,7 +15,7 @@ export function Testimonials() {
     ]
 
     return (
-        <section className="py-20 px-4 bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-[#1d4ed8] via-[#1e40af] to-[#111827]">
+        <section className="py-20 px-4 bg-gradient-to-br from-[#111827] to-[#2E2662]">
             <div className="container mx-auto max-w-6xl">
                 <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
                     What our customers are saying
