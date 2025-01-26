@@ -41,7 +41,7 @@ export default function ShowQrCodeCard({ data, token }: { data: QrCodeData; toke
                 title: "QR Code Deleted",
                 description: "The QR code has been successfully deleted.",
             })
-            router.push("/dashboard/qr-codes")
+            window.location.href = ("/dashboard/qr-codes")
         } catch (error) {
             toast({
                 variant: "destructive",
