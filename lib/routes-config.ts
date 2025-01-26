@@ -27,7 +27,7 @@ export const DOCS: EachRoute[] = [
     items: [
       { title: "Introduction", href: "/introduction" },
       { title: "Authentication", href: "/authentication", },
-      { title: "Rate Limits", href: "/rate-limits", },
+      // { title: "Rate Limits", href: "/rate-limits", },
     ],
   },
   {
