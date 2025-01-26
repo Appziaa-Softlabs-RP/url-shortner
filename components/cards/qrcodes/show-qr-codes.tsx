@@ -1,6 +1,7 @@
 "use client"
 
 import { deleteQrCode } from "@/api/qrCodeApi"
+import Share from "@/components/shared/share"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import {
@@ -15,9 +16,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
-import { Pencil, Trash2 } from "lucide-react"
+import { Copy, Download, Trash2 } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -41,7 +41,7 @@ export default function ShowQrCodeCard({ data, token }: { data: QrCodeData; toke
                 title: "QR Code Deleted",
                 description: "The QR code has been successfully deleted.",
             })
-            window.location.href = ("/dashboard/qr-codes")
+            router.push("/dashboard/qr-codes")
         } catch (error) {
             toast({
                 variant: "destructive",
@@ -54,6 +54,24 @@ export default function ShowQrCodeCard({ data, token }: { data: QrCodeData; toke
         }
     }
 
+    const copyToClipboard = (text: string, message: string) => {
+        navigator.clipboard.writeText(text).then(() => {
+            toast({
+                title: "Copied!",
+                description: message,
+            })
+        })
+    }
+
+    const downloadQRCode = () => {
+        const link = document.createElement("a")
+        link.href = data.qr_code
+        link.download = `qrcode-${data.id}.png`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }
+
     return (
         <Card className="w-full max-w-3xl mx-auto">
             <CardHeader>
@@ -63,14 +81,28 @@ export default function ShowQrCodeCard({ data, token }: { data: QrCodeData; toke
             <CardContent className="space-y-6">
                 <div className="flex flex-col md:flex-row items-center gap-6">
                     <div className="w-64 h-64 relative">
-                        <Image src={data.qr_code || "/placeholder.svg"} alt="QR Code" layout="fill" objectFit="contain" 
+                        <Image
+                            src={data.qr_code || "/placeholder.svg"}
+                            alt="QR Code"
+                            layout="fill"
+                            objectFit="contain"
                             unoptimized
                         />
                     </div>
                     <div className="flex-1 space-y-4">
                         <div>
                             <Label htmlFor="long-url">Long URL</Label>
-                            <Input id="long-url" value={data.long_url} readOnly />
+                            <div className="flex">
+                                <Input id="long-url" value={data.long_url} readOnly className="flex-grow" />
+                                <Button
+                                    variant="outline"
+                                    size="icon"
+                                    onClick={() => copyToClipboard(data.long_url, "Long URL copied to clipboard!")}
+                                    className="ml-2"
+                                >
+                                    <Copy className="h-4 w-4" />
+                                </Button>
+                            </div>
                         </div>
                         <div>
                             <Label htmlFor="created-at">Created At</Label>
@@ -79,7 +111,16 @@ export default function ShowQrCodeCard({ data, token }: { data: QrCodeData; toke
                     </div>
                 </div>
             </CardContent>
-            <CardFooter className="flex justify-end">
+            <CardFooter className="flex justify-between flex-wrap gap-2">
+                <div className="flex gap-2 items-center">
+                    <Button variant="outline" onClick={downloadQRCode}>
+                        <Download size={'sm'} className="w-4 h-4 mr-2" />
+                        Download QR
+                    </Button>
+                    <Share
+                        url={data.qr_code}
+                    />
+                </div>
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                     <DialogTrigger asChild>
                         <Button variant="destructive">

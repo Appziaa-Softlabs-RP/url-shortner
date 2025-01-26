@@ -39,7 +39,7 @@ export function ShareDialog({ url, isOpen, onClose }: ShareDialogProps) {
                         copied ? "bg-green-600/10" : "bg-primary/10"
                     )}>
                         <p className={cn(
-                            "font-bold",
+                            "font-bold max-w-full overflow-x-auto",
                             copied ? "text-green-700" : "text-primary"
                         )}>
                             {url}
