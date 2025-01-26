@@ -81,9 +81,9 @@ export function NavMain({
     const path = usePathname();
 
     return (
-        <SidebarGroup>
+        <SidebarGroup className="pt-6">
             <SidebarGroupLabel>Explore</SidebarGroupLabel>
-            <SidebarMenu className="pt-6">
+            <SidebarMenu className="">
                 {items.map((item) => (
                     <Collapsible
                         key={item.title}

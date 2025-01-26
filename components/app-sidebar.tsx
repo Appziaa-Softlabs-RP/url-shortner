@@ -11,6 +11,7 @@ import {
     BarChart3,
     LayoutDashboard,
     Link as LinkNew,
+    QrCode,
     Settings
 } from "lucide-react"
 import Image from "next/image"
@@ -31,11 +32,11 @@ const data = {
             url: "/dashboard/urls",
             icon: LinkNew,
         },
-        // {
-        //     title: "QR Codes",
-        //     url: "/dashboard/qr-codes",
-        //     icon: QrCode,
-        // },
+        {
+            title: "QR Codes",
+            url: "/dashboard/qr-codes",
+            icon: QrCode,
+        },
         {
             title: "Analytics",
             url: "/dashboard/analytics",

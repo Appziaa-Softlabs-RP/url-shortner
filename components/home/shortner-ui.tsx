@@ -33,7 +33,7 @@ export function ShortnerUI() {
             name: "QR code",
             value: "qr",
             icon: QrCode,
-            coming_soon: true
+            coming_soon: false
         }
     ]
 

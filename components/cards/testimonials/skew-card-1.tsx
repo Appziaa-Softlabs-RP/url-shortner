@@ -6,7 +6,7 @@ export default function SkewCard1({ data }: any) {
     return <div className="relative w-[80%] h-[350px]">
         <div className={cn(
             "relative z-10 w-full h-full rounded-[20px_60px] bg-white",
-            "transform skew-[turn(-0.06turn)] -skew-y-[8deg]",
+            "transform skew-[turn(-0.06turn)] -skew-y-[8deg] -skew-x-[8deg_0deg]",
             "flex items-center justify-center"
         )}>
             {/* image */}
