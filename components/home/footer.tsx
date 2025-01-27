@@ -3,8 +3,8 @@ import Link from "next/link"
 
 export function Footer() {
     const footerLinks = {
-        "Why Bitly?": [
-            "Bitly 101",
+        "Why RWPS?": [
+            "RWPS 101",
             "Enterprise Class",
             "Integrations & API",
             "Pricing",
@@ -40,7 +40,7 @@ export function Footer() {
             "Code of Conduct",
         ],
         "Company": [
-            "About Bitly",
+            "About RWPS",
             "Careers",
             "Partners",
             "Press",

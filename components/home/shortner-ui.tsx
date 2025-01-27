@@ -7,6 +7,7 @@ import { ArrowRight, Link, QrCode } from 'lucide-react'
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Label } from "../ui/label"
+import styles from "./shortner.module.css"
 
 export function ShortnerUI() {
     const [url, setUrl] = useState("")
@@ -38,7 +39,7 @@ export function ShortnerUI() {
     ]
 
     return (
-        <>
+        <div>
             <div className="flex gap-2">
                 {
                     btnTypes.map((btn, index) => {
@@ -88,14 +89,17 @@ export function ShortnerUI() {
                             placeholder="Paste long URL here"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
-                            className="flex-grow h-12 text-lg px-4 fs-[14px] border-2 border-gray-300 focus:border-[#5D91FA]"
+                            className="flex-grow h-12 px-4 text-[14px] border-2 border-gray-300 focus:border-[#5D91FA]"
                             required
                         />
                     </div>
                     <Button
                         type="submit"
                         size={'lg'}
-                        className="text-md flex gap-2 w-fit px-8 py-6 group"
+                        className={cn(
+                            "flex gap-2 w-fit px-8 py-6 group",
+                            styles.responsiveBtnTextLg
+                        )}
                     >
                         <span>
                             {
@@ -110,7 +114,7 @@ export function ShortnerUI() {
                     </Button>
                 </form>
             </div>
-        </>
+        </div>
     )
 }
 

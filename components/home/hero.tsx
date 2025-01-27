@@ -4,7 +4,7 @@ import { ShortnerUI } from "./shortner-ui"
 export function Hero() {
     return (
         <section className="bg-gradient-to-br from-[#111827] to-[#2E2662] text-white py-4 sm:py-16 sm:px-4">
-            <div className="p-4 mx-auto max-w-5xl">
+            <div className="p-4 mx-auto max-w-5xl grid gap-6">
                 <div className="grid gap-2 sm:gap-6 text-center sm:mb-12 mx-auto">
                     <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">
                         Enterprise-Grade URL Shortening — Always Free
@@ -20,7 +20,7 @@ export function Hero() {
                     <div className="grid sm:grid-cols-3 sm:justify-center gap-4 mb-4 text-sm font-light max-w-4xl mx-auto">
                         <span className="flex gap-2 sm:justify-center items-center">
                             <CheckCircle size={20} className="text-yellow-300" />
-                            <span>Basic link analytics</span>
+                            <span>Complete link analytics</span>
                         </span>
                         <span className="flex gap-2 sm:justify-center items-center">
                             <CheckCircle size={20} className="text-yellow-300" />
@@ -28,7 +28,7 @@ export function Hero() {
                         </span>
                         <span className="flex gap-2 sm:justify-center items-center">
                             <CheckCircle size={20} className="text-yellow-300" />
-                            <span>URL shortening</span>
+                            <span>URL shortening with QR Code</span>
                         </span>
                     </div>
                 </div>

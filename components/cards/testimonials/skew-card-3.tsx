@@ -1,8 +1,16 @@
+"use client"
+
 import { cn } from "@/lib/utils"
 import { Star } from "lucide-react"
 import Image from "next/image"
+import { useState } from "react";
 
 export default function SkewCard3({ data }: any) {
+
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const toggleReadMore = () => setIsExpanded(!isExpanded);
+
     return <div className="relative w-[80%] h-[350px]">
         <div className={cn(
             "relative z-10 w-full h-full rounded-[30px_60px] bg-white",
@@ -13,13 +21,19 @@ export default function SkewCard3({ data }: any) {
             <div
                 className="h-[100px] w-[100px] bg-slate-200 absolute top-[-40px] skew-y-[15deg] rounded-full"
             >
-                <Image
-                    src={data.image}
-                    alt={data.name}
-                    width={100}
-                    height={100}
-                    className="rounded-full w-full h-full object-cover"
-                />
+                {data.image ? (
+                    <Image
+                        src={data.image || "/placeholder.svg"}
+                        alt={data.name}
+                        width={60}
+                        height={60}
+                        className="rounded-full"
+                    />
+                ) : (
+                    <div className="w-[100px] h-[100px] border-[1px] rounded-full bg-white flex items-center justify-center text-2xl font-bold text-purple-500">
+                        {data.name.charAt(0)}
+                    </div>
+                )}
             </div>
             {/* text */}
             <div
@@ -29,7 +43,23 @@ export default function SkewCard3({ data }: any) {
                 )}
             >
                 <p className="overflow-y-auto max-h-full text-lg font-semibold">{data.name}</p>
-                <p className="overflow-y-auto max-h-full">{data.quote}</p>
+                <p className="overflow-y-auto max-h-full">
+                    {data?.quote?.length > 180 ? (
+                        <>
+                            {isExpanded
+                                ? data.quote // Show full text
+                                : `${data.quote.slice(0, 180)}...`} {/* Show truncated text */}
+                            <button
+                                onClick={toggleReadMore}
+                                className="text-blue-500 underline ml-2"
+                            >
+                                {isExpanded ? "Read Less" : "Read More"}
+                            </button>
+                        </>
+                    ) : (
+                        data.quote
+                    )}
+                </p>
                 <div className="flex gap-1 justify-center">
                     {
                         Array.from({ length: data.rating }).map((item, index) => (

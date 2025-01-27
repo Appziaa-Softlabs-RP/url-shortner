@@ -31,7 +31,7 @@ export default async function SettingsProfilePage() {
             <div>
                 <h3 className="text-lg sm:text-2xl font-bold">API</h3>
                 <p className="text-sm text-muted-foreground">
-                    For documentation on using the Bitly API, visit the API Documentation.
+                    For documentation on using the RWPS API, visit the API Documentation.
                 </p>
             </div>
             <Separator />

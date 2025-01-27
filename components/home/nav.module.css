@@ -1,0 +1,16 @@
+.responsiveContainer{
+    width: 100%;
+    padding: 5px 30px;
+}
+
+@media (min-width: 780px) {
+    .responsiveContainer{
+        padding: 5px 20px;
+    }
+}
+
+@media (min-width: 880px) {
+    .responsiveContainer{
+        padding: 5px 60px;
+    }
+}

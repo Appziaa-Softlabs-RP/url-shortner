@@ -1,0 +1,9 @@
+.responsiveBtnTextLg{
+    font-size: 0.9rem;
+}
+
+@media (min-width: 400px) {
+    .responsiveBtnTextLg{
+        font-size: 1.3rem;
+    }
+}

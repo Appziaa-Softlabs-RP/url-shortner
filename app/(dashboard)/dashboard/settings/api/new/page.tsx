@@ -19,7 +19,7 @@ export default async function SettingsProfilePage() {
                 <Link href="/dashboard/settings/api" className="text-slate-600">API /</Link> Register OAuth application
                 </h3>
             <p className="text-sm text-muted-foreground">
-                    For documentation on using the Bitly API, visit the API Documentation.
+                    For documentation on using the RWPS API, visit the API Documentation.
                 </p>
             </div>
             <Separator />
