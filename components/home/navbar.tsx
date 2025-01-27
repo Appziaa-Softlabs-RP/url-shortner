@@ -14,12 +14,12 @@ export function Navbar() {
 
     const links = [
         {
-            name: "Features",
-            href: "#features",
+            name: "Pricing",
+            href: "/pricing",
         },
         {
-            name: "Testimonials",
-            href: "#testimonials",
+            name: "Blogs",
+            href: "/blogs/latest",
         },
         {
             name: "Resources",
@@ -46,7 +46,7 @@ export function Navbar() {
                 </div>
                 <div className="hidden md:flex items-center space-x-4">
                     <Link href="/login">
-                        <Button className="group flex gap-1">
+                        <Button size="lg" className="rounded-full text-md py-6 px-8 bg-gradient-to-r from-purple-700/80 via-primary/80 to-primary/80 hover:from-purple-700 hover:via-blue-500 hover:to-blue-500 transition-all duration-300 ease-in-out">
                             <span>Get Started</span>
                             <ArrowRight
                                 size={18}
@@ -86,7 +86,7 @@ export function Navbar() {
                                 </ul>
                                 <div className="px-4 py-6 border-t">
                                     <Link href="/login" onClick={() => setIsOpen(false)}>
-                                        <Button className="w-full justify-center group flex gap-1">
+                                        <Button size="lg" className="rounded-full text-md py-6 px-8 bg-gradient-to-r from-purple-700/80 via-primary/80 to-primary/80 hover:from-purple-700 hover:via-blue-500 hover:to-blue-500 transition-all duration-300 ease-in-out">
                                             <span>Get Started</span>
                                             <ArrowRight
                                                 size={18}

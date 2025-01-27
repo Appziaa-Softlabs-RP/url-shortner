@@ -96,8 +96,10 @@ export function ShortnerUI() {
                     <Button
                         type="submit"
                         size={'lg'}
+
                         className={cn(
                             "flex gap-2 w-fit px-8 py-6 group",
+                            "rounded-full text-md py-6 px-8 bg-gradient-to-r from-purple-700/80 via-primary/80 to-primary/80 hover:from-purple-700 hover:via-blue-500 hover:to-blue-500 transition-all duration-300 ease-in-out",
                             styles.responsiveBtnTextLg
                         )}
                     >

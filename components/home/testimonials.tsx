@@ -38,7 +38,7 @@ const testimonials = [
         rating: 5,
     },
     {
-        id: 5,
+        id: 4,
         name: "Deepa",
         image: "",
         quote:
