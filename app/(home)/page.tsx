@@ -1,4 +1,5 @@
 import BlogsServer from "@/components/home/blogs-server";
+import FAQ from "@/components/home/faq";
 import { Features } from "@/components/home/features";
 import { Hero } from "@/components/home/hero";
 import { Stats } from "@/components/home/stats";
@@ -27,6 +28,7 @@ export default async function Home() {
       <Stats />
       <Testimonials />
       <BlogsServer />
+      <FAQ />
     </main>
   )
 }

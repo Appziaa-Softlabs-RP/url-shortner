@@ -46,7 +46,7 @@ const features = [
 
 export function PricingFeatures() {
     return (
-        <section className="py-16 lg:py-24 bg-gray-50">
+        <section className="py-16">
             <div className="container grid lg:grid-cols-2 gap-4 mx-auto px-8 items-center justify-center">
                 <div className="max-w-3xl mx-auto text-start mb-16">
                     <h2 className="text-3xl lg:text-4xl font-bold mb-6">All Features, Completely Free</h2>

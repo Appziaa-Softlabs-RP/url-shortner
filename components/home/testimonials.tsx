@@ -51,6 +51,7 @@ export function Testimonials() {
     const swiperRef = useRef(null)
     const [isBeginning, setIsBeginning] = useState(true)
     const [isEnd, setIsEnd] = useState(false)
+    const [initialSlide, setInitialSlide] = useState(1)
 
     const handleSlideChange = () => {
         if (swiperRef.current) {
@@ -62,7 +63,7 @@ export function Testimonials() {
     }
 
     return (
-        <section id="testimonials" className="py-4 sm:py-16 bg-gradient-to-b from-blue-100 to-white">
+        <section id="testimonials" className="py-4 sm:py-16 bg-primary/10">
             <div className="p-2 mx-auto max-w-7xl">
                 <div className="relative grid sm:grid-cols-[1fr_500px_1fr] gap-4 justify-center items-center">
                     <div className="w-full hidden sm:flex justify-end">
@@ -109,6 +110,7 @@ export function Testimonials() {
                         slidesPerView={3}
                         centeredSlides={true}
                         loop={false}
+                        initialSlide={initialSlide}
                         navigation={{
                             prevEl: ".custom-prev",
                             nextEl: ".custom-next",
@@ -117,7 +119,7 @@ export function Testimonials() {
                             clickable: true,
                             el: ".custom-pagination",
                             bulletClass: "inline-block w-2.5 h-2.5 mx-1 rounded-full bg-gray-300 cursor-pointer transition-colors",
-                            bulletActiveClass: "!bg-pink-500",
+                            bulletActiveClass: "!bg-blue-500",
                         }}
                         breakpoints={{
                             320: {
@@ -143,7 +145,7 @@ export function Testimonials() {
                         {testimonials.map((testimonial, index) => {
                             const activeCard = testimonial.id % 3
                             return (
-                                <SwiperSlide key={index} className="my-24 w-full">
+                                <SwiperSlide key={index} className="my-16 w-full">
                                     {({ isActive }) => (
                                         <div
                                             className={cn(
@@ -167,7 +169,7 @@ export function Testimonials() {
                     </Swiper>
 
                     {/* Custom Pagination */}
-                    <div className="custom-pagination -translate-y-12 flex justify-center gap-2"></div>
+                    <div className="custom-pagination flex justify-center gap-2"></div>
                 </div>
             </div>
         </section>

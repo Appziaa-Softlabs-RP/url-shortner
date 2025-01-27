@@ -1,112 +1,141 @@
 import { Button } from "@/components/ui/button"
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 export function Footer() {
     const footerLinks = {
-        "Why RWPS?": [
-            "RWPS 101",
-            "Enterprise Class",
-            "Integrations & API",
-            "Pricing",
-        ],
-        "Products": [
-            "Link Management",
-            "QR Codes",
-            "Link-in-bio",
-            "Social Media",
-            "Digital Marketing",
-        ],
-        "Solutions": [
-            "Social Media",
-            "Digital Marketing",
-            "Customer Service",
-            "For Developers",
+        "About Us": [
+            {
+                name: "About Us",
+                href: '#'
+            }
         ],
         "Resources": [
-            "Blog",
-            "Resource Library",
-            "Developers",
-            "App Connectors",
-            "Support",
-            "Trust Center",
-            "Browser Extension",
-            "Mobile App",
+            {
+                name: "Documentation",
+                href: 'https://docs.rwps.in'
+            },
+            {
+                name: "Blogs",
+                href: "/blogs/latest"
+            }
         ],
-        "Legal": [
-            "Privacy Policy",
-            "Cookie Policy",
-            "Terms of Service",
-            "Acceptable Use Policy",
-            "Code of Conduct",
-        ],
-        "Company": [
-            "About RWPS",
-            "Careers",
-            "Partners",
-            "Press",
-            "Contact",
-            "Reviews",
+        "Policies": [
+            {
+                name: "Privacy",
+                href: 'https://rewardsplus.in/privacy'
+            },
+            {
+                name: "Terms",
+                href: 'https://rewardsplus.in/terms'
+            },
         ],
     }
 
+    const socials = [
+        {
+            image: "/icons/twitter-white.svg",
+            name: "X",
+            href: "https://x.com/appziaa"
+        },
+        {
+            icon: Linkedin,
+            name: "Linkdin",
+            href: "https://www.linkedin.com/company/rewardsplus/"
+        },
+        {
+            icon: Facebook,
+            name: "Facebook",
+            href: "https://www.facebook.com/myrewardsplus"
+        },
+        {
+            icon: Instagram,
+            name: "Instagram",
+            href: "https://www.instagram.com/rewardsplus/"
+        },
+        {
+            icon: Youtube,
+            name: "Youtube",
+            href: "https://www.youtube.com/channel/UC9Or6Co4TpAALls1gz3X5cQ"
+        },
+    ]
+
     return (
-        <footer className="bg-gradient-to-br from-[#111827] to-[#2E2662] text-white pt-20 pb-8">
-            <div className="container mx-auto max-w-6xl px-4">
-                <div className="text-center mb-20">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                        More than a link shortener
-                    </h2>
-                    <p className="text-lg mb-8 max-w-2xl mx-auto">
-                        Knowing how your clicks and scans are performing should be as easy as making them. That&apos;s why we&apos;ve optimized all your connections in one place.
-                    </p>
-                    <Button size={'lg'} className="px-10 py-6 text-lg bg-white text-[#4800C4] hover:bg-gray-100">
-                        Get started for free
-                    </Button>
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
-                    {Object.entries(footerLinks).map(([category, links]) => (
-                        <div key={category}>
-                            <h3 className="font-semibold mb-4">{category}</h3>
-                            <ul className="space-y-2">
-                                {links.map((link) => (
-                                    <li key={link}>
-                                        <Link
-                                            href="#"
-                                            className="text-gray-300 hover:text-white text-sm"
-                                        >
-                                            {link}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="border-t border-gray-700 pt-8 mt-8">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-sm text-gray-300">
-                            © 2024 URLShort. All rights reserved.
+        <div className="relative mt-[100px]">
+            {" "}
+            {/* Increased top margin for mobile */}
+            <div className="wave-container">
+                <div className="wave"></div>
+                <div className="wave wave2"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#3F8EF5] z-10"></div>
+            </div>
+            <footer className="bg-[#3F8EF5] text-white pt-16 pb-8">
+                <div className="container mx-auto max-w-6xl px-4">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                            More than just a link shortener
+                        </h2>
+                        <p className="text-lg mb-8 max-w-2xl mx-auto">
+                            Tracking your clicks and scans should be as simple as creating them. That’s why we’ve streamlined all your connections into one convenient platform.
                         </p>
-                        <div className="flex gap-4">
-                            <Link href="#" className="text-gray-300 hover:text-white">
-                                <span className="sr-only">Twitter</span>
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                                </svg>
-                            </Link>
-                            <Link href="#" className="text-gray-300 hover:text-white">
-                                <span className="sr-only">LinkedIn</span>
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                </svg>
-                            </Link>
+                        <Link href='/login'>
+                            <Button size="lg" className="p-8 rounded-full text-lg bg-white text-primary hover:bg-gray-100 transition-colors duration-300">
+                                Get started for free
+                            </Button>
+                        </Link>
+                    </div>
+
+                    <div className="grid sm:grid-cols-[1fr_250px]">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
+                            {Object.entries(footerLinks).map(([category, links]) => (
+                                <div key={category}>
+                                    <h3 className="font-semibold mb-4">{category}</h3>
+                                    <ul className="space-y-2">
+                                        {links.map((link, index) => (
+                                            <li key={index}>
+                                                <Link
+                                                    href={link.href}
+                                                    target="_blank"
+                                                    className="text-gray-200 hover:text-white text-sm transition-colors duration-300"
+                                                >
+                                                    {link.name}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="flex text-center-sm-center flex-col w-fit mx-auto sm:w-full gap-4">
+                            <p>Get social with us</p>
+                            <div className="flex w-full gap-5 items-center">
+                                {
+                                    socials?.map((item, index) => (
+                                        <Link href={item.href}
+                                            target="_blank"
+                                            className="text-gray-200 border-b-2 border-transparent hover:border-white transition-all ease-in-out pb-1 hover:text-white duration-300">
+                                            <span className="sr-only">{item.name}</span>
+                                            {
+                                                item?.icon ? <item.icon size={25} /> : <Image src={item?.image} alt="icon" width={25} height={25} />
+                                            }
+                                        </Link>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="border-t border-gray-400 pt-8 mt-8">
+                        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                            <p className="text-sm text-gray-200">
+                                © {(new Date()).getFullYear()} <Link href="https://rewardsplus.in" target="_blank">RewardsPlus</Link>. All rights reserved.
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     )
 }
-
