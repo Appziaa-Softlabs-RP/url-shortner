@@ -113,7 +113,7 @@ export function Footer() {
                             <div className="flex w-full gap-5 items-center">
                                 {
                                     socials?.map((item, index) => (
-                                        <Link href={item.href}
+                                        <Link key={index} href={item.href}
                                             target="_blank"
                                             className="text-gray-200 border-b-2 border-transparent hover:border-white transition-all ease-in-out pb-1 hover:text-white duration-300">
                                             <span className="sr-only">{item.name}</span>

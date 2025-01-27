@@ -7,25 +7,25 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://app.rwps.in'),
   applicationName: process.env.NEXT_PUBLIC_APP_NAME || "RWPS URL Shortener",
-  title: "Free Enterprise-Grade URL Shortener",
-  description: "Experience RWPS, the enterprise-grade URL shortening platform designed for reliability, scalability, and customization. Enjoy powerful analytics, seamless integration, and limitless innovation—all for free.",
+  title: "Free URL Shortener-Simplify Link Management with RWPS ",
+  description: "RWPS offers free, enterprise-grade URL shortening with detailed analytics, seamless API integration, and reliable performance.",
   openGraph: {
     type: 'website',
-    siteName: "Free Enterprise-Grade URL Shortener",
+    siteName: "Free URL Shortener-Simplify Link Management with RWPS ",
     locale: 'en_US',
     images: [
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png`,
         width: 1200,
         height: 630,
-        alt: "Free Enterprise-Grade URL Shortener",
+        alt: "Free URL Shortener-Simplify Link Management with RWPS ",
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Free Enterprise-Grade URL Shortener",
-    description: 'Experience RWPS, the enterprise-grade URL shortening platform designed for reliability, scalability, and customization. Enjoy powerful analytics, seamless integration, and limitless innovation—all for free.',
+    title: "Free URL Shortener-Simplify Link Management with RWPS ",
+    description: 'RWPS offers free, enterprise-grade URL shortening with detailed analytics, seamless API integration, and reliable performance.',
     images: [`${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png`],
   }
 };
