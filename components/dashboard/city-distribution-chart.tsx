@@ -40,7 +40,7 @@ export function CityDistributionChart({ data }: CityDistributionChartProps) {
                         outerRadius={80}
                         fill="#8884d8"
                         dataKey="count"
-                        label={({ city, percent }) => `${city} ${(percent * 100).toFixed(0)}%`}
+                        label={({ city, percent }) => `${city ?? 'Unknown'} ${(percent * 100).toFixed(0)}%`}
                     >
                         {data.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

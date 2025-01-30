@@ -3,4 +3,4 @@ Allow: /
 Disallow: /dashboard
 Disallow: /dashboard/*
 
-Sitemap: https://digitaljanet.com/sitemap.xml
+Sitemap: https://app.rwps.in/sitemap.xml
