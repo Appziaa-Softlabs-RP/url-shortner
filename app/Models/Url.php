@@ -45,12 +45,21 @@ class Url extends Model
         $data['ip'] = request()->ip();
 
         // Add Geolocation (Country, City, Location)
-        $location = Location::get($data['ip']);
-        if ($location) {
-            $data['country_code'] = $location->countryCode;
-            $data['city'] = $location->cityName;
-            $data['location'] = "{$location->latitude},{$location->longitude}";
-        } else {
+        $ip = $data['ip'];
+        // Handle localhost/private IPs
+        if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+            $ip = '8.8.8.8'; // Use Google's DNS as fallback for testing
+        }
+
+        try {
+            $location = Location::get($ip);
+            $data['country_code'] = $location?->countryCode ?? null;
+            $data['city'] = $location?->cityName ?? null;
+            $data['location'] = ($location?->latitude && $location?->longitude)
+                ? "{$location->latitude},{$location->longitude}"
+                : null;
+        } catch (\Exception $e) {
+            logger()->error("Location detection failed: " . $e->getMessage());
             $data['country_code'] = null;
             $data['city'] = null;
             $data['location'] = null;
